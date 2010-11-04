@@ -1,0 +1,6 @@
+.svn
+config/config.xml
+config/admin_config.xml
+log/*
+tmp/sess/*
+nbproject/*
