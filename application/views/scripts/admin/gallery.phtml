@@ -1,0 +1,35 @@
+
+    <div class="admin_submenu" >
+        <div class="menulist" >
+            <a href="/admin/gallery/item/new">Додати Галерею</a>
+        </div>
+
+        <div> ----- </div>
+        <?php
+        if (is_object($this->gallery)) :
+        foreach ($this->gallery as $item)  : ?>
+            <div class="menulist" ><a href="/admin/gallery/item/<?php echo $item->idgallery; ?>">
+                <?php echo $item->name; ?></a>&nbsp;&nbsp;
+                <a href="/admin/gallery/item/<?php echo $item->idgallery; ?>/delete/1">X</a></div>
+        <?php
+        endforeach; endif; ?>
+    </div>
+
+    <div class="admin_content" >
+
+        <?php
+        switch ($this->item) {
+            case 'new' :
+                  echo   '<h2 class="admin_title">Створити галерею</h2>';
+                  break;
+
+           default : echo '<h2 class="admin_title">Редагувати галерею</h2>';
+                  break;
+
+        }
+        echo $this->render('admin/editgallery.phtml');
+        ?>
+
+    </div>
+
+

@@ -70,8 +70,8 @@ class AdminController extends Local_Controller {
 
 
         //перевіряємо на видалення
-        $delete = $this->_getParam('delete',false);
-        if ( ($delete) && Zend_Validate::is($this->view->item, 'Digits')  ) {
+        $delete = $this->_getParam('delete', false);
+        if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
             Model_Menu::deletemenu($this->view->item);
             $this->_redirect('/admin/menu');
         }
@@ -79,7 +79,7 @@ class AdminController extends Local_Controller {
         // якщо треба отримати дані за id меню
         if (Zend_Validate::is($this->view->item, 'Digits')) {
             $this->view->menudata = Model_Menu::getById($this->view->item);
-            if ( $this->view->menudata->parent == 0 ) {
+            if ($this->view->menudata->parent == 0) {
                 $this->view->curmenu = $this->view->menudata->idmenu;
             } else {
                 $this->view->curmenu = $this->view->menudata->parent;
@@ -101,25 +101,14 @@ class AdminController extends Local_Controller {
             $input = $this->menuvalid($_POST);
             if ($input->isValid()) {
                 $res = Model_Menu::updatemenu($input);
-                if ($res[0]>0) {
-                    $this->_redirect('/admin/menu/item/'.$res[1]);
+                if ($res[0] > 0) {
+                    $this->_redirect('/admin/menu/item/' . $res[1]);
                 } else {
                     var_dump($res[1]);
-                    
                 }
             }
             var_dump($input->getMessages());
         }
-    }
-
-    /**
-     * Видалення пункта меню за його id
-     *
-     */
-    public function deletemenuAction() {
-
-        $idmenu = $this->_getParam('item');
-        
     }
 
     private function menuvalid($input) {
@@ -138,10 +127,78 @@ class AdminController extends Local_Controller {
             ),
             'name' => array(
                 'allowEmpty' => false,
-                'Digists',
-                'messages' => array('dddd','222')
+                'Digits',
+                'messages' => array('dddd', '222')
             ),
             'idmenu' => array()
+        );
+
+        return new Zend_Filter_Input($filters, $validators, $input, $options);
+    }
+
+    /*
+     * Тут працюэмо з галерея
+     *
+     *
+     */
+
+    public function galleryAction() {
+        $this->view->menu_gallery = 'selected';
+        $this->view->item = $this->_getParam('item', 'new');
+        $this->view->gallery = Model_Gallery::getAll();
+
+        //перевіряємо на видалення
+        $delete = $this->_getParam('delete', false);
+        if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
+            Model_Gallery::deletegallery($this->view->item);
+            $this->_redirect('/admin/gallery');
+        }
+        // якщо треба отримати дані за id меню
+        if (Zend_Validate::is($this->view->item, 'Digits')) {
+            $this->view->data = Model_Gallery::getById($this->view->item);
+        } else {
+            $this->view->data = Model_Gallery::getById(NULL);
+        }
+    }
+
+    /*
+     * Menu updater
+     *
+     */
+
+    public function savegalleryAction() {
+        if ($this->_request->isPost()) {
+
+            $input = $this->galleryvalid($_POST);
+
+            if ($input->isValid()) {
+                $res = Model_Gallery::updategallery($input);
+                if ($res[0] > 0) {
+                    $this->_redirect('/admin/gallery/item/' . $res[1]);
+                } else {
+                    var_dump($res[1]);
+                    exit;
+                }
+            }
+            var_dump($input->getMessages());
+            exit;
+        }
+    }
+
+    private function galleryvalid($input) {
+
+        $filters = array(
+            '*' => array(array('PregReplace', "/[\\\\']/", ''), /* array('StripTags'), */ array('StringTrim'))
+        );
+        $options = array(
+            'escapeFilter' => new Zend_Filter_HtmlEntities(null, 'UTF-8')
+        );
+        $validators = array(
+            'name' => array(
+                'allowEmpty' => false,
+                'messages' => array('dddd', '222')
+            ),
+            'idgallery' => array()
         );
 
         return new Zend_Filter_Input($filters, $validators, $input, $options);
