@@ -4,3 +4,4 @@ config/admin_config.xml
 log/*
 tmp/sess/*
 nbproject/*
+public/gallery/*
