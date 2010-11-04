@@ -1,0 +1,284 @@
+<div class="featured">
+    <form action="/<?php echo $this->lang;?>/search" method="get" name="lsearch">
+        <div class="searchbox">
+            <input style="width:165px;height: 19px;" name="q" type="text"/>
+            <div class="batn fr">
+                <a href="#nogo" onclick="document.lsearch.submit()"><?php echo $this->words['search'];?></a>
+            </div>
+            </div>
+        
+    </form>
+
+</div>
+<div class="featured">
+    <h3><?php echo $this->words['getadvice'];?></h3>
+    <div class="descr"><?php echo $this->words['getadvicetext'];?></div>
+    <div class="hr"></div>
+    
+   <div class="cont">  <img class="fl" src="/public/img/zhan.png" title="" alt="">                               
+    <div>   <h4>Zhanetta </h4>
+            Tel.: +3620 / 480 2772
+       </div>
+        <div class="clear"></div>
+     </div>
+   <div class="hr_d"></div>  
+    <div class="cont">   
+     <img class="fl" src="/public/img/AMI.png" title="" alt="">
+     <div>   <h4>Amir </h4>
+            Tel.: +7 925 / 800 6888
+       </div>
+        <div class="clear"></div>
+      </div>
+    
+    <div class="btn fr"> 
+        <a href="/<?php echo $this->lang;?>/o-nas-81.html"><b><?php echo $this->words['aboutus'];?> »</b></a>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="featured">
+    <h3><?php echo $this->words['psearch'];?></h3>
+    <form id="search" action="/<?php echo $this->lang;?>/search" method="get"  name="psearch">
+
+        <div class="featur">
+            <a id="crent" class="serchtads fl active" href="#"><span class=""><?php echo $this->words['rent'];?></span></a>
+            <a id="csale" class="serchtads fl" href="#"><span class=""><?php echo $this->words['sale'];?></span></a>
+            <input id="rentorsale" name="rentorsale" type="hidden" value="rent" />
+            <div class="clear"></div>
+
+        </div>
+
+        <select  name="search[location]" id="location" gtbfieldid="9">
+            <option class="search_seloptb" value="0"><?php echo $this->words['alllocation'];?></option>
+            <?php $cities = array(
+                    'Budapest' => 'Budapest',
+                    'Vien'=> 'Vien',
+                    'Lake Balaton properties and other areas'=> 'Lake Balaton properties and other areas',
+                    'Areas around Budapest' => 'Areas around Budapest',
+                    'Heviz / Zala areas' => 'Heviz / Zala areas'
+            );
+            foreach($cities as  $ckey => $cname) :?>
+            <option class="search_seloptit" value="<?php echo $ckey ?>"
+                        <?php echo ($this->propertydata->city == $ckey)?'selected="selected"':''; ?>  >
+                            <?php echo  $this->words[$cname]; ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
+
+
+        <select  name="search[property_type]" id="property_type" gtbfieldid="10">
+            <option class="search_seloptb" value="0"><?php echo $this->words['alltype'];?></option>
+            <?php foreach($this->property_type as $ptype)  :?>
+            <option class="search_seloptit" value="<?php echo $ptype['id']; ?>"><?php echo $ptype['name_'.$this->lang]; ?>
+            </option>
+            <?php endforeach;?>
+        </select>
+
+        <!--<select  name="search[district]" id="district" gtbfieldid="11">
+            <option value="0"><?php /* echo $this->words['alldistrict'];?></option>
+            <?php foreach($this->district as $pd)  :?>
+            <option value="<?php echo $pd['id']; ?>"><?php echo $pd['name']; ?></option>
+            <?php endforeach; */ ?>
+        </select>-->
+
+        <select  name="search[district]" id="district" gtbfieldid="11">
+            <option class="search_seloptb" value="0"><?php echo $this->words['alldistrict'];?></option>
+            <?php $districts = array(
+                    'Budapest all' => 'Budapest all',
+                    'Pest' => 'Pest',
+                    'Buda' => 'Buda',
+                    'Budapest Downtown' => 'Budapest Downtown'
+            );
+            foreach($districts as  $ckey => $cname) :?>
+            <option class="search_seloptit" value="<?php echo $ckey ?>"
+                        <?php echo ($this->propertydata->city == $ckey)?'selected="selected"':''; ?>  >
+                            <?php echo  $this->words[$cname]; ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
+
+       <div class="hr_d"></div>
+        <div class="fl"> <label><?php echo $this->words['size'];?>:</label>	</div>
+        <input class="fr" style="width:125px;" name="search[size]" type="text"/>
+      <!--  <select class="fr" style="width:145px;" name="search[size]" id="size" gtbfieldid="12">
+            <option selected="selected" value="0-10000"> Любое </option>
+            <option value="20-40">20-40</option>
+            <option value="40-55">40-55</option>
+            <option value="50-65">50-65</option>
+            <option value="60-80">60-80</option>
+            <option value="75-100">75-100</option>
+            <option value="90-150">90-150</option>
+            <option value="150-1500000">150+</option>
+        </select>
+        -->
+        <div class="clear"></div>
+        <div class="fl"> <label><?php echo $this->words['rooms'];?>:</label>	</div>
+        <select  name="search[rooms]" id="search_rooms" gtbfieldid="9" class="fr" style="width: 125px;">
+            <!--<option value="">Studio</option>-->
+            <option class="search_seloptb" value="1">1+</option>
+            <option class="search_seloptit" value="2">2+</option>
+            <option class="search_seloptit" value="3">3+</option>
+            <option class="search_seloptit" value="4">4+</option>
+            <option class="search_seloptit" value="5">5+</option>
+        </select>
+<!--        <div class="fl"> <label><?php echo $this->words['rooms'];?>:</label>	</div>
+        <input class="fr" style="width:125px;" name="search[rooms]" type="text"/>-->
+        <!--
+        <select class="fr" style="width:145px;" name="search[bedrooms]" id="bedrooms" gtbfieldid="13">
+            <option selected="selected" value="0-10000"> Любое </option>
+            <option value="1-2">1-2</option>
+            <option value="3-4">3-4</option>
+            <option value="5-6">5-6</option>
+        </select>
+        -->
+        <div class="clear"></div>
+         <div class="hr_d"></div>
+        <div class="fl"> <label style="margin-top:30px;"><?php echo $this->words['price'];?>:</label>	</div>
+
+        <div class="fr">
+            <div> <label><?php echo $this->words['price_to'];?></label>	</div><input style="margin-right:10px!important;width:60px;"type="text"  name="search[price_max]" gtbfieldid="16">
+        </div>
+        <div class="fr">	<div> <label><?php echo $this->words['price_from'];?></label>	</div>
+            <input style="width:60px;" type="text"  name="search[price_min]" gtbfieldid="15">-</div>
+        <div class="clear"></div>
+
+
+        <div class="fl"> <label><?php echo $this->words['currency'];?>:</label>	</div>
+        <select class="fr" style="width:140px;" name="search[currency]" id="currency" gtbfieldid="14">
+            <option selected="selected" value="euro">EUR</option>
+            <option value="forint">HUF</option>
+        </select>
+         <div class="clear"></div>
+         <div class="hr"></div>
+        <div class="btn fr">
+            <a href="#nogo" onclick="document.psearch.submit()"><b><?php echo $this->words['search'];?> »</b></a>
+        </div>
+        <div class="clear"></div>
+
+    </form>
+</div>
+
+<?php
+if (count($this->reduced) > 0) : ?>
+<div class="featured">
+
+    <h3><?php echo $this->words['specoffer'];?></h3>
+    <?php
+    foreach ($this->specoffer as $lproper) {
+        echo $this->PropertyBox($lproper, 'popularoftheday', $this->lang);
+    }
+    ?>
+
+    <div class="clear"></div>
+</div>
+<?php endif;?>
+<div class="featured">
+    <h3><?php echo $this->words['fotogal'];?></h3>
+
+    <a href="/<?php echo $this->lang;?>/fotogalereya-21.html"><img alt="" title="" src="/public/img/photogal.jpg"></a>
+</div>
+<div class="featured">
+    <a href="#nogo"><img alt="" title="" src="/public/img/adv_here.jpg"></a>
+</div>
+<div class="featured">
+    <h3><?php echo $this->words['whyinvest']; ?></h3>
+
+    <a href="/<?php echo $this->lang;?>/Why-to-invest-in-Hungary-54.html"><img alt="" title="" src="/public/img/invest.jpg"></a>
+</div>
+
+<?php
+if (count($this->reduced) > 0) : ?>
+<div class="featured">
+
+    <h3><?php echo $this->words['reduced2sell'];?></h3>
+    <?php
+    foreach ($this->reduced as $lproper) {
+        echo $this->PropertyBox($lproper, 'popularoftheday', $this->lang);
+    }
+    ?>
+
+    <div class="clear"></div>
+</div>
+<?php endif;?>
+<div class="featured">    <h3><?php echo $this->words['huneduc'];?></h3>
+    <a href="/<?php echo $this->lang;?>/Education-in-Hungary-61.html"><img alt="" title="" src="/public/img/sdukation.jpg"></a>
+
+</div>
+<div class="featured">
+    <h3 class="cont"><?php echo $this->words['main_news'];?></h3>
+
+    <div class="news">
+        <ul>
+            <?php
+            if (count($this->lastnews) > 0) {
+            foreach ($this->lastnews as $news) {
+                $title = ($this->lang == 'ru')?$news->item_ru:$news->item_en;
+                $link = $this->url(array('lang' => $this->lang,
+                        'title' => Local_String::translit($title),
+                        'menu_id' => $news->id), 'menu');
+
+                ?>
+            <li><a href="<?php echo $link; ?>"><?php echo $title; ?></a></li>
+                <?php } } ?>
+
+        </ul>
+    </div>
+       <div class="hr"></div>
+        <div class="btn fr">
+            <a href="" onclick=""><b><?php echo $this->words['More news'];?> »</b></a>
+        </div>
+       
+
+    <div class="clear"></div>
+</div>
+
+<div class="featured">
+    <div class="descr"> <strong><?php echo $this->words['keywordslist'];?></strong>    </div>
+ </div>
+<div class="featured">
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style">
+<a href="http://www.addthis.com/bookmark.php?v=250&amp;username=xa-4c374d4c3fd54ed8" class="addthis_button_compact">Share</a>
+<span class="addthis_separator">|</span>
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_myspace"></a>
+<a class="addthis_button_google"></a>
+<a class="addthis_button_twitter"></a>
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c374d4c3fd54ed8"></script>
+<!-- AddThis Button END -->
+</div>
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#crent').bind('click', function() {
+            jQuery('#rentorsale').val('rent');
+            rentactive();
+            //alert(jQuery('#rentorsale').val());
+        });
+        jQuery('#csale').bind('click', function() {
+            jQuery('#rentorsale').val('sale');
+            saleactive();
+            //  alert(jQuery('#rentorsale').val());
+        });
+
+        function tcheck() {
+            if (jQuery('#rentorsale').val() == 'rent') {
+                rentactive();
+            } else {
+                saleactive();
+            }
+        }
+
+        function rentactive() {
+            jQuery('#crent').addClass('active');
+            jQuery('#csale').removeClass('active');
+        }
+
+        function saleactive() {
+            jQuery('#crent').removeClass('active');
+            jQuery('#csale').addClass('active');
+        }
+
+        //alert(jQuery('#rentorsale').val());
+    });
+</script>

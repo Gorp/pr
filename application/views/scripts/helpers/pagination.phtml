@@ -1,0 +1,49 @@
+<?php if ($this->pageCount):
+$titleurl = Local_String::translit($this->title_item);
+$url_ar = array(
+        'title' => $titleurl,
+        'lang' => $this->lang,
+        'menu_id' => $this->menu_id);
+?>
+
+
+<table><tr><td>
+<div class="paginationControl" style="display: inline;">
+<!-- Previous page link -->
+<?php if (isset($this->previous)):
+    $url_ar['page'] = $this->previous;
+ ?>
+  <a href="<?php echo $this->url($url_ar,'menupage'); ?>">&lt; </a> |
+<?php else:
+    unset($url_ar['page']);
+?>
+  <span class="disabled2">&laquo;  </span> |
+<?php endif; ?>
+<!-- Numbered page links -->
+<?php 
+    foreach ($this->pagesInRange as $page):
+    if ($page != $this->current):
+            $url_ar['page'] = $page;
+?>
+            <a href="<?php echo $this->url($url_ar,'menupage'); ?>"><?php echo $page; ?></a> |
+<?php
+    else:
+        unset($url_ar['page']);
+        echo $page. " | ";
+    endif;
+    endforeach;
+?>
+<!-- Next page link -->
+<?php
+    if (isset($this->next)):
+    $url_ar['page'] = $this->next;
+?>
+    <a href="<?php echo $this->url($url_ar,'menupage'); ?>"> &gt;</a>
+<?php else: ?>
+  <span class="disabled2"> &raquo;</span>
+<?php endif; ?>
+</div>
+</td></tr></table>
+<?php endif;
+
+?>

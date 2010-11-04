@@ -1,0 +1,69 @@
+<div class="fl mainbox_sm">
+    <div class="day_prop_sm fl">
+
+        <h2><a href="<?php echo $this->link; ?>"><?php echo $this->title."  H<font size='1px'>2</font>I - ".$this->property->id; ?></a></h2>
+        <span class="fl"><strong><?php echo $this->property->city;?></strong> <?php echo $this->property->district;?>.</span>
+        <div  class="day_prop_txt fr">
+	    <span>
+		<?php
+		if ($this->property->size != '0') :?>
+		<strong><?php echo $this->property->size;?> m&sup2;</strong>
+		<?php
+		endif;?>
+	    </span>
+	</div>
+        <div class="clear"></div>
+        
+        <div  class="day_prop_txt">
+            <span>
+		<?php
+		if ($this->property->rooms != '0') :?>
+                <font color="#97a5a8"><?php echo $this->words['rooms'];?>:</font> <?php echo $this->property->rooms;?>
+		<?php else : 
+		  //echo "&nbsp;";
+		endif;?>
+            </span>
+            <div class="right"style="float:right;">
+                <span></span>
+            </div>
+        </div>
+        <?php
+        if ($this->property->euro_sqm != '0') : ?>
+        <div class="fl" style="border-width: 1px;">
+            <span><font color="#97a5a8"><?php echo $this->words['pricesqm'];?>:</font></span>
+
+        </div>
+        <div class="fr right">
+            <div class="pr_prais"><?php echo $this->property->euro_sqm;?> EUR</div>
+        </div>
+        <div class="clear"></div>
+        <?php
+        endif; ?>
+
+        <div class="fl" style="border-width: 1px;">
+            <span><font color="#97a5a8"><?php echo $this->words['price_from'];?>:</font></span>
+
+        </div>
+        <div class="fr right"><div class="pr_prais"><?php echo $this->property->euro;?> EUR</div>
+            <div class="pr_prais">
+                <?php if ( $this->property->forint > 0)  :  ?>
+                    <?php echo $this->property->forint;?> HUF
+                <?php endif;?>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div>
+            <a href="<?php echo $this->link; ?>">
+                <img alt="<?php echo $this->title;?>" title="<?php echo $this->title;?>" src="<?php echo $this->property->getPicture('mid');?>"></a>
+        </div>
+
+        <div class="clear"></div>
+        <div class="descr"><?php echo $this->short;?></div>
+
+
+
+
+    </div>
+
+    <div class="clear"></div>
+</div>

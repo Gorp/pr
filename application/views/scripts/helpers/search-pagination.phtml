@@ -1,0 +1,53 @@
+<?php if ($this->pageCount):
+
+$url_ar = array(
+        'lang' => $this->lang,
+        'query' => $this->query);
+?>
+
+
+
+<ul id="pagination" >
+<!-- Previous page link -->
+<?php if (isset($this->previous)):
+    $url_ar['query'] = $this->query.'&page='.$this->previous;
+ ?>
+ <li class=""> <a href="<?php echo $url_ar['query']; ?>">&lt;  </a> </li>
+<?php else:
+    unset($url_ar['page']);
+    
+    
+?>
+  <li class="previous-off">&laquo;  </li> 
+<?php endif; ?>
+<!-- Numbered page links -->
+<?php 
+    foreach ($this->pagesInRange as $page):
+    if ($page != $this->current):
+            $url_ar['query'] = $this->query.'&page='.$page;
+?>
+           <li> <a href="<?php echo $url_ar['query']; ?>"><?php echo $page; ?></a> </li>
+<?php
+    else:        
+        unset($url_ar['page']);
+         echo '<li class="active">'.$page. " </li>";
+    endif;
+    endforeach;
+?>
+<!-- Next page link -->
+<?php
+    if (isset($this->next)):
+    $url_ar['query'] = $this->query.'&page='.$this->next;
+?>
+   <li class="next"> <a href="<?php echo $url_ar['query']; ?>"> &gt;</a>
+<?php else: ?>
+  <li class="next"> &raquo;</li>
+<?php endif; ?>
+<div class="clear"></div>
+</ul>
+
+<?php endif;
+
+?>
+
+<div class="clear"></div>

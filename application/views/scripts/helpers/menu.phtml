@@ -1,0 +1,91 @@
+
+<div class="main_menu">
+<ul class="nav" id="nav-one">
+    <?php foreach ($this->menu as $menu) : ?>
+			<li>
+                
+                <?php
+                    $title = $menu['item_'.$this->lang];
+                    $submenu = $menu->getMenuChild();
+                    if (count($submenu)  < 1 ) :?>
+                    <a href="
+                    <?php
+                        
+                        $titleurl = Local_String::translit($title);
+                        echo
+                        $this->url(array(
+                        'lang' => $this->lang, 'title' => $titleurl, 'menu_id' => $menu->id
+                        ), 'menu');
+                        ?>">
+           <span class="down"><?php echo $title; ?></span> </a>
+                <?php else :
+                    echo "<a href='#'>$title</a>";
+                 endif;?>
+
+                <ul style="opacity: 0.9999; display: block;">
+                <?php
+                
+                //var_dump($menu);
+                
+                
+                $submenu = $menu->getMenuChild();
+                foreach ($submenu as $smenu) : ?>
+                      <li><a href="
+                <?php
+                        eval('$stitle = $smenu->item_'.$this->lang.";");
+                        $stitleurl = Local_String::translit($stitle);
+                        echo
+                        $this->url(array(
+                        'lang' => $this->lang, 'title' => $stitleurl, 'menu_id' => $smenu->id
+                        ), 'menu');
+                        ?>">
+
+                        <span class="down"><?php echo $stitle; ?></span> </a>
+					</li>
+                 <?php
+                 endforeach;
+                 ?>
+				</ul>
+			</li>
+
+<?php endforeach; ?>
+<div class="clear"></div>
+		</ul>
+
+
+</div>
+<!--
+<div id="navh">
+<ul  class="nav" id="nav-one">
+
+    <li >
+           <span class="down"><b><?php echo $title; ?></b></span> </a>
+
+    </li>
+
+</ul>
+
+</div>
+
+-->
+<br /><br /><br /><br />
+<script>
+jQuery(document).ready(function(){
+	jQuery("#nav-one li").hover(
+		function(){ jQuery("ul", this).fadeIn("fast"); },
+		function() { }
+	);
+	if (document.all) {
+		jQuery("#nav-one li").hoverClass ("sfHover");
+	}
+});
+
+jQuery.fn.hoverClass = function(c) {
+	return this.each(function(){
+		jQuery(this).hover(
+			function() { jQuery(this).addClass(c);  },
+			function() { jQuery(this).removeClass(c); }
+		);
+	});
+};
+</script>

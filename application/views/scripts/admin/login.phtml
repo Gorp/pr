@@ -1,0 +1,9 @@
+<div id="login_wrapper">
+    <form id="login_form" action="/admin/login" method="post">
+        <strong>Користувач</strong><input name="user" type="text" id="login_textfield" />
+
+        <strong>Пароль</strong><input name="password" type="password" id="login_textfield" />
+        <input type="submit" id="login_buttonfield" value="Увійти" name="login_button" />
+    </form>
+    <br><strong style="color: red;"><?php echo $this->error; ?></strong>
+</div>

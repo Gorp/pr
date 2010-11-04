@@ -1,0 +1,27 @@
+<form action="/admin/savemenu" method="post" >
+    <div class="field">
+        <div class="field_name">Назва :</div>
+        <div >
+            <input class="field_input" type="text" name="name" value="<?php echo $this->menudata->name; ?>" />
+            <input  type="hidden" name="idmenu" value="<?php echo $this->item; ?>" />
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="field_name">Меню :</div>
+        <select class="field_input" name="parent" >
+            <option value="0">Головне Меню</option>
+            <?php
+            if (is_object($this->mainmenu)) :
+            foreach ($this->mainmenu as $menu)  :
+                if ($menu->idmenu == $this->menudata->idmenu ) { continue; }    ?>
+                <option
+                <?php echo ($menu->idmenu == $this->menudata->parent)?'selected="selected"':''; ?> 
+                value="<?php echo $menu->idmenu; ?>" >
+                <?php echo $menu->name; ?></option>
+            <?php
+            endforeach; endif; ?>
+        </select>
+    </div>
+    <input type="submit" name="login_button" value="Додати" id="admin_button" />
+</form>
