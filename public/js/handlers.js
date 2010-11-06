@@ -94,7 +94,7 @@ function uploadProgress(file, bytesLoaded, bytesTotal) {
 
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
 		progress.setProgress(percent);
-		progress.setStatus("Uploading...");
+		progress.setStatus("Завантаження...");
 	} catch (ex) {
 		this.debug(ex);
 	}
@@ -105,12 +105,12 @@ function uploadSuccess(file, serverData) {
 	try {
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
 		progress.setComplete();
-		progress.setStatus("Complete.");
+		progress.setStatus("Закачалося.");
                 var res = eval('(' + serverData + ')');
                 if (res['status'] != 'success') {
                     alert(res['status']);
                 } else {
-                   $.get('/ajax/getimg?property_id=' + res['property_id'] + '', function(data){ 
+                   $.get('/ajax/getimg/item/' + res['idgallery'] + '', function(data){
                        // var imgs = eval('(' + data + ')');
                         $('.photolist').html(data);
                     });

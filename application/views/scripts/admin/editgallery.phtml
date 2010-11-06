@@ -76,10 +76,10 @@
         swfu = new SWFUpload(settings);
     };
     $(document).ready(function() {
-//        $.get('/ajax/getimg/item/' + <?php echo $this->item; ?> + '', function(data){
-//            // var imgs = eval('(' + data + ')');
-//            $('.photolist').html(data);
-//        });
+        $.get('/ajax/getimg/item/' + <?php echo $this->item; ?> + '', function(data){
+            // var imgs = eval('(' + data + ')');
+            $('.photolist').html(data);
+        });
     });
 </script>
 

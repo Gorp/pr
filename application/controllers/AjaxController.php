@@ -24,11 +24,13 @@ class AjaxController extends Zend_Controller_Action {
                 // upload received file(s)
                 $upload->receive();
                 $t = $upload->getFileInfo();
-                $filename = $t['Filedata']['name'];
+                $oldfilename = $t['Filedata']['name'];
                 $idgallery = $this->_getParam('item', null);
-
-                copy("tmp/" . $filename, 'public/gallery/full/' . $idgallery . '_' . $filename);
-                unlink("tmp/" . $filename);
+                list($status, $idimage) = Model_Image::addImage($idgallery);
+                if (!$status) return false;
+                $filename = $idimage.".jpg";
+                copy("tmp/" . $oldfilename, 'public/gallery/full/' . $idgallery . '_' . $filename);
+                unlink("tmp/" . $oldfilename);
                 $ar = getimagesize('public/gallery/full/' . $idgallery. '_' . $filename);
                 $res2width = true;
                 if ($ar[0] < $ar[1]) {
@@ -79,25 +81,17 @@ class AjaxController extends Zend_Controller_Action {
     // отримати список всіх зображень для вибраної нерухостоі
     public function getimgAction() {
 
-        $property_id = $this->_request->getParam('property_id', null);
         $idgallery = $this->_request->getParam('item', null);
 
-        $table = new Model_PropertyPicture();
-        // перевіряємо чи вказато конкретну картинку
-        if ($image_id) {
-            $data = $table->fetchAll("id = " . $image_id);
-        } else {
-            $data = $table->fetchAll("property_id = " . $property_id);
-        }
-
+        $data = Model_Image::getAll($idgallery);
         if (is_object($data)) {
             $res = '';
             foreach ($data as $value) :
                 $res .= "
 <div style=\"float: left; text-align: center; margin-bottom: 4px;\">
-    <img  src=\"/public/property/mid/" . $value["id"] . "_" . $value["picture"] . "\" style=\"float: left; border: 1px solid; margin-left: 2px;\"><br>
-    <input type=\"button\" onclick=\"$.get('/ajax/delimg/image_id/" . $value["id"] . "', function(data){ $('.photolist').html(data)});\" class=\"admin_buttonfield\"
-    value=\"Delete\">
+    <img  src=\"/public/gallery/small/" . $value["idgallery"] . "_" . $value["idimage"] . ".jpg\" style=\"float: left; border: 1px solid; margin-left: 2px;\"><br>
+    <input type=\"button\" onclick=\"$.get('/ajax/delimg/item/" . $value["idimage"] . "', function(data){ $('.photolist').html(data)});\" class=\"admin_buttonfield\"
+    value=\"Видалити\">
 </div>";
 
             endforeach;
@@ -109,34 +103,28 @@ class AjaxController extends Zend_Controller_Action {
 
     // отримати список всіх зображень для вибраної нерухостоі
     public function delimgAction() {
-        $image_id = $this->_request->getParam('image_id', null);
+        $idimage = $this->_request->getParam('item', null);
 
         // отримуемо інформацію про файл
-        $table = new Model_PropertyPicture();
-        $image = $table->fetchRow('id = ' . $image_id);
+        
+        $image = Model_Image::getById($idimage);
         // видалити файли
-        @unlink('public/property/full/' . $image->id . '_' . $image->picture);
-        @unlink('public/property/mid/' . $image->id . '_' . $image->picture);
-        @unlink('public/property/big/' . $image->id . '_' . $image->picture);
-        @unlink('public/property/small/' . $image->id . '_' . $image->picture);
-        @unlink('public/property/350x220/' . $image->id . '_' . $image->picture);
-        @unlink('public/property/addimg/' . $image->id . '_' . $image->picture);
-        $property_id = $image->property_id;
+        @unlink('public/property/full/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/property/mid/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/property/small/' . $image->idgallery . '_' . $image->idimage.".jpg");
         //видалити запис про картинку
-        Model_PropertyPicture::deletePictureById($image->id);
+        Model_Image::deleteImage($idimage);
 
         //
-        $data = $table->fetchAll("property_id = " . $property_id);
-
-
+        $data = Model_Image::getAll($image->idgallery);
         if (is_object($data)) {
             $res = '';
             foreach ($data as $value) :
                 $res .= "
 <div style=\"float: left; text-align: center; margin-bottom: 4px;\">
-    <img  src=\"/public/property/mid/" . $value["id"] . "_" . $value["picture"] . "\" style=\"float: left; border: 1px solid; margin-left: 2px;\"><br>
-    <input type=\"button\" onclick=\"$.get('/ajax/delimg/image_id/" . $value["id"] . "', function(data){ $('.photolist').html(data)});\" class=\"admin_buttonfield\"
-    value=\"Delete\">
+    <img  src=\"/public/gallery/small/" . $value["idgallery"] . "_" . $value["idimage"] . ".jpg\" style=\"float: left; border: 1px solid; margin-left: 2px;\"><br>
+    <input type=\"button\" onclick=\"$.get('/ajax/delimg/item/" . $value["idimage"] . "', function(data){ $('.photolist').html(data)});\" class=\"admin_buttonfield\"
+    value=\"Видалити\">
 </div>";
 
             endforeach;
