@@ -35,8 +35,8 @@ class AjaxController extends Zend_Controller_Action {
                     $res2width = false;
                 }
 
-                $image_mid = new Asido_Image('public/gallery/full/' . $idgallery. '_' . $filename, 'public/property/mid/' . $idgallery . '_' . $filename);
-                $image_small = new Asido_Image('public/property/full/' . $idgallery . '_' . $filename, 'public/property/small/' . $idgallery. '_' . $filename);
+                $image_mid = new Asido_Image('public/gallery/full/' . $idgallery. '_' . $filename, 'public/gallery/mid/' . $idgallery . '_' . $filename);
+                $image_small = new Asido_Image('public/gallery/full/' . $idgallery . '_' . $filename, 'public/gallery/small/' . $idgallery. '_' . $filename);
 
                 $asido = new Asido_Api();
                 //$asido_drive =
@@ -59,14 +59,20 @@ class AjaxController extends Zend_Controller_Action {
                 $image_small->save(ASIDO_OVERWRITE_ENABLED);
 
                 // update permition
-                @chmod('public/property/full/' . $idgallery. '_' . $filename, 0777);
-                @chmod('public/property/mid/' . $idgallery . '_' . $filename, 0777);
-                @chmod('public/property/small/' . $idgallery . '_' . $filename, 0777);
+                @chmod('public/gallery/full/' . $idgallery. '_' . $filename, 0777);
+                @chmod('public/gallery/mid/' . $idgallery . '_' . $filename, 0777);
+                @chmod('public/gallery/small/' . $idgallery . '_' . $filename, 0777);
+                echo json_encode(array('status' => 'success', 'idgallery' => $idgallery));
+                exit;
             } catch (Zend_File_Transfer_Exception $e) {
-                var_dump($e->getMessage());
+                echo json_encode(array('status' => 'error', 'msg' => $e->getMessage()));
+                exit;
+            } catch (Exception $e) {
+                echo json_encode(array('status' => 'error', 'msg' => $e->getMessage()));
+                exit;
             }
         }
-        echo json_encode(array('status' => 'success', 'idgallery' => $id, 'image_id' => $image_id));
+        echo json_encode(array('status' => 'error', 'msg' => 'non-action'));
         exit;
     }
 
