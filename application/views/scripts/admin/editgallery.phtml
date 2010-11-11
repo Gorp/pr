@@ -7,19 +7,20 @@
         </div>
     </div>
 
-    <input type="submit" name="login_button" value="Додати" id="admin_button" />
+    <input type="submit"  value="<?php echo ($this->item == 'new')?'Додати':'Поновити';?>" id="admin_button" />
 </form>
 
-
+<?php
+if ( $this->item != 'new' ) : ?>
 <div id="content">
     <form id="form1" action="/mandi/imgupload/item/<?php echo $this->item; ?>" method="post" enctype="multipart/form-data">
         <div class="fieldset flash" id="fsUploadProgress">
-            <span class="legend">Upload Queue</span>
+            <span class="legend">Черга завантаження</span>
         </div>
-        <div id="divStatus">0 Files Uploaded</div>
+        <div id="divStatus">0 Файлів завантажено</div>
         <div>
             <span id="spanButtonPlaceHolder"></span>
-            <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+<!--            <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />-->
         </div>
 
     </form>
@@ -42,7 +43,7 @@
             post_params: {"PHPSESSID" : "<?php echo session_id(); ?>"},
             file_size_limit : "100 MB",
             file_types : "*.*",
-            file_types_description : "All Files",
+            file_types_description : "Вс файли",
             file_upload_limit : 100,
             file_queue_limit : 0,
             custom_settings : {
@@ -56,7 +57,7 @@
             button_width: "65",
             button_height: "29",
             button_placeholder_id: "spanButtonPlaceHolder",
-            button_text: '<span class="theFont">Upload images</span>',
+            button_text: '<span class="theFont">Завантажити картинки</span>',
             button_text_style: ".theFont { font-size: 16; }",
             button_text_left_padding: 12,
             button_text_top_padding: 3,
@@ -83,3 +84,5 @@
     });
 </script>
 
+<?php
+endif; ?>

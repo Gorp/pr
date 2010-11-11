@@ -14,7 +14,7 @@ The FileProgress class is not part of SWFUpload.
 function fileQueued(file) {
 	try {
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
-		progress.setStatus("Pending...");
+		progress.setStatus("В очікуванні...");
 		progress.toggleCancel(true, this);
 
 	} catch (ex) {
@@ -80,7 +80,7 @@ function uploadStart(file) {
 		we can do is say we are uploading.
 		 */
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
-		progress.setStatus("Uploading...");
+		progress.setStatus("Завантажую...");
 		progress.toggleCancel(true, this);
 	}
 	catch (ex) {}
