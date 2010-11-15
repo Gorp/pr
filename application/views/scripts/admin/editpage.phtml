@@ -1,0 +1,35 @@
+<?php $this->ckeditor = 'ckeditor'; ?>
+<div style="margin-left:20px;">
+<form action="/admin/savepage" method="post">
+    <input id="idpage" type="hidden" name="idpage"
+           value="<?php echo $this->escape($this->item); ?>" />
+    <div class="field">
+    <div class="field_name">Назва: </div>
+    <div><input id="title" class="field_input" type="text" name="title"
+                value="<?php echo $this->escape($this->data->title); ?>" /></div>
+    </div>
+    <div class="field">
+    <div class="field_name">URL: </div>
+    <div><input id="url" class="field_input" type="text" name="url"
+                value="<?php echo $this->escape($this->data->url); ?>" /></div>
+    </div>
+    <div class="field">
+    <div class="field_name">Ключові слова: </div>
+    <div><input id="keyword" class="field_input" type="text" name="keyword"
+                value="<?php echo $this->escape($this->data->keyword); ?>" /></div>
+    </div>
+    <div class="field">
+    <div class="field_name">Опис: </div>
+    <div><input id="description" class="field_input" type="text" name="description" 
+                value="<?php echo $this->escape($this->data->description); ?>" /></div>
+    </div>
+    <div class="field">
+    <div class="field_name">Контент: </div><br /><br />
+    <div><textarea class="field_input" id="richtext" cols="30" rows="5" name="richtext">
+            <?php echo $this->data->richtext; ?>
+        </textarea></div>
+    </div>
+    <input id="submit" type="submit" name="submit" value="Зберегти" />
+</form>
+</div>
+<?php echo $this->setupEditor('richtext'); ?>

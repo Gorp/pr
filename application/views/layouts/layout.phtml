@@ -2,36 +2,45 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<head>
-    <link rel="icon" href="/public/img/favicon.ico" type="image/x-icon" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <?php echo '<title>'.$this->pageTitle.'</title>'; ?>
-    <?php echo $this->headScript() ?>
-    <?php echo $this->headLink() ?>
-    <?php echo $this->headLink()->appendStylesheet($this->baseURL.'/public/css/style.css'); ?> 
-    
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
-    	<script type="text/javascript">
-		//no conflict jquery
-		jQuery.noConflict();
-		//jquery stuff
-	</script>
-    
-</head>
+    <head>
+        <link rel="icon" href="/public/img/favicon.ico" type="image/x-icon" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php echo '<title>' . $this->pageTitle . '</title>'; ?>
+        <?php echo $this->headScript() ?>
+        <?php echo $this->headLink() ?>
+        <?php echo $this->headLink()->appendStylesheet($this->baseURL . '/public/css/style.css'); ?>
+
+    </head>
 
 
-    <body class="homepage<?php echo ($this->lang != 'en') ? '_'.$this->lang:''; ?>">
-  <div id="container">
-    <div id="header"><?php  echo $this->render('helpers/header.phtml') ?>
-            <?php  echo $this->render('helpers/menu.phtml') ?>
-    </div>
-    <div id="wrapper">
-      <div id="content"><?php echo $this->layout()->content ?></div>
-    </div>
-    <div id="navigation"><?php  echo $this->render('helpers/sidebar.phtml') ?></div>
-    <div id="footer"><?php echo $this->render('helpers/footer.phtml') ?></div>
-    </div>
-    <?php echo $this->render('helpers/counter.phtml'); ?>    
-</body>
+    <body >
+        <div id="wrapper">
+
+            <div id="header">
+                <?php echo $this->render('helpers/header.phtml') ?>
+                <?php echo $this->render('helpers/menu.phtml') ?>
+            </div><!-- #header-->
+
+            <div id="middle">
+
+                <div id="container">
+
+                    <div id="content">
+                        <strong>Content:</strong> Sed placerat accumsan ligula. Aliquam felis magna, congue quis, tempus eu, aliquam vitae, ante. Cras neque justo, ultrices at, rhoncus a, facilisis eget, nisl. Quisque vitae pede. Nam et augue. Sed a elit. Ut vel massa. Suspendisse nibh pede, ultrices vitae, ultrices nec, mollis non, nibh. In sit amet pede quis leo vulputate hendrerit. Cras laoreet leo et justo auctor condimentum. Integer id enim. Suspendisse egestas, dui ac egestas mollis, libero orci hendrerit lacus, et malesuada lorem neque ac libero. Morbi tempor pulvinar pede. Donec vel elit.
+                    </div><!-- #content-->
+                </div><!-- #container-->
+
+                <div class="sidebar" id="sideRight">
+                    <strong>Right Sidebar:</strong> Integer velit. Vestibulum nisi nunc, accumsan ut, vehicula sit amet, porta a, mi. Nam nisl tellus, placerat eget, posuere eget, egestas eget, dui. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In elementum urna a eros. Integer iaculis. Maecenas vel elit.
+                </div><!-- .sidebar#sideRight -->
+
+            </div><!-- #middle-->
+
+        </div><!-- #wrapper -->
+
+        <div id="footer">
+            <?php echo $this->render('helpers/footer.phtml') ?>
+        </div><!-- #footer -->
+
+    </body>
 </html>

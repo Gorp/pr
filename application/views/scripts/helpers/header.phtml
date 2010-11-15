@@ -1,28 +1,3 @@
-<div class="dats fl"><?php echo strtoupper(date('M d, Y')); ?></div>
-
-<div class="langs fr">
-    <a href="<?php 
-                  echo $this->url(array('lang' => 'en',
-                                              'title' => $this->urltitle,
-                                               $this->link_type.'_id' => $this->id), $this->link_type);
-              ?>">
-    <img alt="English" title="English" src="/public/img/gb.gif"></a>&nbsp;&nbsp;&nbsp;
-    <a href="<?php
-                  echo $this->url(array('lang' => 'ru',
-                                              'title' => $this->urltitle,
-                                               $this->link_type.'_id' => $this->id), $this->link_type);
-              ?>">
-    <img alt="Русский" title="Русский" src="/public/img/ru.gif">
-    </a>
-</div>
-<div class="contacts fr">
-    <a href="/<?php echo $this->lang;?>/o-nas-81.html"><?php echo $this->words['contactsus'];?></a> |
-    
-    <a href="skype:zhanettat">
-   <?php echo $this->words['skypeus'];?>
-    </a>
-</div>
-<div class="clear"></div>
-
-<a class="logo" href="/"><div style="width: 140px; height: 110px; position: absolute; margin-left: -160px;"></div>
-   <?php echo $this->words['realestate'];?></a>
+<center>
+    <img src="<?php echo $this->headerurl;?>" alt="Все для свята"/>
+</center>
