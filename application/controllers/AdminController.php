@@ -126,9 +126,7 @@ class AdminController extends Local_Controller {
             //'Identical' => '1-1'
             ),
             'name' => array(
-                'allowEmpty' => false,
-                'Digits',
-                'messages' => array('dddd', '222')
+                'allowEmpty' => false
             ),
             'idmenu' => array()
         );
@@ -204,5 +202,72 @@ class AdminController extends Local_Controller {
         return new Zend_Filter_Input($filters, $validators, $input, $options);
     }
 
-}
+    public function pageAction() {
+        $this->view->item = $this->_getParam('item', 'new');
+        $this->view->pages = Model_Page::getAll();
 
+        //перевіряємо на видалення
+        $delete = $this->_getParam('delete', false);
+        if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
+            Model_Page::deletepage($this->view->item);
+            $this->_redirect('/admin/page');
+        }
+        // якщо треба отримати дані за id сторінки
+        if (Zend_Validate::is($this->view->item, 'Digits')) {
+            $this->view->data = Model_Page::getById($this->view->item);
+        } else {
+            $this->view->data = Model_Page::getById(NULL);
+        }
+    }
+
+    public function savepageAction() {
+        if ($this->_request->isPost()) {
+            $input = $this->pagevalid($_POST);
+            if ($input->isValid()) {
+                $res = Model_Page::updatepage($input);
+                if ($res[0] > 0) {
+                    $this->_redirect('/admin/page/item/' . $res[1]);
+                } else {
+                    var_dump($res[1]);
+                    exit;
+                }
+            }
+            var_dump($input->getMessages());
+            exit;
+        }
+    }
+
+    private function pagevalid($input) {
+        $filters = array(
+            '*' => array(array('StringTrim'))
+        );
+        $options = array(
+            'escapeFilter' => new Zend_Filter_HtmlEntities(null, 'UTF-8')
+        );
+        $validators = array(
+            'title' => array(
+                'allowEmpty' => false
+            ),
+            'description' => array(
+                'allowEmpty' => false
+            ),
+            'richtext' => array(
+                'allowEmpty' => false
+            ),
+            'idpage' => array()
+        );
+        return new Zend_Filter_Input($filters, $validators, $input, $options);
+    }
+
+    public function  getpageimgAction() {
+        $this->_helper->layout->disableLayout();
+        if ($this->_request->isPost()) {
+            if (copy($_FILES['upload']['tmp_name'],
+                    'public/img/'.$_FILES['upload']['name'])) {
+                    $this->view->message = 'Файл збережений як public/img/'.$_FILES['upload']['name'];
+            } else {
+                $this->view->message = 'Помилка.';
+            }
+        }
+    }
+}
