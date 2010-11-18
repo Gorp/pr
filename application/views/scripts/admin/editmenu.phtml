@@ -13,14 +13,28 @@
             <option value="0">Головне Меню</option>
             <?php
             if (is_object($this->mainmenu)) :
-            foreach ($this->mainmenu as $menu)  :
-                if ($menu->idmenu == $this->menudata->idmenu ) { continue; }    ?>
-                <option
-                <?php echo ($menu->idmenu == $this->menudata->parent)?'selected="selected"':''; ?> 
+                foreach ($this->mainmenu as $menu)  :
+                    if ($menu->idmenu == $this->menudata->idmenu ) { continue; }    ?>
+                    <option
+                    <?php echo ($menu->idmenu == $this->menudata->parent)?'selected="selected"':''; ?>
                 value="<?php echo $menu->idmenu; ?>" >
-                <?php echo $menu->name; ?></option>
+                    <?php echo $menu->name; ?></option>
+                <?php
+                endforeach; endif; ?>
+        </select>
+    </div>
+    <div class="field">
+        <div class="field_name">Сторінка :</div>
+        <select class="field_input" name="idpage" >
+            <option value="0">Вибрати сторінку</option>
             <?php
-            endforeach; endif; ?>
+            if (is_object($this->pages) && $this->menudata->idmenu != null) :
+                foreach ($this->pages as $page)  : ?>
+            <option <?php echo ($page->idpage == $this->menudata->idpage)?'selected="selected"':''; ?>
+                value="<?php echo $page->idpage; ?>" >
+                    <?php echo $page->title; ?></option>
+                <?php
+                endforeach; endif; ?>
         </select>
     </div>
     <input type="submit" name="login_button" value="Додати" id="admin_button" />

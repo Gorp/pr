@@ -1,7 +1,7 @@
 <?php $this->ckeditor = 'ckeditor'; ?>
 <div style="margin-left:20px;">
-<form action="/admin/savepage" method="post">
-    <input id="idpage" type="hidden" name="idpage"
+<form action="<?php echo $this->actionname;?>" method="post">
+    <input id="<?php echo $this->idname;?>" type="hidden" name="<?php echo $this->idname;?>"
            value="<?php echo $this->escape($this->item); ?>" />
     <div class="field">
     <div class="field_name">Назва: </div>

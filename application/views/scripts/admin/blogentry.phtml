@@ -1,0 +1,26 @@
+<div class="admin_submenu" >
+    <div class="menulist" >
+        <a href="/admin/blogentry/item/new">Додати Запис</a>
+    </div>
+    <div> ----- </div>
+    <?php
+    if (is_object($this->entrys)) :
+    foreach ($this->entrys as $item)  : ?>
+        <div class="menulist" ><a href="/admin/blogentry/item/<?php echo $item->identry; ?>">
+            <?php echo $item->title; ?></a>&nbsp;&nbsp;
+            <a href="/admin/blogentry/item/<?php echo $item->identry; ?>/delete/1">X</a></div>
+    <?php
+    endforeach; endif; ?>
+</div>
+<div class="admin_content" >
+    <?php
+    switch ($this->item) {
+        case 'new' :
+              echo   '<h2 class="admin_title">Створити запис</h2>';
+              break;
+       default : echo '<h2 class="admin_title">Редагувати запис</h2>';
+              break;
+    }
+    echo $this->render('admin/editpage.phtml');
+    ?>
+</div>

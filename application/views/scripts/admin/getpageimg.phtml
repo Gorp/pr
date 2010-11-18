@@ -1,1 +1,2 @@
-<?php echo $this->message;?><br />
+<?php if (!empty($this->message)) echo
+"<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($this->funcNum, '', '$this->message');</script>";?>

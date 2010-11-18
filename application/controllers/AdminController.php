@@ -67,7 +67,7 @@ class AdminController extends Local_Controller {
         $this->view->item = $this->_getParam('item', 'new');
         //var_dump(Model_Users::getDefaultAdapter());
         $this->view->mainmenu = Model_Menu::getAll(0);
-
+        $this->view->pages = Model_Page::getAll();
 
         //перевіряємо на видалення
         $delete = $this->_getParam('delete', false);
@@ -98,6 +98,7 @@ class AdminController extends Local_Controller {
 
     public function savemenuAction() {
         if ($this->_request->isPost()) {
+            //var_dump($_POST);exit;
             $input = $this->menuvalid($_POST);
             if ($input->isValid()) {
                 $res = Model_Menu::updatemenu($input);
@@ -128,7 +129,8 @@ class AdminController extends Local_Controller {
             'name' => array(
                 'allowEmpty' => false
             ),
-            'idmenu' => array()
+            'idmenu' => array(),
+            'idpage' => array()
         );
 
         return new Zend_Filter_Input($filters, $validators, $input, $options);
@@ -205,7 +207,8 @@ class AdminController extends Local_Controller {
     public function pageAction() {
         $this->view->item = $this->_getParam('item', 'new');
         $this->view->pages = Model_Page::getAll();
-
+        $this->view->actionname = '/admin/savepage';
+        $this->view->idname = 'idpage';
         //перевіряємо на видалення
         $delete = $this->_getParam('delete', false);
         if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
@@ -262,12 +265,83 @@ class AdminController extends Local_Controller {
     public function  getpageimgAction() {
         $this->_helper->layout->disableLayout();
         if ($this->_request->isPost()) {
-            if (copy($_FILES['upload']['tmp_name'],
-                    'public/img/'.$_FILES['upload']['name'])) {
-                    $this->view->message = 'Файл збережений як public/img/'.$_FILES['upload']['name'];
+            $url = 'public/img/'.uniqid().".".pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
+            $funcNum = $_GET['CKEditorFuncNum'];
+            if (($_FILES['upload'] == "none") || (empty($_FILES['upload']['name']))) {
+                $message = "Файл не завантажений.";
+            } else if ($_FILES['upload']["size"] == 0) {
+                $message = "Файл пустий.";
+            } else if (($_FILES['upload']["type"] != "image/gif") &&
+                      ($_FILES['upload']["type"] != "image/jpeg") &&
+                      ($_FILES['upload']["type"] != "image/png")) {
+                $message = "Невірний формат файлу. Допустимі формати JPG, GIF, PNG.";
+            } else if (!is_uploaded_file($_FILES['upload']["tmp_name"])) {
+                $message = "Некоректне імя тимчасового файлу.";
             } else {
-                $this->view->message = 'Помилка.';
+                $message = '';
+                move_uploaded_file($_FILES['upload']['tmp_name'], $url);
+                echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '/$url', '$message');</script>";
             }
+            $this->view->funcNum = $funcNum;
+            $this->view->message = $message;
         }
+    }
+
+    public function blogentryAction() {
+        $this->view->item = $this->_getParam('item', 'new');
+        $this->view->entrys = Model_Blogentry::getAll();
+        $this->view->actionname = '/admin/saveblogentry';
+        $this->view->idname = 'identry';
+        //перевіряємо на видалення
+        $delete = $this->_getParam('delete', false);
+        if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
+            Model_Blogentry::deleteentry($this->view->item);
+            $this->_redirect('/admin/blogentry');
+        }
+        // якщо треба отримати дані за id сторінки
+        if (Zend_Validate::is($this->view->item, 'Digits')) {
+            $this->view->data = Model_Blogentry::getById($this->view->item);
+        } else {
+            $this->view->data = Model_Blogentry::getById(NULL);
+        }
+    }
+
+    public function saveblogentryAction() {
+        if ($this->_request->isPost()) {
+            $input = $this->blogentryvalid($_POST);
+            if ($input->isValid()) {
+                $res = Model_Blogentry::updateentry($input);
+                if ($res[0] > 0) {
+                    $this->_redirect('/admin/blogentry/item/' . $res[1]);
+                } else {
+                    var_dump($res[1]);
+                    exit;
+                }
+            }
+            var_dump($input->getMessages());
+            exit;
+        }
+    }
+
+    private function blogentryvalid($input) {
+        $filters = array(
+            '*' => array(array('StringTrim'))
+        );
+        $options = array(
+            'escapeFilter' => new Zend_Filter_HtmlEntities(null, 'UTF-8')
+        );
+        $validators = array(
+            'title' => array(
+                'allowEmpty' => false
+            ),
+            'description' => array(
+                'allowEmpty' => false
+            ),
+            'richtext' => array(
+                'allowEmpty' => false
+            ),
+            'identry' => array()
+        );
+        return new Zend_Filter_Input($filters, $validators, $input, $options);
     }
 }
