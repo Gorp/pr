@@ -11,6 +11,9 @@ class Local_Controller extends Zend_Controller_Action {
 
         // отримуємо головне меню
         $this->view->menu = Model_Menu::getAll(0);
-        
+
+        // вибранна мова
+        $this->view->lang = 'ua';
+
     }
 }

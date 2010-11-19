@@ -77,10 +77,15 @@ input {
 #sideRight {
 	float: left;
 	margin-right: -3px;
-	width: 250px;
+	width: 220px;
 	margin-left: -250px;
 	position: relative;
 	background: #FFACAA;
+}
+
+.sidebar {
+        background-color: #fff;
+        padding: 17px 13px;
 }
 
 
