@@ -1,0 +1,52 @@
+<script type="text/javascript" src="/public/js/jquery-1.4.3.min.js" />
+<script type="text/javascript">
+    //no conflict jquery
+    jQuery.noConflict();
+</script>
+<script type="text/javascript">
+    jQuery('head').append('<link rel="stylesheet" href="/public/css/menu.css" type="text/css" media="screen" />' +
+'<!--[if lte IE 7]><link rel="stylesheet" href="/public/css/menuie.css" type="text/css" media="screen" /><![endif]-->');
+jQuery(document).ready(function(){
+   jQuery('#main_menu li').hover(
+        function() {
+            jQuery(this).children('a').addClass('menuitem_active').removeClass('menuitem');
+            jQuery(this).find('ul').stop(true,true);
+            jQuery(this).find('ul').slideDown();
+        },
+        function() {
+            jQuery(this).find('a').addClass('menuitem').removeClass('menuitem_active');
+            jQuery(this).find('ul').slideUp('fast');
+        }
+   );
+});
+</script>
+<ul id="main_menu">
+<?php
+if (is_object($this->menu)) :
+// Обробляэмо обэкт меню
+foreach ($this->menu as $menu) :
+// Якщо у пункта меню немаэ предків виводимо в головне меню
+if ($menu->parent == 0) :
+// Шукаємо нащадків поточного пункта меню
+$menuchilds = Model_Menu::getAll($menu->idmenu);
+$haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; ?>
+    <li>
+        <a href="#" class="menuitem"><?php echo $menu->name;
+        if ($haschilds)
+            echo '<span class="menu_arrow"></span>';?></a>
+        <?php
+        // Якщо нащадки знайдені - виводимо
+        if ($haschilds) : ?>
+        <ul>
+            <?php foreach ($menuchilds as $child) : ?>
+                <li><a href="#"  class="menuitem"><?php echo $child->name; ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+    </li>
+<?php
+endif;
+endforeach;
+endif;
+?>
+</ul>
