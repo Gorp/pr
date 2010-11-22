@@ -3,7 +3,7 @@
 class AdminController extends Local_Controller {
 
     private $_user = 'admin';
-    private $_password = 'admin*pr';
+    private $_password = '1';
     public $ns;
 
     public function checkLogin() {

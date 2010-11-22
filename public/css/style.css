@@ -9,7 +9,7 @@ body {
 	font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
 	width: 100%;
 	height: 100%;
-        background-color: #3c3c3c;
+        background-color: #000;
         padding: 5px 5px;
 }
 a {
@@ -77,15 +77,100 @@ input {
 #sideRight {
 	float: left;
 	margin-right: -3px;
-	width: 220px;
-	margin-left: -250px;
+	width: 237px;
+	margin-left: -247px;
 	position: relative;
-	background: #FFACAA;
+	background: #0b0b0b url('/public/img/bsidebar.gif') no-repeat bottom right;
+        font: 14px/18px Arial, Tahoma, Verdana, sans-serif;
+        min-height:  240px;
+        outline: none;
 }
 
-.sidebar {
-        background-color: #fff;
-        padding: 17px 13px;
+.sidebarservice {
+    border: 2px #404040 solid;
+    color: white;
+    font: 14px/18px Arial, Tahoma, Verdana, sans-serif;
+    background: #0b0b0b url('/public/img/wsun.png') no-repeat top right;
+    margin-bottom:  6px;
+}
+.sidebarservice h2{
+    color: white;
+    padding-left: 22px;
+}
+
+.sidebarservice input.lbut,.sidebarservice input.lbut:hover{
+   background: url('/public/img/lbut.png') no-repeat;
+   height: 40px;
+   width: 229px;
+   color: white;
+   padding-bottom: 3px;
+   border: 0px #404040 solid;
+   margin: 0px 2px 2px 2px;
+   font: 16px/18px Arial, Tahoma, Verdana, sans-serif;
+   text-align: left;
+   padding-left: 20px;
+   cursor: pointer;
+   outline: none;
+}
+
+.sidebarservice input.lbut:hover{
+   background: url('/public/img/lbuth.png') no-repeat;
+}
+
+.sidebarcontact {
+    border: 0px #404040 solid;
+    background: #e8e8e8 url('/public/img/boxb.png') repeat-y;
+}
+
+
+.sidebarbox h2{
+    color: #404040;
+}
+
+.sidebarbox input{
+    height: 20px;
+    width: 196px;
+    border: 0px solid #b2d1ff;
+    margin-bottom: 6px;
+    background: url('/public/img/ibox.png') no-repeat;
+    padding-left: 3px;
+}
+
+.sidebarbox textarea{
+    height: 72px;
+    width: 192px;
+    background: url('/public/img/tbox.png') no-repeat;
+    padding-left: 3px;
+    border: 0px solid #b2d1ff;
+    margin-bottom: 6px;
+}
+
+.sidebarbox input.slbut,.sidebarbox input.slbut:hover{
+   background: url('/public/img/slbut.png') no-repeat;
+   height: 40px;
+   width: 104px;
+   margin-left: 93px;
+   color: white;
+   padding-bottom: 12px;
+
+}
+
+.sidebarbox input.slbut:hover{
+   background: url('/public/img/slbuth.png') no-repeat;
+   cursor: pointer;
+}
+
+
+.sidebarbox {
+    background: #e8e8e8 url('/public/img/bsun.png') no-repeat top right;
+    width: 215px;
+    margin: 0px 8px;
+    padding-left: 8px;
+}
+
+.ourwork {
+    border: 2px #404040 solid;
+    color: white;
 }
 
 
