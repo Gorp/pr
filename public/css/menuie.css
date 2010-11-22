@@ -1,0 +1,18 @@
+#main_menu li {
+    display:inline;
+    margin-right: 4px;
+}
+#main_menu li a{
+    display:inline;
+    zoom:1;
+}
+#main_menu li ul li a{
+    width:200px;
+}
+#main_menu li ul {
+    margin-left:-105%;
+}
+#main_menu .menu_arrow {
+    display:inline;
+    top:7px;
+}
