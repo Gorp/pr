@@ -6,6 +6,7 @@
     margin:0;
     padding:0;
     position: relative;
+    margin-left:5px;
 }
 #main_menu li {
     display:inline-block;
@@ -28,7 +29,7 @@
 #main_menu li ul {
     display:none;
     position:absolute;
-    margin-left: -40px;
+    margin-left: 0px;
     top: 49px;
     z-index:150;
 }
