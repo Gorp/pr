@@ -182,3 +182,25 @@ input {
 	height: 100px;
 	background: #BFF08E;
 }
+
+/* Blog
+------------------------------------------------------------------*/
+.blog {
+    color: #bababa;
+    width: 720px;
+    margin-top: 200px;
+}
+
+.blog_title {
+    background: url('/public/img/ssun.png') no-repeat left center transparent;
+    color: #bababa;
+
+}
+
+.blog_thumb {
+
+}
+
+.blog_stext {
+
+}

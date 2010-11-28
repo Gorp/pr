@@ -21,6 +21,12 @@ class Model_Blogentry extends Model_Base_Table {
         return $table->fetchAll($select);
     }
 
+    public static function getLast3Blog() {
+        $table = self::getInstance();
+        $select = $table->select()->order('identry');
+        return $table->fetchAll($select);
+    }
+
     public static function getById($identry=NULL) {
         $table = self::getInstance();
         $select = $table->select();
