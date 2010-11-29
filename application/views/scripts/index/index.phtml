@@ -6,14 +6,14 @@
 
 
 
-<div>
+<div style="max-height: 400px;">
 <div id="CustomSlideshow">
-        <img src="/public/gallery/main/vesillya.jpg" alt="Весілля"/>
+<!--        <img src="/public/gallery/main/vesillya.jpg" alt="Весілля"/>
 
-        <img src="/public/gallery/main/korporativ.jpg" alt="Корпаратив"/>
+        <img src="/public/gallery/main/korporativ.jpg" alt="Корпаратив"/>-->
 
 
-<!--    <a href="http://cnn.com" title="Camomile">
+    <a href="http://cnn.com" title="Camomile">
         <div style="position: relative; background: url('/public/gallery/main/vyspkni.jpg') no-repeat; width: 720px; height: 400px;">
             <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute;  margin-top:  340px; padding-left: 10px; width: 720px; height: 60px; height: 60px; font-weight: bold; color: #fff;">
                 <p><?php echo $this->tr(NULL,$this->lang,'<h2>Випуснкі вечори</h2>'); ?></p> </div>
@@ -27,7 +27,7 @@
                 <p><?php echo $this->tr(NULL,$this->lang,'<h2>Корпоративи</h2>'); ?></p> </div>
         </div>
     </a>
--->
+
 <!--    <a href="http://stb.ua" title="Bumblebees">
         <div style="position: relative; background: url('/public/gallery/main/vesillya.jpg')  no-repeat; width: 720px; height: 400px;">
             <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute; margin-top:  340px;  padding-left: 10px; width: 720px; height: 60px; font-weight: bold; color: #fff;">
@@ -45,46 +45,36 @@
 </div></div>
 
 <div style="clear: both;"></div>
-<!--
+
 <div class="blog">
     <div class="blog_title"><h2>Назва події</h2>Ужгород, 25 березеня 2010</div>
+    <div class="blog_thumb"><img src="/public/img/blog/boxb.png" /></div>
     <div class="blog_stext">
-        <div class="blog_thumb"><img src="/public/img/blog/boxb.png" /></div>
+        
         If you can see this page, then the people who own this website have just installed the Apache Web server software and the Apache Interface to OpenSSL (mod_ssl) successfully. They now have to add content to this directory and replace this placeholder page, or else point the server at their real content.
     </div>
-</div>-->
-asdasdasdas
+</div>
+
 
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
     $('#CustomSlideshow').slideshow({
         width:720,     // width in px
-        height:480,    // height in px
-		history:true,  // change/check location hash
+        height:400,    // height in px
+        history:true,  // change/check location hash
         index:0,       // start from frame number N
         time:2000,     // time out beetwen (ms)
         title:false,   // show title
-        panel:true,    // show controls panel
-        loop:false,    // stop looping
+        panel:false,    // show controls panel
+        loop:true,    // stop looping
 
         effect:'random',      // aviable fade, scrollUp/Down/Left/Right, zoom, zoomFade, zoomTL, zoomBR, growX, growY, random
         effecttime:1000,      // aviable fast,slow,normal and any valid fx speed value
         nextclick:true,       // bind content click next slide
         playframe:true,       // show frame "Play Now!"
-        imgresize:true,       // resize image to slideshow window
-        help:'Hello World!',
+        imgresize:true       // resize image to slideshow window
 
-        controls :{         // show/hide controls elements
-            'hide':false,   // show controls bar on mouse hover
-            'first':false,  // goto first frame
-            'prev':false,   // goto previouse frame (if it first go to last)
-            'play':true,    // play slideshow
-            'next':false,   // goto next frame (if it last go to first)
-            'last':false,   // goto last frame
-            'help':false,   // show help message
-            'counter':true  // show slide counter
-        }
     });
 });
 //]]>
