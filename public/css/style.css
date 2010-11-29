@@ -188,7 +188,7 @@ input {
 .blog {
     color: #bababa;
     width: 720px;
-    margin-top: 10px;
+    margin: 10px;
     display: inline-block;
 }
 
@@ -196,6 +196,8 @@ input {
     background: url('/public/img/ssun.png') no-repeat left center transparent;
     color: #bababa;
     padding-left: 46px;
+    margin-bottom: 5px;
+
 }
 
 .blog_thumb {
@@ -205,6 +207,6 @@ input {
 
 .blog_stext {
     width: 400px;
-    margin-left: 220px;
+    margin-left: 230px;
  
 }
