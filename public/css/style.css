@@ -68,7 +68,7 @@ input {
 	overflow: hidden;
 }
 #content {
-	padding: 0 270px 0 0;
+	padding: 0 270px 0 10px;
 }
 
 
