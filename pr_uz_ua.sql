@@ -1,4 +1,4 @@
-﻿# SQL Manager 2007 for MySQL 4.3.4.1
+# SQL Manager 2007 for MySQL 4.3.4.1
 # ---------------------------------------
 # Host     : localhost
 # Port     : 3306
@@ -12,13 +12,7 @@
 
 SET FOREIGN_KEY_CHECKS=0;
 
-DROP DATABASE IF EXISTS `pr_uz_ua`;
 
-CREATE DATABASE `pr_uz_ua`
-    CHARACTER SET 'latin1'
-    COLLATE 'latin1_swedish_ci';
-
-USE `pr_uz_ua`;
 
 #
 # Structure for the `gallery` table : 
