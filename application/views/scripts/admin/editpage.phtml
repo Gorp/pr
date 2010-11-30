@@ -23,6 +23,20 @@
     <div><input id="description" class="field_input" type="text" name="description" 
                 value="<?php echo $this->escape($this->data->description); ?>" /></div>
     </div>
+
+    <div class="field">
+    <div class="field_name">Мови: </div>
+    <div><select id="lang" class="field_input" name="lang" onchange="window.location='/admin/page/item/' + <?php echo $this->item;?> +  '/lang/' + $('#lang').val() ">
+            <?php
+            foreach ($this->langs as $lang) : ?>
+            <option value="<?php echo $lang; ?>" <?php echo ($this->lang == $lang)?'selected="selected"':''; ?>>
+                <?php echo $lang; ?>
+            </option>
+            <?php
+            endforeach;   ?>
+        </select>
+    </div></div>
+
     <div class="field">
     <div class="field_name">Контент: </div><br /><br />
     <div><textarea class="field_input" id="richtext" cols="30" rows="5" name="richtext">

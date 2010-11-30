@@ -206,6 +206,7 @@ class AdminController extends Local_Controller {
 
     public function pageAction() {
         $this->view->item = $this->_getParam('item', 'new');
+        $this->view->lang = $this->_getParam('lang', 'ua');
         $this->view->pages = Model_Page::getAll();
         $this->view->actionname = '/admin/savepage';
         $this->view->idname = 'idpage';
@@ -217,7 +218,7 @@ class AdminController extends Local_Controller {
         }
         // якщо треба отримати дані за id сторінки
         if (Zend_Validate::is($this->view->item, 'Digits')) {
-            $this->view->data = Model_Page::getById($this->view->item);
+            $this->view->data = Model_Page::getById($this->view->item, $this->view->lang);
         } else {
             $this->view->data = Model_Page::getById(NULL);
         }
@@ -229,7 +230,7 @@ class AdminController extends Local_Controller {
             if ($input->isValid()) {
                 $res = Model_Page::updatepage($input);
                 if ($res[0] > 0) {
-                    $this->_redirect('/admin/page/item/' . $res[1]);
+                    $this->_redirect('/admin/page/item/' . $res[1].'/lang/'.$_POST['lang']);
                 } else {
                     var_dump($res[1]);
                     exit;
@@ -251,10 +252,19 @@ class AdminController extends Local_Controller {
             'title' => array(
                 'allowEmpty' => false
             ),
+            'url' => array(
+                'allowEmpty' => false
+            ),
+            'keyword' => array(
+                'allowEmpty' => false
+            ),
             'description' => array(
                 'allowEmpty' => false
             ),
             'richtext' => array(
+                'allowEmpty' => false
+            ),
+            'lang' => array(
                 'allowEmpty' => false
             ),
             'idpage' => array()
