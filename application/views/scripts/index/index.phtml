@@ -28,7 +28,7 @@
         </div>
     </a>
 
-<!--    <a href="http://stb.ua" title="Bumblebees">
+   <a href="http://stb.ua" title="Bumblebees">
         <div style="position: relative; background: url('/public/img/main/vesillya.jpg')  no-repeat; width: 720px; height: 400px;">
             <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute; margin-top:  340px;  padding-left: 10px; width: 720px; height: 60px; font-weight: bold; color: #fff;">
                 <p><?php echo $this->tr(NULL,$this->lang,'<h2>Весілля</h2>'); ?></p> </div>
@@ -40,7 +40,7 @@
             <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute; margin-top:  340px;  padding-left: 10px; width: 720px; height: 60px; font-weight: bold; color: #fff;">
                 <p><?php echo $this->tr(NULL,$this->lang,'<h2>Дні народження</h2>'); ?></p> </div>
         </div>
-    </a>-->
+    </a>
     
 </div></div>
 
@@ -93,8 +93,8 @@ $(document).ready(function(){
         effect:'random',      // aviable fade, scrollUp/Down/Left/Right, zoom, zoomFade, zoomTL, zoomBR, growX, growY, random
         effecttime:500,      // aviable fast,slow,normal and any valid fx speed value
         nextclick:false,       // bind content click next slide
-        playframe:true,       // show frame "Play Now!"
-        imgresize:true       // resize image to slideshow window
+        playframe:false,       // show frame "Play Now!"
+        imgresize:false       // resize image to slideshow window
 
     }).playSlide();
 });

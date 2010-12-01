@@ -261,9 +261,7 @@ class AdminController extends Local_Controller {
             'description' => array(
                 'allowEmpty' => false
             ),
-            'richtext' => array(
-                'allowEmpty' => false
-            ),
+
             'lang' => array(
                 'allowEmpty' => false
             ),
@@ -299,6 +297,7 @@ class AdminController extends Local_Controller {
 
     public function blogentryAction() {
         $this->view->item = $this->_getParam('item', 'new');
+        $this->view->lang = $this->_getParam('lang', 'ua');
         $this->view->entrys = Model_Blogentry::getAll();
         $this->view->actionname = '/admin/saveblogentry';
         $this->view->idname = 'identry';
@@ -310,7 +309,7 @@ class AdminController extends Local_Controller {
         }
         // якщо треба отримати дані за id сторінки
         if (Zend_Validate::is($this->view->item, 'Digits')) {
-            $this->view->data = Model_Blogentry::getById($this->view->item);
+            $this->view->data = Model_Blogentry::getById($this->view->item, $this->view->lang);
         } else {
             $this->view->data = Model_Blogentry::getById(NULL);
         }
@@ -344,6 +343,16 @@ class AdminController extends Local_Controller {
             'title' => array(
                 'allowEmpty' => false
             ),
+            'url' => array(
+                'allowEmpty' => false
+            ),
+            'keyword' => array(
+                'allowEmpty' => false
+            ),
+            'lang' => array(
+                'allowEmpty' => false
+            ),
+
             'description' => array(
                 'allowEmpty' => false
             ),

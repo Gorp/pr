@@ -27,7 +27,9 @@ class Model_Page extends Model_Base_Table {
         if ($idpage !== NULL) {
             $select->where('idpage = ?', $idpage)
                    ->where('lang = ?', $lang);
-            return $table->fetchRow($select);
+            $res = $table->fetchRow($select);
+            if ( is_object($res)) { return $res; }
+            return $table->fetchNew();
         } else {
             return $table->fetchNew();
         }
@@ -49,10 +51,11 @@ class Model_Page extends Model_Base_Table {
                     ->where("lang = ?", $data['lang']);
 //                echo $select;exit;
                 $cur = $table->fetchRow($select);
-                if (count($cur)<1) {
-                    $table->insert($data);
-                } else {
+                //var_dump($cur, $data);                exit;
+                if (is_object($cur)) {
                     $table->update($data, 'idpage =  ' . $id. " and lang = '".$cur->lang."'");
+                } else {
+                    $table->insert($data);
                 }
                 
             } else {
