@@ -78,6 +78,87 @@ class AjaxController extends Zend_Controller_Action {
         exit;
     }
 
+
+    /*
+     * Закачка картинок для тумбов
+     *
+     */
+    public function thumbuploadAction() {
+        if ($this->_request->isPost()) {
+            $type = $this->_getParam('type', 'page');
+            $item = $this->_getParam('item');
+
+            //якщо нема id (блога чи сторінки) виходимо з помилкою
+            if (empty($item)) {
+                echo "Код пустой";
+                exit;
+            }
+
+            // в залежності від типу тсорінки вибираємо місце де буде картинка
+            switch ($type) {
+                case 'blog':
+                        $dest= 'public/img/blog/thumb';
+                    break;
+                case 'page':
+                        $dest= 'public/img/blog/thumb';
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            /* Uploading Document File on Server */
+            $upload = new Zend_File_Transfer_Adapter_Http();
+            $upload->setDestination("tmp");
+            try {
+                // upload received file(s)
+                $upload->receive();
+                $t = $upload->getFileInfo();
+                $t = $upload->getFileInfo();
+                $oldfilename = 'tmp/'.$t['Filedata']['name'];
+                $filename = "{$dest}/{$item}.jpg";
+                
+
+                // ініціалізуємо модулі лдля роботи з картинками
+                $thumb = new Asido_Image($oldfilename, $filename);
+                $asido = new Asido_Api();
+                $asido->_driver(new Asido_Driver_GD());
+
+                // визначаэмо пропорції картинки, щоб дізнатися з якої сторони вирізати
+                $ar = getimagesize($oldfilename);
+                $res2width = true;
+                if ($ar[0] < $ar[1]) {
+                    $res2width = false;
+                }
+
+                if ($res2width && (($ar[0] / $ar[1]) > 1.5 )) {
+                    $asido->height($thumb, 153);
+                } else {
+                    $asido->width($thumb, 224);
+                }
+                $asido->crop($thumb, 0, 0, 224, 153);
+                $thumb->save(ASIDO_OVERWRITE_ENABLED);
+
+                // update permition
+                @chmod($filename, 0777);
+                @unlink($oldfilename);
+                echo json_encode(array('status' => 'success', 'item' => $item));
+                exit;
+            } catch (Zend_File_Transfer_Exception $e) {
+                echo json_encode(array('status' => 'error', 'msg' => $e->getMessage()));
+                exit;
+            } catch (Exception $e) {
+                echo json_encode(array('status' => 'error', 'msg' => $e->getMessage()));
+                exit;
+            }
+        }
+        echo json_encode(array('status' => 'error', 'msg' => 'non-action'));
+        exit;
+    }
+
+
+
     // отримати список всіх зображень для вибраної нерухостоі
     public function getimgAction() {
 

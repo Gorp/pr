@@ -97,13 +97,14 @@ body
 
 .admin_content {
     background-color: #fff;
-    width: 100%;
-    min-height: 600px;
+    width: 1000px;
+    min-height: 650px;
     border: 2px solid green;
     margin: 0 0 0 300px;
     float: right;
     position: absolute;
     padding: 10px;
+   
 }
 
 .admin_submenu .menulist {
@@ -308,4 +309,12 @@ h2.admin_title {
     background:#000;
     border:solid 1px #fff;
     color:#fff;
+}
+
+#admin_page_thumb {
+    border: 1px dotted #999;
+    width: 227px;
+    height: 206px;
+    margin-left: 500px;
+    position: absolute;
 }
