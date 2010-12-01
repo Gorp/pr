@@ -30,8 +30,9 @@ CREATE TABLE `blog_entry` (
   `description` varchar(255) DEFAULT NULL,
   `richtext` text,
   `idgallery` int(11) DEFAULT '0',
-  PRIMARY KEY (`identry`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `lang` varchar(2) NOT NULL DEFAULT 'ua',
+  PRIMARY KEY (`identry`,`lang`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +41,7 @@ CREATE TABLE `blog_entry` (
 
 LOCK TABLES `blog_entry` WRITE;
 /*!40000 ALTER TABLE `blog_entry` DISABLE KEYS */;
-INSERT INTO `blog_entry` VALUES (1,'Новий запис1',NULL,NULL,'Опис Новий запис1','<p>\r\n	<img alt=\"\" src=\"/public/img/4ce42fe4a6a4d.jpg\" style=\"width: 100px; height: 100px; float: left;\" />Контент Новий запис1</p>',0),(2,'Новий запис2',NULL,NULL,'Опис Новий запис2','<p>\r\n	КОнтент Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2Новий запис2</p>',0),(4,'Новий запис4',NULL,NULL,'Опис Новий запис3','<p>\r\n	Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4Новий запис4</p>',0);
+INSERT INTO `blog_entry` VALUES (5,'Перший пост','first','слово1, слово2, слово3','много много слов','<p>\r\n	Тестсыв авыа выа ыфв паоржцышр ацрфу шахйцщшра щхцшйрща йцшщр пацшщрпхй шщрепащр еа ркущпйр йшкурп шркуп щрку пку рпйкур пйрку шпркрпйгкур пйрку шрпжщйшкур пйшркущпр й щйрку рпйку рпйшкр пйшркуп зйшрку пзшрнрпйшрку пщйшкурп йшур йору рпйущш рпщ</p>',0,'ua'),(5,'Первый пост','first','слово1, слово2, слово3','много много слов','<p>\r\n	выэалдпжвад лпыжвылп\\ эвы\\ждпэлш ыу\\ждлпж вылпэжвы п</p>\r\n<p>\r\n	же</p>\r\n<p>\r\n	плцукжп лвы эжвыпэжвыалпз фэжлепжклп\\жвфыпж вылп&nbsp; ллпэвылп эвжлфып жвыэлпвыж пэъ</p>\r\n<p>\r\n	выахп лвфыжэпл уэжкл п</p>\r\n<p>\r\n	эжлцку пэжйбу лпук лпжлку пэжважлпж элвыэ</p>\r\n<p>\r\n	жп лвылпп\\эжбвыа плвыаЭ</p>',0,'ru');
 /*!40000 ALTER TABLE `blog_entry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,8 +139,9 @@ CREATE TABLE `page` (
   `description` varchar(255) DEFAULT NULL,
   `richtext` text,
   `idgallery` int(11) DEFAULT '0',
-  PRIMARY KEY (`idpage`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+  `lang` varchar(2) NOT NULL DEFAULT 'ua',
+  PRIMARY KEY (`idpage`,`lang`)
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +150,7 @@ CREATE TABLE `page` (
 
 LOCK TABLES `page` WRITE;
 /*!40000 ALTER TABLE `page` DISABLE KEYS */;
-INSERT INTO `page` VALUES (16,'Кешаня',NULL,NULL,'Попугай','<h3 style=\"color: red; text-align: center;\">\r\n	<span style=\"font-size: 26px;\"><span style=\"background-color: rgb(75, 0, 130);\"><img alt=\"\" src=\"/public/img/4ce3d82e141b8.jpg\" style=\"width: 100px; height: 80px; float: left;\" />Кеша хороший Кеша хороший Кеша хороший Кеша хороший Кеша хороший Кеша хороший Кеша хороший Кеша хороший Кеша хороший <strong><em><u>Кеша </u></em></strong>хороший Кеша хороший </span></span></h3>\r\n<p>\r\n	<span style=\"font-size: 26px;\"><span style=\"background-color: rgb(75, 0, 130);\"><img alt=\"\" src=\"/public/img/4ce3d9463a432.jpg\" style=\"width: 100px; height: 75px; float: left;\" /></span></span></p>',0),(17,'Гарна Назва 1',NULL,NULL,'Гарний Опис','<p>\r\n	Текст контент Текст контент Текст контент Текст контент Текст контент Текст контент Текст контент Текст контент Текст контент Текст контент Текст контент Текст контент<img alt=\"\" src=\"/public/img/4ce42820cb5d7.jpg\" style=\"width: 100px; height: 75px;\" /></p>\r\n<div firebugversion=\"1.5.4\" id=\"_firebugConsole\" style=\"display: none;\">\r\n	&nbsp;</div>',0),(21,'Samsung Monte SGH-5614616',NULL,NULL,'телефон з сенсорним екраном','<p>\r\n	Багато інформації про телефон з сенсорним екраном Samsung Monte gjhkijjjjjjjjj</p>\r\n<div firebugversion=\"1.5.4\" id=\"_firebugConsole\" style=\"display: none;\">\r\n	&nbsp;</div>',0),(23,'Нова сторінка',NULL,NULL,'нова','<p style=\"text-align: center;\">\r\n	&nbsp;</p>\r\n<p style=\"text-align: center;\">\r\n	<img alt=\"\" src=\"/public/img/4ce3dc3ef37a2.jpg\" style=\"width: 150px; height: 120px; float: left;\" /></p>\r\n<p>\r\n	<em><u><strong>фвфвфвфвфц</strong></u></em></p>',0),(30,'Нова сторінка2',NULL,NULL,'Опис нова сторінка2','<p>\r\n	Текст нова сторінка2</p>',0);
+INSERT INTO `page` VALUES (31,'Rus','sdfsdfsdf','sdfsdfasdsd','sdfsdfdddd',NULL,0,'ru'),(31,'UA','eqweqweqweqwe','qweqwe','qweqweqw',NULL,0,'ua'),(5,'Первый пост','first','слово1, слово2, слово3','много много слов',NULL,0,'ru');
 /*!40000 ALTER TABLE `page` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-12-01 13:15:14
+-- Dump completed on 2010-12-01 16:01:25
