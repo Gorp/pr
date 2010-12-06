@@ -29,14 +29,11 @@ if (is_object($this->menu)) :
         $menuchilds = Model_Menu::getAll($menu->idmenu);
         $haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; ?>
         <li>
-            <a href="#" class="menuitem"><?php echo $menu->name;
-            if ($haschilds) {
-                echo '<span class="menu_arrow"></span>'; }?>
-
-            </a>
+            <a href="#" class="menuitem"><?php echo $menu->name;?></a>
             <?php
             // Якщо нащадки знайдені - виводимо
-            if ($haschilds) : ?>
+            if ($haschilds) :
+                echo '<span class="menu_arrow"></span>';?>
             <ul>
                 <?php foreach ($menuchilds as $child) : ?>
                     <li><a href="#"  class="menuitem"><?php echo $child->name; ?></a></li>
