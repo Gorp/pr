@@ -296,6 +296,27 @@ h2.admin_title {
     position: absolute;
 }
 
+.lang_field_input {
+    border:1px solid #CACACA;
+    color:#565656;
+    font-size:16px;
+    height:26px;
+    width:615px;
+    margin-left: 15px;
+    padding: 1px;
+}
+
+.lang_field_name {
+    font-weight: bold;
+    font-size: 16px;
+    width: 140px;
+    height:26px;
+/*    border:1px solid #CACACA;*/
+    position: absolute;
+}
+
+
+
 #admin_button {
     background:#333333;
     border:solid 1px #222222;
@@ -303,6 +324,7 @@ h2.admin_title {
     margin:10px 0 0 0;
     padding:4px;
     color:#ffffff;
+    cursor: pointer;
 }
 #admin_button:hover,
 #admin_button:focus {

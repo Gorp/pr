@@ -363,18 +363,28 @@ class AdminController extends Local_Controller {
     }
 
     public function translateAction() {
-        $this->view->item = $this->_getParam('item', 'new');
+        $this->view->item = $this->_getParam('item');
         $this->view->actionname = '/admin/savetranslate';
-        $this->view->idname = 'idpage';
+        $this->view->idname = 'idtranslate';
         //перевіряємо на видалення
         $delete = $this->_getParam('delete', false);
         if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
             Model_Translate::delete($this->view->item);
-            $this->_redirect('/admin/page');
+            $this->_redirect('/admin/translate');
         }
         // якщо треба отримати дані за id сторінки
-        $this->view->data = Model_Page::getById(NULL);
-        
+        $this->view->data = Model_Lang::getAll();
+
+        if ($this->_request->isPost()){
+           $data = array(
+                'lang' => $this->_getParam('lang'),
+                'phrase' => $this->_getParam('phrase'),
+                'text'  => $this->_getParam('text'),
+                'idlang' => $this->view->item
+            );
+            Model_Lang::updateLang($data);
+            $this->_redirect('/admin/translate');
+        }
     }
 
 }
