@@ -230,7 +230,7 @@ class AdminController extends Local_Controller {
             if ($input->isValid()) {
                 $res = Model_Page::updatepage($input);
                 if ($res[0] > 0) {
-                    $this->_redirect('/admin/page/item/' . $res[1].'/lang/'.$_POST['lang']);
+                    $this->_redirect('/admin/page/item/' . $res[1] . '/lang/' . $_POST['lang']);
                 } else {
                     var_dump($res[1]);
                     exit;
@@ -261,7 +261,6 @@ class AdminController extends Local_Controller {
             'description' => array(
                 'allowEmpty' => false
             ),
-
             'lang' => array(
                 'allowEmpty' => false
             ),
@@ -270,18 +269,18 @@ class AdminController extends Local_Controller {
         return new Zend_Filter_Input($filters, $validators, $input, $options);
     }
 
-    public function  getpageimgAction() {
+    public function getpageimgAction() {
         $this->_helper->layout->disableLayout();
         if ($this->_request->isPost()) {
-            $url = 'public/img/'.uniqid().".".pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
+            $url = 'public/img/' . uniqid() . "." . pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
             $funcNum = $_GET['CKEditorFuncNum'];
             if (($_FILES['upload'] == "none") || (empty($_FILES['upload']['name']))) {
                 $message = "Файл не завантажений.";
             } else if ($_FILES['upload']["size"] == 0) {
                 $message = "Файл пустий.";
             } else if (($_FILES['upload']["type"] != "image/gif") &&
-                      ($_FILES['upload']["type"] != "image/jpeg") &&
-                      ($_FILES['upload']["type"] != "image/png")) {
+                    ($_FILES['upload']["type"] != "image/jpeg") &&
+                    ($_FILES['upload']["type"] != "image/png")) {
                 $message = "Невірний формат файлу. Допустимі формати JPG, GIF, PNG.";
             } else if (!is_uploaded_file($_FILES['upload']["tmp_name"])) {
                 $message = "Некоректне імя тимчасового файлу.";
@@ -352,7 +351,6 @@ class AdminController extends Local_Controller {
             'lang' => array(
                 'allowEmpty' => false
             ),
-
             'description' => array(
                 'allowEmpty' => false
             ),
@@ -363,4 +361,21 @@ class AdminController extends Local_Controller {
         );
         return new Zend_Filter_Input($filters, $validators, $input, $options);
     }
+
+    public function translateAction() {
+        $this->view->item = $this->_getParam('item', 'new');
+        $this->view->actionname = '/admin/savetranslate';
+        $this->view->idname = 'idpage';
+        //перевіряємо на видалення
+        $delete = $this->_getParam('delete', false);
+        if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
+            Model_Translate::delete($this->view->item);
+            $this->_redirect('/admin/page');
+        }
+        // якщо треба отримати дані за id сторінки
+        $this->view->data = Model_Page::getById(NULL);
+        
+    }
+
 }
+
