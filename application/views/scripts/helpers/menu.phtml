@@ -5,14 +5,14 @@
 </script>
 <script type="text/javascript">
 jQuery(document).ready(function(){
-   jQuery('#main_menu li').hover(
+   jQuery('#main_menu li[id]').hover(
         function() {
-            jQuery(this).children('a').addClass('menuitem_active').removeClass('menuitem');
+            jQuery(this).children('a:not(.menuchilditem)').addClass('menuitem_active').removeClass('menuitem');
             jQuery(this).find('ul').stop(true,true);
             jQuery(this).find('ul').slideDown();
         },
         function() {
-            jQuery(this).find('a').addClass('menuitem').removeClass('menuitem_active');
+            jQuery(this).find('a:not(.menuchilditem)').addClass('menuitem').removeClass('menuitem_active');
             jQuery(this).find('ul').slideUp('fast');
         }
    );
@@ -28,7 +28,7 @@ if (is_object($this->menu)) :
         // Шукаємо нащадків поточного пункта меню
         $menuchilds = Model_Menu::getAll($menu->idmenu);
         $haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; ?>
-        <li>
+        <li id="main_menu_<?php echo $menu->idmenu;?>_ua">
             <a href="#" class="menuitem"><?php echo $menu->name;?></a>
             <?php
             // Якщо нащадки знайдені - виводимо
@@ -36,7 +36,7 @@ if (is_object($this->menu)) :
                 echo '<span class="menu_arrow"></span>';?>
             <ul>
                 <?php foreach ($menuchilds as $child) : ?>
-                    <li><a href="#"  class="menuitem"><?php echo $child->name; ?></a></li>
+                    <li><a href="#"  class="menuchilditem"><?php echo $child->name; ?></a></li>
                 <?php endforeach; ?>
             </ul>
             <?php endif; ?>
