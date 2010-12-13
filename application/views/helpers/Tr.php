@@ -12,7 +12,7 @@
 class Zend_View_Helper_Tr {
 
     function tr($id, $lang, $phrase) {
-        return $phrase;
+        return Model_Lang::getLang($id, $lang, $phrase);
     }
 }
 ?>

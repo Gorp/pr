@@ -1,0 +1,21 @@
+<div class="admin_content"  style="margin-left: 5px;height: 430px; overflow-y: scroll; overflow-x: hidden;" >
+    <?php
+    echo "Всього записів: ".count($this->data)."<br />";
+    foreach ($this->data as $phrase)  :
+    foreach ($this->langs as $lang) :?>
+    <form action="" method="post">
+        <?php 
+            echo $lang.": ";
+            $cur_phrase = Model_Lang::getLangByPhrase($phrase->phrase, $lang);
+        ?>
+        <input class="lang_field_input" name="text" type="text" value="<?php echo $cur_phrase->text;?>" />
+        <input name="item" type="hidden" value="<?php echo $cur_phrase->idlang;?>" />
+        <input name="lang" type="hidden" value="<?php echo $lang;?>" />
+        <input name="phrase" type="hidden" value="<?php echo $phrase->phrase;?>" />
+        <input  id="admin_button"  type="submit" value="Зберегти" />
+    </form>
+    <?php
+    endforeach;
+    echo "<hr />";
+    endforeach; ?>
+</div>
