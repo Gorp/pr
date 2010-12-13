@@ -10,8 +10,8 @@ class IndexController extends Local_Controller
 
 
     public function indexAction(){
-        // action body
-        
+// action body
+        $this->view->last = Model_Blogentry::getLast3Blog($this->view->lang);
     }
 
 

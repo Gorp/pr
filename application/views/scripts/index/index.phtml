@@ -45,37 +45,28 @@
 </div></div>
 
 <div style="clear: both;"></div>
+<?php
 
+foreach ($this->last as $blog) :?>
 <div class="blog">
-    <div class="blog_title"><h2>Назва події</h2>Ужгород, 25 березеня 2010</div>
-            <img src="/public/img/blog/boxb.png" align="left"/>
+  
+    <div class="blog_title">
+          <a href="<?php echo $blog->url;?>" >
+               <h2><?php echo $blog->title;?></h2> 
+          </a> <?php echo $this->localDate($blog->date, $this->lang);?></div>
+          <a href="<?php echo $blog->url;?>" >
+            <img src="/public/img/blog/thumb/<?php echo $blog->identry;?>.jpg" align="left"/>
+          </a>
     <div class="blog_stext">
-
-        If you can see this page, then the people who own this website have just installed the Apache Web server software and the Apache Interface to OpenSSL (mod_ssl) successfully. They now have to add content to this directory and replace this placeholder page, or else point the server at their real content.
+        <?php echo mb_substr(strip_tags($blog->richtext),0,450, 'UTF-8');?>
     </div>
 </div>
 
 <hr />
+<?php
+endforeach;?>
 
-<div class="blog">
-    <div class="blog_title"><h2>Назва події</h2>Ужгород, 25 березеня 2010</div>
-            <img src="/public/img/blog/boxb.png" align="left"/>
-    <div class="blog_stext">
 
-        If you can see this page, then the people who own this website have just installed the Apache Web server software and the Apache Interface to OpenSSL (mod_ssl) successfully. They now have to add content to this directory and replace this placeholder page, or else point the server at their real content.
-    </div>
-</div>
-
-<hr />
-
-<div class="blog">
-    <div class="blog_title"><h2>Назва події</h2>Ужгород, 25 березеня 2010</div>
-            <img src="/public/img/blog/boxb.png" align="left"/>
-    <div class="blog_stext">
-
-        If you can see this page, then the people who own this website have just installed the Apache Web server software and the Apache Interface to OpenSSL (mod_ssl) successfully. They now have to add content to this directory and replace this placeholder page, or else point the server at their real content.
-    </div>
-</div>
 
 <script type="text/javascript">
 //<![CDATA[
