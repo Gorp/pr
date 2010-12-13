@@ -17,16 +17,19 @@ class Model_Page extends Model_Base_Table {
 
     public static function getAll() {
         $table = self::getInstance();
-        $select = $table->select()->order('idpage');
+        $select = $table->select()->order('idpage')->group('idpage');
         return $table->fetchAll($select);
     }
 
-    public static function getById($idpage=NULL) {
+    public static function getById($idpage=NULL, $lang = 'ua') {
         $table = self::getInstance();
         $select = $table->select();
         if ($idpage !== NULL) {
-            $select->where('idpage = ?', $idpage);
-            return $table->fetchRow($select);
+            $select->where('idpage = ?', $idpage)
+                   ->where('lang = ?', $lang);
+            $res = $table->fetchRow($select);
+            if ( is_object($res)) { return $res; }
+            return $table->fetchNew();
         } else {
             return $table->fetchNew();
         }
@@ -35,11 +38,26 @@ class Model_Page extends Model_Base_Table {
     public static function updatepage($input) {
         $table = self::getInstance();
         $data = $input->getUnescaped();
+
+
         try {            
             if (isset($data['idpage'])
                 && ($data['idpage'] != 'new')) {
                 $id = $data['idpage'];
-                $table->update($data, 'idpage =  ' . $id);
+
+                //перевіремо чи вже э такий запис
+                $select = $table->select()
+                    ->where("idpage = ?", $data['idpage'])
+                    ->where("lang = ?", $data['lang']);
+//                echo $select;exit;
+                $cur = $table->fetchRow($select);
+                //var_dump($cur, $data);                exit;
+                if (is_object($cur)) {
+                    $table->update($data, 'idpage =  ' . $id. " and lang = '".$cur->lang."'");
+                } else {
+                    $table->insert($data);
+                }
+                
             } else {
                 unset($data['idpage']);
                 $id = $table->insert($data);

@@ -17,16 +17,25 @@ class Model_Blogentry extends Model_Base_Table {
 
     public static function getAll() {
         $table = self::getInstance();
+        $select = $table->select()->order('identry')->group('identry');
+        return $table->fetchAll($select);
+    }
+
+    public static function getLast3Blog() {
+        $table = self::getInstance();
         $select = $table->select()->order('identry');
         return $table->fetchAll($select);
     }
 
-    public static function getById($identry=NULL) {
+    public static function getById($identry=NULL, $lang = 'ua') {
         $table = self::getInstance();
         $select = $table->select();
         if ($identry !== NULL) {
-            $select->where('identry = ?', $identry);
-            return $table->fetchRow($select);
+            $select->where('identry = ?', $identry)
+                   ->where('lang = ?', $lang);
+            $res = $table->fetchRow($select);
+            if ( is_object($res)) { return $res; }
+            return $table->fetchNew();
         } else {
             return $table->fetchNew();
         }
@@ -39,7 +48,17 @@ class Model_Blogentry extends Model_Base_Table {
             if (isset($data['identry'])
                 && ($data['identry'] != 'new')) {
                 $id = $data['identry'];
-                $table->update($data, "identry =  ".$id);
+
+                //перевіремо чи вже э такий запис
+                $select = $table->select()
+                    ->where("identry = ?", $data['identry'])
+                    ->where("lang = ?", $data['lang']);
+                $cur = $table->fetchRow($select);
+                if (is_object($cur)) {
+                    $table->update($data, 'identry =  ' . $id. " and lang = '".$cur->lang."'");
+                } else {
+                    $table->insert($data);
+                }
             } else {
                 unset($data['identry']);
                 $id = $table->insert($data);

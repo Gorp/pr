@@ -108,15 +108,9 @@ function uploadSuccess(file, serverData) {
 		progress.setStatus("Закачалося.");
                 var res = eval('(' + serverData + ')');
                 if (res['status'] != 'success') {
-                    alert(res['status']);
+                    alert(serverData);
                 } else {
-                   $.get('/ajax/getimg/item/' + res['idgallery'] + '', function(data){
-                       // var imgs = eval('(' + data + ')');
-                        $('.photolist').html(data);
-                    });
-                   //console.log(res);
-                   //$('.photolist').html(res['data']);
-
+                    afterUpload();
                 }
 		progress.toggleCancel(false);
 

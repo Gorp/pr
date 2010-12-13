@@ -18,9 +18,9 @@ if ( $this->item != 'new' ) : ?>
             <span class="legend">Черга завантаження</span>
         </div>
         <div id="divStatus">0 Файлів завантажено</div>
-        <div>
+        <div style="margin-bottom: 6px;">
             <span id="spanButtonPlaceHolder"></span>
-<!--            <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />-->
+            <input id="btnCancel" type="button" value="Скасувати" onclick="swfu.cancelQueue();" disabled="disabled" style="position: absolute;margin-left: 2px; font-size: 8pt; height: 29px;" />
         </div>
 
     </form>
@@ -43,7 +43,7 @@ if ( $this->item != 'new' ) : ?>
             post_params: {"PHPSESSID" : "<?php echo session_id(); ?>"},
             file_size_limit : "100 MB",
             file_types : "*.*",
-            file_types_description : "Вс файли",
+            file_types_description : "Всі файли",
             file_upload_limit : 100,
             file_queue_limit : 0,
             custom_settings : {
@@ -53,12 +53,12 @@ if ( $this->item != 'new' ) : ?>
             debug: false,
 
             // Button settings
-            //button_image_url: "/public/img/TestImageNoText_65x29.png",
-            button_width: "65",
-            button_height: "29",
+            button_image_url: "/public/img/uploadbtn.png",
+            button_width: "172",
+            button_height: "30",
             button_placeholder_id: "spanButtonPlaceHolder",
-            button_text: '<span class="theFont">Завантажити картинки</span>',
-            button_text_style: ".theFont { font-size: 16; }",
+            button_text: '<span class="theFont">Завантажити</span>',
+            button_text_style: ".theFont { pointer:cursor; font-size: 19; color: #dddddd;text-decoration: none; font-weight: bold;}",
             button_text_left_padding: 12,
             button_text_top_padding: 3,
 
@@ -76,6 +76,15 @@ if ( $this->item != 'new' ) : ?>
 
         swfu = new SWFUpload(settings);
     };
+
+    function afterUpload() {
+        
+        $.get('/ajax/getimg/item/' + '<?php echo $this->item; ?>' , function(data){
+           // var imgs = eval('(' + data + ')');
+            $('.photolist').html(data);
+        });
+    }
+
     $(document).ready(function() {
         $.get('/ajax/getimg/item/' + '<?php echo $this->item; ?>', function(data){
             // var imgs = eval('(' + data + ')');

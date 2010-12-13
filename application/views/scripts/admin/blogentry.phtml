@@ -12,7 +12,7 @@
     <?php
     endforeach; endif; ?>
 </div>
-<div class="admin_content" >
+<div class="admin_content" style="height: 430px; overflow-y: scroll; overflow-x: hidden;">
     <?php
     switch ($this->item) {
         case 'new' :
@@ -21,6 +21,6 @@
        default : echo '<h2 class="admin_title">Редагувати запис</h2>';
               break;
     }
-    echo $this->render('admin/editpage.phtml');
+    echo $this->render('admin/editblogentry.phtml');
     ?>
 </div>

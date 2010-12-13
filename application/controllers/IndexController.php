@@ -11,6 +11,7 @@ class IndexController extends Local_Controller
 
     public function indexAction(){
         // action body
+        
     }
 
 

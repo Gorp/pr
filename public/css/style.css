@@ -1,89 +1,89 @@
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 html {
-	height: 100%;
+    height: 100%;
 }
 body {
-	font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
-	width: 100%;
-	height: 100%;
-        background-color: #000;
-        padding: 5px 5px;
+    font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    padding: 5px 5px;
 }
 a {
-	color: blue;
-	outline: none;
-	text-decoration: underline;
+    color: blue;
+    outline: none;
+    text-decoration: underline;
 }
 a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 p {
-	margin: 0 0 18px
+    margin: 0 0 18px
 }
 img {
-	border: none;
+    border: none;
 }
 input {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 #wrapper {
-	width: 980px;
-	margin: 0 auto;
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
+    width: 980px;
+    margin: 0 auto;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
 }
 
 
 /* Header
 -----------------------------------------------------------------------------*/
 #header {
-/*	height: 150px;*/
-	background: #000;
-        padding: 5px;
+    /*	height: 150px;*/
+    background: #000;
+    padding: 5px;
 }
 
 
 /* Middle
 -----------------------------------------------------------------------------*/
 #middle {
-	width: 100%;
-	padding: 0 0 100px;
-	height: 1%;
-	position: relative;
+    width: 100%;
+    padding: 0 0 100px;
+    height: 1%;
+    position: relative;
 }
 #middle:after {
-	content: '.';
-	display: block;
-	clear: both;
-	visibility: hidden;
-	height: 0;
+    content: '.';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
 }
 #container {
-	width: 100%;
-	float: left;
-	overflow: hidden;
+    width: 100%;
+    float: left;
+    overflow: hidden;
 }
 #content {
-	padding: 0 270px 0 0;
+    padding: 0 270px 0 10px;
 }
 
 
 /* Sidebar Right
 -----------------------------------------------------------------------------*/
 #sideRight {
-	float: left;
-	margin-right: -3px;
-	width: 237px;
-	margin-left: -247px;
-	position: relative;
-	background: #0b0b0b url('/public/img/bsidebar.gif') no-repeat bottom right;
-        font: 14px/18px Arial, Tahoma, Verdana, sans-serif;
-        min-height:  240px;
-        outline: none;
+    float: left;
+    margin-right: -3px;
+    width: 237px;
+    margin-left: -247px;
+    position: relative;
+    background: #0b0b0b url('/public/img/bsidebar.gif') no-repeat bottom right;
+    font: 14px/18px Arial, Tahoma, Verdana, sans-serif;
+    min-height:  240px;
+    outline: none;
 }
 
 .sidebarservice {
@@ -99,22 +99,22 @@ input {
 }
 
 .sidebarservice input.lbut,.sidebarservice input.lbut:hover{
-   background: url('/public/img/lbut.png') no-repeat;
-   height: 40px;
-   width: 229px;
-   color: white;
-   padding-bottom: 3px;
-   border: 0px #404040 solid;
-   margin: 0px 2px 2px 2px;
-   font: 16px/18px Arial, Tahoma, Verdana, sans-serif;
-   text-align: left;
-   padding-left: 20px;
-   cursor: pointer;
-   outline: none;
+    background: url('/public/img/lbut.png') no-repeat;
+    height: 40px;
+    width: 229px;
+    color: white;
+    padding-bottom: 3px;
+    border: 0px #404040 solid;
+    margin: 0px 2px 2px 2px;
+    font: 16px/18px Arial, Tahoma, Verdana, sans-serif;
+    text-align: left;
+    padding-left: 20px;
+    cursor: pointer;
+    outline: none;
 }
 
 .sidebarservice input.lbut:hover{
-   background: url('/public/img/lbuth.png') no-repeat;
+    background: url('/public/img/lbuth.png') no-repeat;
 }
 
 .sidebarcontact {
@@ -146,18 +146,18 @@ input {
 }
 
 .sidebarbox input.slbut,.sidebarbox input.slbut:hover{
-   background: url('/public/img/slbut.png') no-repeat;
-   height: 40px;
-   width: 104px;
-   margin-left: 93px;
-   color: white;
-   padding-bottom: 12px;
+    background: url('/public/img/slbut.png') no-repeat;
+    height: 40px;
+    width: 104px;
+    margin-left: 93px;
+    color: white;
+    padding-bottom: 12px;
 
 }
 
 .sidebarbox input.slbut:hover{
-   background: url('/public/img/slbuth.png') no-repeat;
-   cursor: pointer;
+    background: url('/public/img/slbuth.png') no-repeat;
+    cursor: pointer;
 }
 
 
@@ -177,8 +177,36 @@ input {
 /* Footer
 -----------------------------------------------------------------------------*/
 #footer {
-	width: 980px;
-	margin: -100px auto 0;
-	height: 100px;
-	background: #BFF08E;
+    width: 980px;
+    margin: -100px auto 0;
+    height: 100px;
+    background: #BFF08E;
+}
+
+/* Blog
+------------------------------------------------------------------*/
+.blog {
+    color: #bababa;
+    width: 720px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.blog_title {
+    background: url('/public/img/ssun.png') no-repeat left center transparent;
+    color: #bababa;
+    padding-left: 46px;
+    margin-bottom: 5px;
+
+}
+
+.blog_thumb {
+    width: 230px;
+    height: 180px;
+}
+
+.blog_stext {
+    width: 400px;
+    margin-left: 230px;
+
 }
