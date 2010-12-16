@@ -266,6 +266,10 @@ class AdminController extends Local_Controller {
             'lang' => array(
                 'allowEmpty' => false
             ),
+            'richtext' => array(
+                'allowEmpty' => false
+            ),
+
             'idpage' => array()
         );
         return new Zend_Filter_Input($filters, $validators, $input, $options);

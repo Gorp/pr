@@ -22,7 +22,7 @@ jQuery(document).ready(function(){
 </script>
 <ul id="main_menu">
  <li>
-     <a href="/<?php echo $this->lang;?>" class="menuitem"><?php echo $this->tr(NULL,$this->lang,'Головна'); ?></a>
+     <a href="/" class="menuitem"><?php echo $this->tr(NULL,$this->lang,'Головна'); ?></a>
  </li>
 <?php
 if (is_object($this->menu)) :
@@ -34,14 +34,33 @@ if (is_object($this->menu)) :
         $menuchilds = Model_Menu::getAll($menu->idmenu, $this->lang);
         $haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; ?>
         <li id="main_menu_<?php echo $menu->idmenu."_".$this->lang;?>">
-            <a href="#" class="menuitem"><?php echo $menu->name; ?></a>
+            <?php
+             if (empty($child->idpage)) {
+                $url = 'javascript:void(0)';
+             } else {
+                $url =  $this->url(array('lang' => $this->lang,
+                              'title' => $menu->getPageByMenu($this->lang),
+                              'idpage' => $menu->idpage), 'page');
+             }
+            ?>
+            <a href="<?php echo $url; ?>" class="menuitem"><?php echo $menu->name; ?></a>
             <?php
             // Якщо нащадки знайдені - виводимо
             if ($haschilds) :
                 echo '<span class="menu_arrow"></span>';?>
             <ul>
-                <?php foreach ($menuchilds as $child) : ?>
-                    <li><a href="#"  class="menuchilditem"><?php echo $child->name; ?></a></li>
+                <?php foreach ($menuchilds as $child) :
+                        if (empty($child->idpage)) {
+                            $url = 'javascript:void(0)';
+                        } else {
+                            $url =  $this->url(array('lang' => $this->lang,
+                                          'title' => $child->getPageByMenu($this->lang),
+                                          'idpage' => $child->idpage), 'page');
+
+                        }
+
+                 ?>
+                        <li><a href="<?php echo $url; ?>"  class="menuchilditem"><?php echo $child->name; ?></a></li>
                 <?php endforeach; ?>
             </ul>
             <?php endif; ?>

@@ -12,17 +12,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     protected function _initRouter() {
         $router = Zend_Controller_Front::getInstance()->getRouter();
         $route = new Zend_Controller_Router_Route_Regex(
-                        '([a-z]{2})/(.*)\.html',
+                        '([a-z]{2})/(.*)-(\d+)\.html',
                         array(
-                            'action' => 'index',
+                            'action' => 'page',
                             'controller' => 'index',
                             'module' => 'default'
                         ),
                         array(
                             1 => 'lang',
-                            2 => 'url',
-                        ), '%s/%s.html');
-         $router->addRoute('menu', $route);
+                            2 => 'title',
+                            3 => 'idpage'
+                        ), '%s/%s-%d.html');
+         $router->addRoute('page', $route);
 
          return $router;
     }

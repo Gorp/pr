@@ -22,6 +22,9 @@ class IndexController extends Local_Controller
 
     public function pageAction(){
         // action body
+        $idpage = $this->_getParam('idpage',0);
+        $this->view->content = Model_Page::getById($idpage,$this->view->lang);
+        //@TODO додати на сторінку title keywords description
     }
 
 }
