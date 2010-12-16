@@ -21,9 +21,12 @@ class Model_Blogentry extends Model_Base_Table {
         return $table->fetchAll($select);
     }
 
-    public static function getLast3Blog() {
+    public static function getLast3Blog($lang) {
         $table = self::getInstance();
-        $select = $table->select()->order('identry');
+        $select = $table->select()
+                    ->where('lang = ?', $lang)
+                    ->order('identry desc')
+                    ->limit(3);
         return $table->fetchAll($select);
     }
 
@@ -57,10 +60,12 @@ class Model_Blogentry extends Model_Base_Table {
                 if (is_object($cur)) {
                     $table->update($data, 'identry =  ' . $id. " and lang = '".$cur->lang."'");
                 } else {
+                    $data['date'] = new Zend_Db_Expr('CURRENT_TIMESTAMP') ;
                     $table->insert($data);
                 }
             } else {
                 unset($data['identry']);
+                $data['date'] = new Zend_Db_Expr('CURRENT_TIMESTAMP') ;
                 $id = $table->insert($data);
             }
             return array(true, $id);

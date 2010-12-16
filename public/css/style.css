@@ -178,26 +178,38 @@ input {
 -----------------------------------------------------------------------------*/
 #footer {
     width: 980px;
-    margin: -100px auto 0;
+/*    margin: -100px auto 0;*/
     height: 100px;
-    background: #BFF08E;
+/*    background: #BFF08E;*/
 }
 
 /* Blog
 ------------------------------------------------------------------*/
-.blog {
+.blog{
     color: #bababa;
     width: 720px;
     margin: 10px;
     display: inline-block;
+    text-decoration: none;
 }
 
-.blog_title {
+.blog a{
+    color: #bababa;
+    text-decoration: none;
+}
+
+.blog a:hover{
+    color: yellow;
+    border-bottom: yellow dotted  1px;
+    text-decoration: blink;
+}
+
+.blog_title{
     background: url('/public/img/ssun.png') no-repeat left center transparent;
     color: #bababa;
     padding-left: 46px;
     margin-bottom: 5px;
-
+    text-decoration: none;
 }
 
 .blog_thumb {

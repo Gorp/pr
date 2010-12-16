@@ -65,6 +65,7 @@ class AdminController extends Local_Controller {
     public function menuAction() {
         $this->view->menu_menu = 'selected';
         $this->view->item = $this->_getParam('item', 'new');
+        $this->view->lang = $this->_getParam('lang', 'ua');
         //var_dump(Model_Users::getDefaultAdapter());
         $this->view->mainmenu = Model_Menu::getAll(0);
         $this->view->pages = Model_Page::getAll();
@@ -78,7 +79,7 @@ class AdminController extends Local_Controller {
 
         // якщо треба отримати дані за id меню
         if (Zend_Validate::is($this->view->item, 'Digits')) {
-            $this->view->menudata = Model_Menu::getById($this->view->item);
+            $this->view->menudata = Model_Menu::getById($this->view->item,$this->view->lang);
             if ($this->view->menudata->parent == 0) {
                 $this->view->curmenu = $this->view->menudata->idmenu;
             } else {
@@ -103,7 +104,7 @@ class AdminController extends Local_Controller {
             if ($input->isValid()) {
                 $res = Model_Menu::updatemenu($input);
                 if ($res[0] > 0) {
-                    $this->_redirect('/admin/menu/item/' . $res[1]);
+                    $this->_redirect('/admin/menu/item/' . $res[1] . '/lang/' . $_POST['lang']);
                 } else {
                     var_dump($res[1]);
                 }
@@ -129,6 +130,7 @@ class AdminController extends Local_Controller {
             'name' => array(
                 'allowEmpty' => false
             ),
+            'lang' => array(),
             'idmenu' => array(),
             'idpage' => array()
         );
@@ -256,10 +258,10 @@ class AdminController extends Local_Controller {
                 'allowEmpty' => false
             ),
             'keyword' => array(
-                'allowEmpty' => false
+                'allowEmpty' => true
             ),
             'description' => array(
-                'allowEmpty' => false
+                'allowEmpty' => true
             ),
             'lang' => array(
                 'allowEmpty' => false
@@ -346,16 +348,16 @@ class AdminController extends Local_Controller {
                 'allowEmpty' => false
             ),
             'keyword' => array(
-                'allowEmpty' => false
+                'allowEmpty' => true
             ),
             'lang' => array(
                 'allowEmpty' => false
             ),
             'description' => array(
-                'allowEmpty' => false
+                'allowEmpty' => true
             ),
             'richtext' => array(
-                'allowEmpty' => false
+                'allowEmpty' => true
             ),
             'identry' => array()
         );

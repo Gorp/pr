@@ -21,6 +21,9 @@ jQuery(document).ready(function(){
 });
 </script>
 <ul id="main_menu">
+ <li>
+     <a href="/<?php echo $this->lang;?>" class="menuitem"><?php echo $this->tr(NULL,$this->lang,'Головна'); ?></a>
+ </li>
 <?php
 if (is_object($this->menu)) :
     // Обробляэмо обэкт меню
@@ -28,10 +31,10 @@ if (is_object($this->menu)) :
         // Якщо у пункта меню немаэ предків виводимо в головне меню
         if ($menu->parent == 0) :
         // Шукаємо нащадків поточного пункта меню
-        $menuchilds = Model_Menu::getAll($menu->idmenu);
+        $menuchilds = Model_Menu::getAll($menu->idmenu, $this->lang);
         $haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; ?>
-        <li id="main_menu_<?php echo $menu->idmenu;?>_ua">
-            <a href="#" class="menuitem"><?php echo $menu->name;?></a>
+        <li id="main_menu_<?php echo $menu->idmenu."_".$this->lang;?>">
+            <a href="#" class="menuitem"><?php echo $menu->name; ?></a>
             <?php
             // Якщо нащадки знайдені - виводимо
             if ($haschilds) :

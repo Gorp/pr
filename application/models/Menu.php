@@ -10,6 +10,7 @@ class Model_Menu extends Model_Base_Table {
 
     protected $_name = 'menu';
     protected $_primary = 'idmenu';
+    protected $_rowClass='Model_Row_Menu';
     protected static $_instance = null;
 
     public static function getInstance() {
@@ -25,12 +26,13 @@ class Model_Menu extends Model_Base_Table {
      *
      */
 
-    public static function getAll($parent=NULL) {
+    public static function getAll($parent=NULL,$lang = 'ua') {
         $table = self::getInstance();
         $select = $table->select();
         if ($parent !== NULL) {
             $select->where('parent = ?', $parent);
         }
+        $select->where('lang = ?', $lang);
         return $table->fetchAll($select);
     }
 
@@ -40,12 +42,14 @@ class Model_Menu extends Model_Base_Table {
      * @return RowSet
      * 
      */
-    public static function getById($idmenu=NULL) {
+    public static function getById($idmenu=NULL, $lang = 'ua') {
         $table = self::getInstance();
         $select = $table->select();
         if ($idmenu !== NULL) {
-            $select->where('idmenu = ?', $idmenu);
-            return $table->fetchRow($select);
+            $select->where('idmenu = ?', $idmenu)->where('lang = ?', $lang);
+             $res = $table->fetchRow($select);
+            if ( is_object($res)) { return $res; }
+            return $table->fetchNew();
         } else {
             return $table->fetchNew();
         }
@@ -64,7 +68,16 @@ class Model_Menu extends Model_Base_Table {
             if (isset($data['idmenu']) &&
                     ($data['idmenu'] != 'new' )) {
                 $id = $data['idmenu'];
-                $table->update($data, 'idmenu =  ' . $id);
+
+                $select = $table->select()
+                    ->where("idmenu = ?", $data['idmenu'])
+                    ->where("lang = ?", $data['lang']);
+                $cur = $table->fetchRow($select);
+                if (is_object($cur)) {
+                    $table->update($data, 'idmenu =  ' . $id. " and lang = '".$cur->lang."'");
+                } else {
+                    $table->insert($data);
+                }
             } else {
                 unset($data['idmenu']);
                 $id = $table->insert($data);

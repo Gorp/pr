@@ -20,5 +20,9 @@ class IndexController extends Local_Controller
     }
 
 
+    public function pageAction(){
+        // action body
+    }
+
 }
 
