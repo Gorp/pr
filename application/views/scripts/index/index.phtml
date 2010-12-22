@@ -15,40 +15,41 @@
 
     <a href="http://cnn.com" title="Camomile">
         <div style="position: relative; background: url('/public/img/main/vyspkni.jpg') no-repeat; width: 720px; height: 400px;">
-            <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute;  margin-top:  340px; padding-left: 10px; width: 720px; height: 60px; height: 60px; font-weight: bold; color: #fff;">
-                <p><?php echo $this->tr(NULL,$this->lang,'<h2>Випуснкі вечори</h2>'); ?></p> </div>
+            <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute;  margin-top:  360px; padding-left: 10px; padding-top: 10px; padding-top: 10px; width: 720px; height: 40px; height: 40px; font-weight: bold; color: #fff;">
+                <?php echo $this->tr(NULL,$this->lang,'<h2>Випуснкі вечори</h2>'); ?> </div>
 
         </div>
     </a>
 
     <a href="http://stb.ua" title="Bumblebees">
         <div style="position: relative; background: url('/public/img/main/korporativ.jpg')  no-repeat; width: 720px; height: 400px;">
-            <div style="background-color: rgba(0, 0, 0, 0.7); position: absolute;  margin-top:  340px;  padding-left: 10px; width: 720px; height: 60px; font-weight: bold; color: #fff;">
-                <p><?php echo $this->tr(NULL,$this->lang,'<h2>Корпоративи</h2>'); ?></p> </div>
+            <div style="background-color: rgba(0, 0, 0, 0.7); position: absolute;  margin-top:  360px;  padding-left: 10px; padding-top: 10px; width: 720px; height: 40px; font-weight: bold; color: #fff;">
+                <?php echo $this->tr(NULL,$this->lang,'<h2>Корпоративи</h2>'); ?> </div>
         </div>
     </a>
 
    <a href="http://stb.ua" title="Bumblebees">
         <div style="position: relative; background: url('/public/img/main/vesillya.jpg')  no-repeat; width: 720px; height: 400px;">
-            <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute; margin-top:  340px;  padding-left: 10px; width: 720px; height: 60px; font-weight: bold; color: #fff;">
-                <p><?php echo $this->tr(NULL,$this->lang,'<h2>Весілля</h2>'); ?></p> </div>
+            <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute; margin-top:  360px;  padding-left: 10px; padding-top: 10px; width: 720px; height: 40px; font-weight: bold; color: #fff;">
+                <?php echo $this->tr(NULL,$this->lang,'<h2>Весілля</h2>'); ?></div>
         </div>
     </a>
 
     <a href="http://stb.ua" title="Bumblebees">
         <div style="position: relative; background: url('/public/img/main/birthday.jpg')  no-repeat; width: 720px; height: 400px;">
-            <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute; margin-top:  340px;  padding-left: 10px; width: 720px; height: 60px; font-weight: bold; color: #fff;">
-                <p><?php echo $this->tr(NULL,$this->lang,'<h2>Дні народження</h2>'); ?></p> </div>
+            <div style="background-color: rgba(0, 0, 0, 0.7);position: absolute; margin-top:  360px;  padding-left: 10px; padding-top: 10px; width: 720px; height: 40px; font-weight: bold; color: #fff;">
+                <?php echo $this->tr(NULL,$this->lang,'<h2>Дні народження</h2>'); ?></div>
         </div>
     </a>
     
 </div></div>
 
 <div style="clear: both;"></div>
+<div style="border-top: 1px white dotted;">
 <?php
 
 foreach ($this->last as $blog) :?>
-<div class="blog">
+<div class="blog" >
   
     <div class="blog_title">
           <a href="<?php echo $blog->url;?>" >
@@ -65,6 +66,7 @@ foreach ($this->last as $blog) :?>
 <hr />
 <?php
 endforeach;?>
+</div>
 
 
 
