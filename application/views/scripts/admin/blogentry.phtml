@@ -8,7 +8,8 @@
     foreach ($this->entrys as $item)  : ?>
         <div class="menulist" ><a href="/admin/blogentry/item/<?php echo $item->identry; ?>">
             <?php echo $item->title; ?></a>&nbsp;&nbsp;
-            <a href="/admin/blogentry/item/<?php echo $item->identry; ?>/delete/1">X</a></div>
+            <a href="/admin/blogentry/item/<?php echo $item->identry; ?>/delete/1"
+               onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a></div>
     <?php
     endforeach; endif; ?>
 </div>

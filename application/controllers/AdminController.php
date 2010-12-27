@@ -104,6 +104,20 @@ class AdminController extends Local_Controller {
             if ($input->isValid()) {
                 $res = Model_Menu::updatemenu($input);
                 if ($res[0] > 0) {
+                    // Якщо це створення нового обєкта та збережено з мовою по запиту,
+                    // зберігаємо варіант для інших мов
+                    if ($_POST['idmenu'] == 'new') {
+                        foreach ($this->view->langs as $key) {
+                            if ($key !== $input->lang) {
+                                $data = $_POST;
+                                $data['idmenu'] = $res[1];
+                                $data['lang'] = $key;
+                                $input = $this->menuvalid($data);
+                                Model_Menu::updatemenu($input);
+                            }
+                        }
+                    }
+                    // Якщо ні просто переходимо до редактування обєкту
                     $this->_redirect('/admin/menu/item/' . $res[1] . '/lang/' . $_POST['lang']);
                 } else {
                     var_dump($res[1]);
@@ -232,6 +246,20 @@ class AdminController extends Local_Controller {
             if ($input->isValid()) {
                 $res = Model_Page::updatepage($input);
                 if ($res[0] > 0) {
+                    // Якщо це створення нового обєкта та збережено з мовою по запиту, 
+                    // зберігаємо варіант для інших мов
+                    if ($_POST['idpage'] == 'new') {
+                        foreach ($this->view->langs as $key) {
+                            if ($key !== $input->lang) {
+                                $data = $_POST;
+                                $data['idpage'] = $res[1];
+                                $data['lang'] = $key;
+                                $input = $this->pagevalid($data);
+                                Model_Page::updatepage($input);
+                            }
+                        }
+                    }
+                    // Якщо ні просто переходимо до редактування обєкту
                     $this->_redirect('/admin/page/item/' . $res[1] . '/lang/' . $_POST['lang']);
                 } else {
                     var_dump($res[1]);
@@ -252,9 +280,6 @@ class AdminController extends Local_Controller {
         );
         $validators = array(
             'title' => array(
-                'allowEmpty' => false
-            ),
-            'url' => array(
                 'allowEmpty' => false
             ),
             'keyword' => array(
@@ -326,6 +351,20 @@ class AdminController extends Local_Controller {
             if ($input->isValid()) {
                 $res = Model_Blogentry::updateentry($input);
                 if ($res[0] > 0) {
+                    // Якщо це створення нового обєкта та збережено з мовою по запиту,
+                    // зберігаємо варіант для інших мов
+                    if ($_POST['identry'] == 'new') {
+                        foreach ($this->view->langs as $key) {
+                            if ($key !== $input->lang) {
+                                $data = $_POST;
+                                $data['identry'] = $res[1];
+                                $data['lang'] = $key;
+                                $input = $this->blogentryvalid($data);
+                                Model_Blogentry::updateentry($input);
+                            }
+                        }
+                    }
+                    // Якщо ні просто переходимо до редактування обєкту
                     $this->_redirect('/admin/blogentry/item/' . $res[1]);
                 } else {
                     var_dump($res[1]);
@@ -346,9 +385,6 @@ class AdminController extends Local_Controller {
         );
         $validators = array(
             'title' => array(
-                'allowEmpty' => false
-            ),
-            'url' => array(
                 'allowEmpty' => false
             ),
             'keyword' => array(

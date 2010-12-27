@@ -10,7 +10,8 @@
         foreach ($this->gallery as $item)  : ?>
             <div class="menulist" ><a href="/admin/gallery/item/<?php echo $item->idgallery; ?>">
                 <?php echo $item->name; ?></a>&nbsp;&nbsp;
-                <a href="/admin/gallery/item/<?php echo $item->idgallery; ?>/delete/1">X</a></div>
+                <a href="/admin/gallery/item/<?php echo $item->idgallery; ?>/delete/1"
+                   onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a></div>
         <?php
         endforeach; endif; ?>
     </div>

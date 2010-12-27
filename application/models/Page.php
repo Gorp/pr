@@ -34,13 +34,10 @@ class Model_Page extends Model_Base_Table {
     public static function updatepage($input) {
         $table = self::getInstance();
         $data = $input->getUnescaped();
-
-
         try {            
             if (isset($data['idpage'])
                 && ($data['idpage'] != 'new')) {
                 $id = $data['idpage'];
-
                 //перевіремо чи вже э такий запис
                 $select = $table->select()
                     ->where("idpage = ?", $data['idpage'])

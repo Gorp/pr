@@ -10,14 +10,16 @@
         foreach ($this->mainmenu as $menu)  : ?>
             <div class="menulist" ><a href="/admin/menu/item/<?php echo $menu->idmenu; ?>">
                 <?php echo $menu->name; ?></a>&nbsp;&nbsp;
-                <a href="/admin/menu/item/<?php echo $menu->idmenu; ?>/delete/1">X</a></div>
+                <a href="/admin/menu/item/<?php echo $menu->idmenu; ?>/delete/1" 
+                   onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a></div>
                 <ul>
                 <?php
                 if ( ($menu->idmenu == $this->curmenu) && is_object($this->submenu) ) :
                 foreach ($this->submenu as $submenu)  : ?>
                    <li class="menulist"><a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>">
                 <?php echo $submenu->name; ?></a>&nbsp;&nbsp;
-                   <a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>/delete/1">X</a>
+                   <a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>/delete/1"
+                      onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a>
                    </li>
                 <?php
                 endforeach; endif; ?>

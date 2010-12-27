@@ -44,7 +44,7 @@
         <select class="field_input" name="idpage" >
             <option value="0">Вибрати сторінку</option>
             <?php
-            if (is_object($this->pages) && $this->menudata->idmenu != null) :
+            if (is_object($this->pages)) :
                 foreach ($this->pages as $page)  : ?>
             <option <?php echo ($page->idpage == $this->menudata->idpage)?'selected="selected"':''; ?>
                 value="<?php echo $page->idpage; ?>" >
