@@ -5,13 +5,14 @@ class IndexController extends Local_Controller
 
     public function init(){
         parent::init();
-
+        $this->view->showvideo = false;
     }
 
 
     public function indexAction(){
 // action body
         $this->view->last = Model_Blogentry::getLast3Blog($this->view->lang);
+        $this->view->showvideo = true;
     }
 
 
