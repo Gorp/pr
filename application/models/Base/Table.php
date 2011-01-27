@@ -9,4 +9,11 @@ abstract class Model_Base_Table extends Zend_Db_Table_Abstract {
                 new Zend_Paginator_Adapter_DbTableSelect($data));
 
     }
+
+    public function getMaxSort() {
+        $max = $this->select()
+                     ->from(array($this->_name),array('mmm' => 'max(sort)'));
+        $t = $this->fetchRow($max);
+        return $t->mmm + 1;
+    }
 }

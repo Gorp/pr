@@ -32,7 +32,8 @@ class Model_Menu extends Model_Base_Table {
         if ($parent !== NULL) {
             $select->where('parent = ?', $parent);
         }
-        $select->where('lang = ?', $lang);
+        $select->where('lang = ?', $lang)
+               ->order('sort');
         return $table->fetchAll($select);
     }
 
@@ -76,9 +77,17 @@ class Model_Menu extends Model_Base_Table {
                 if (is_object($cur)) {
                     $table->update($data, 'idmenu =  ' . $id. " and lang = '".$cur->lang."'");
                 } else {
+//                    $max = $table->select()
+//                                 ->from(array($table->_name),array('idlang','text'));
+//                    $t = $table->fetchRow($max);
+//                    
+                    $t = $table->fetchRow("idmenu = ".$data['idmenu']);
+                    $data['sort'] = $t->sort;
                     $table->insert($data);
                 }
             } else {
+
+                $data['sort'] = $table->getMaxSort();
                 unset($data['idmenu']);
                 $id = $table->insert($data);
             }
@@ -99,6 +108,45 @@ class Model_Menu extends Model_Base_Table {
         $table = self::getInstance();
         $table->update(array("parent"=>0), 'parent = '.$idmenu);
         return $table->delete("idmenu = ".$idmenu);
+    }
+
+    /**
+     *
+     * @param <type> $direction - куда будемо рухати меню
+     * 
+     */
+    public static function movemenu($idmenu, $direction) {
+        $table = self::getInstance();
+
+        $cur = $table->fetchRow($table->select()->where("idmenu = ?", $idmenu, "INTEGER"));
+
+        $select = $table->select();
+        if ( $direction == 'up') {
+            $select->where("sort < ?", $cur->sort, "INTEGER")
+                   ->where("parent = ?", $cur->parent, "INTEGER") 
+                   ->order("sort desc")
+                   ->group("idmenu")
+                   ->limit(1);
+
+        } else {
+            $select->where("sort > ?", $cur->sort, "INTEGER")
+                   ->where("parent = ?", $cur->parent, "INTEGER")
+                   ->order("sort")
+                   ->group("idmenu")
+                   ->limit(1);
+
+        }
+
+        $res = $table->fetchRow($select);
+
+        if ( count($res) == 1) {
+            $t = $cur->sort;
+            $cur->sort = $res->sort;
+            $res->sort = $t;
+            $cur->save();
+            $res->save();
+        }
+
     }
 
 }

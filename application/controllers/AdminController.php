@@ -65,6 +65,13 @@ class AdminController extends Local_Controller {
     public function menuAction() {
         $this->view->menu_menu = 'selected';
         $this->view->item = $this->_getParam('item', 'new');
+        // 0 якщо рухаємо  меню
+        if ( ($move = $this->_getParam('move', false))) {
+            Model_Menu::movemenu($this->view->item, $move);
+        }
+        echo "false";
+
+
         $this->view->lang = $this->_getParam('lang', 'ua');
         //var_dump(Model_Users::getDefaultAdapter());
         $this->view->mainmenu = Model_Menu::getAll(0);
@@ -107,8 +114,9 @@ class AdminController extends Local_Controller {
                     // Якщо це створення нового обєкта та збережено з мовою по запиту,
                     // зберігаємо варіант для інших мов
                     if ($_POST['idmenu'] == 'new') {
+                        $ll = $input->lang;
                         foreach ($this->view->langs as $key) {
-                            if ($key !== $input->lang) {
+                            if ($key !== $ll) {
                                 $data = $_POST;
                                 $data['idmenu'] = $res[1];
                                 $data['lang'] = $key;
