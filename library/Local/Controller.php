@@ -18,6 +18,12 @@ class Local_Controller extends Zend_Controller_Action {
         //скільки мов підтримуємо
         $this->view->langs = explode(',', $this->view->config->langs);
 
+        // показувати відео тільки на першій сторінці
+        $this->view->showvideo = false;
+        if ( ($this->_getParam('action') == 'index' ) && ($this->_getParam('controller') == 'index' )  ) {
+            $this->view->showvideo = true;
+        }
+
         //налаштування транспорту пошти
         Zend_Mail::setDefaultTransport(
                 new Zend_Mail_Transport_Smtp(
