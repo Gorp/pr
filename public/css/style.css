@@ -48,6 +48,16 @@ input {
 }
 
 
+.alignright, .fr {
+    float: right !important;
+}
+
+.langs, .contacts, .dats {
+    height: 15px;
+    padding: 10px 20px 0 10px;
+    text-align: left;
+}
+
 /* Middle
 -----------------------------------------------------------------------------*/
 #middle {

@@ -13,7 +13,7 @@ class Local_Controller extends Zend_Controller_Action {
         $this->view->menu = Model_Menu::getAll(0);
 
         // вибранна мова
-        $this->view->lang = 'ua';
+        $this->view->lang = $this->_getParam('lang', 'ua');
 
         //скільки мов підтримуємо
         $this->view->langs = explode(',', $this->view->config->langs);

@@ -22,7 +22,7 @@ jQuery(document).ready(function(){
 </script>
 <ul id="main_menu">
  <li>
-     <a href="/" class="menuitem"><?php echo $this->tr(NULL,$this->lang,'Головна'); ?></a>
+     <a href="/<?php echo $this->lang; ?>/" class="menuitem"><?php echo $this->tr(NULL,$this->lang,'Головна'); ?></a>
  </li>
 <?php
 if (is_object($this->menu)) :
@@ -32,10 +32,13 @@ if (is_object($this->menu)) :
         if ($menu->parent == 0) :
         // Шукаємо нащадків поточного пункта меню
         $menuchilds = Model_Menu::getAll($menu->idmenu, $this->lang);
-        $haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; ?>
+        $haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; 
+//        var_dump($menuchilds,$haschilds );
+//        exit;
+?>
         <li id="main_menu_<?php echo $menu->idmenu."_".$this->lang;?>">
             <?php
-             if (empty($child->idpage)) {
+             if (count($menuchilds) > 0 ) {
                 $url = 'javascript:void(0)';
              } else {
                 $url =  $this->url(array('lang' => $this->lang,
@@ -50,7 +53,7 @@ if (is_object($this->menu)) :
                 echo '<span class="menu_arrow"></span>';?>
             <ul>
                 <?php foreach ($menuchilds as $child) :
-                        if (empty($child->idpage)) {
+                        if ( empty($child->idpage) ) {
                             $url = 'javascript:void(0)';
                         } else {
                             $url =  $this->url(array('lang' => $this->lang,
@@ -60,7 +63,7 @@ if (is_object($this->menu)) :
                         }
 
                  ?>
-                        <li><a href="<?php echo $url; ?>"  class="menuchilditem"><?php echo $child->name; ?></a></li>
+                <li><a href="<?php echo $url; ?>"  class="menuchilditem"><?php echo $child->name; ?></a></li>
                 <?php endforeach; ?>
             </ul>
             <?php endif; ?>
