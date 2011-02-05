@@ -24,6 +24,9 @@ class Local_Controller extends Zend_Controller_Action {
             $this->view->showvideo = true;
         }
 
+        //текущий номер сторінки
+        $this->view->idpage = $this->_getParam('idpage', 0);
+
         //налаштування транспорту пошти
         Zend_Mail::setDefaultTransport(
                 new Zend_Mail_Transport_Smtp(

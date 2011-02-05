@@ -2,7 +2,13 @@
 if ($this->showvideo) : ?>
 <iframe title="YouTube video player" class="youtube-player" type="text/html" width="237" height="240" src="http://www.youtube.com/embed/LFbcgZpOoCE" frameborder="0" allowFullScreen></iframe>
 <?php
-endif; ?>
+endif;
+
+$page = array(
+    35
+);
+
+if (in_array($this->idpage, $page)) : ?>
 <div class="sidebarservice">
     <br />
     <?php echo $this->tr(11, $this->lang, '<h2>Наші роботи</h2>'); ?>
@@ -18,7 +24,8 @@ endif; ?>
     <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(17, $this->lang, 'Концерти'); ?>"/>
 
 </div>
-
+<?php
+endif; ?>
 
 <img style="" src="/public/img/boxtop.png" />
 <div class="sidebarcontact">
