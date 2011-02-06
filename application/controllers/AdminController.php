@@ -66,7 +66,7 @@ class AdminController extends Local_Controller {
         $this->view->menu_menu = 'selected';
         $this->view->item = $this->_getParam('item', 'new');
         // 0 якщо рухаємо  меню
-        if ( ($move = $this->_getParam('move', false))) {
+        if (($move = $this->_getParam('move', false))) {
             Model_Menu::movemenu($this->view->item, $move);
         }
         echo "false";
@@ -86,7 +86,7 @@ class AdminController extends Local_Controller {
 
         // якщо треба отримати дані за id меню
         if (Zend_Validate::is($this->view->item, 'Digits')) {
-            $this->view->menudata = Model_Menu::getById($this->view->item,$this->view->lang);
+            $this->view->menudata = Model_Menu::getById($this->view->item, $this->view->lang);
             if ($this->view->menudata->parent == 0) {
                 $this->view->curmenu = $this->view->menudata->idmenu;
             } else {
@@ -108,7 +108,7 @@ class AdminController extends Local_Controller {
         if ($this->_request->isPost()) {
             //var_dump($_POST);exit;
             $input = $this->menuvalid($_POST);
-            if ($input->isValid()) {
+            if (($input->isValid()) && ($input->blockedit == 'unblock')) {
                 $res = Model_Menu::updatemenu($input);
                 if ($res[0] > 0) {
                     // Якщо це створення нового обєкта та збережено з мовою по запиту,
@@ -128,10 +128,24 @@ class AdminController extends Local_Controller {
                     // Якщо ні просто переходимо до редактування обєкту
                     $this->_redirect('/admin/menu/item/' . $res[1] . '/lang/' . $_POST['lang']);
                 } else {
-                    var_dump($res[1]);
+                    if (count($res[1]) > 1) {
+                        echo "Ошибка! " . $res[1];
+                        exit;
+                    } else {
+                        echo "Редагування цього запису заблоковано.";
+                        exit;
+                    }
                 }
             }
-            var_dump($input->getMessages());
+            $t = $input->getMessages();
+            if (count($t) > 0) {
+                echo "Ошибка! " . var_dump($t);;
+                exit;
+            } else {
+                echo "Редагування цього запису заблоковано.";
+                exit;
+            }
+
         }
     }
 
@@ -154,7 +168,10 @@ class AdminController extends Local_Controller {
             ),
             'lang' => array(),
             'idmenu' => array(),
-            'idpage' => array()
+            'idpage' => array(),
+            'blockedit' => array(
+                'default' => 'unblock'
+            )
         );
 
         return new Zend_Filter_Input($filters, $validators, $input, $options);
@@ -302,7 +319,6 @@ class AdminController extends Local_Controller {
             'richtext' => array(
                 'allowEmpty' => false
             ),
-
             'idpage' => array()
         );
         return new Zend_Filter_Input($filters, $validators, $input, $options);
@@ -425,11 +441,11 @@ class AdminController extends Local_Controller {
         // якщо треба отримати дані за id сторінки
         $this->view->data = Model_Lang::getAll();
 
-        if ($this->_request->isPost()){
-           $data = array(
+        if ($this->_request->isPost()) {
+            $data = array(
                 'lang' => $this->_getParam('lang'),
                 'phrase' => $this->_getParam('phrase'),
-                'text'  => $this->_getParam('text'),
+                'text' => $this->_getParam('text'),
                 'idlang' => $this->view->item
             );
             Model_Lang::updateLang($data);
