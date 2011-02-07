@@ -7,7 +7,7 @@ class Local_Controller extends Zend_Controller_Action {
         $bootstrap = $frontController->getParam('bootstrap');
 
         $this->view->config = new Zend_Config($bootstrap->getOptions());
-        $this->view->headerurl = '/public/img/header_main.jpg';
+        
 
         // отримуємо головне меню
         $this->view->menu = Model_Menu::getAll(0);
@@ -26,6 +26,28 @@ class Local_Controller extends Zend_Controller_Action {
 
         //текущий номер сторінки
         $this->view->idpage = $this->_getParam('idpage', 0);
+
+        switch ($this->view->idpage) {
+            case '32':
+                $this->view->headerurl = '/public/img/header_diskotek.jpg';
+                break;
+            case '33':
+                $this->view->headerurl = '/public/img/header_livemusic.jpg';
+                break;
+            case '37':
+                $this->view->headerurl = '/public/img/header_stars.jpg';
+                break;
+            case '39':
+                $this->view->headerurl = '/public/img/header_sound.jpg';
+                break;
+            case '40':
+                $this->view->headerurl = '/public/img/header_rent.jpg';
+                break;
+
+            default:
+                $this->view->headerurl = '/public/img/header_main.jpg';
+                break;
+        }
 
         //налаштування транспорту пошти
         Zend_Mail::setDefaultTransport(
