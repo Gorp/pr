@@ -8,12 +8,11 @@ class Local_Controller extends Zend_Controller_Action {
 
         $this->view->config = new Zend_Config($bootstrap->getOptions());
         
-
-        // отримуємо головне меню
-        $this->view->menu = Model_Menu::getAll(0);
-
         // вибранна мова
         $this->view->lang = $this->_getParam('lang', 'ua');
+
+        // отримуємо головне меню
+        $this->view->menu = Model_Menu::getAll(NULL,$this->view->lang);
 
         //скільки мов підтримуємо
         $this->view->langs = explode(',', $this->view->config->langs);
