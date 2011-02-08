@@ -1,5 +1,4 @@
-
-    <div class="admin_submenu" >
+<div class="admin_submenu" style="height: 430px; overflow-y: scroll; overflow-x: hidden;">
         <div class="menulist" >
             <a href="/admin/gallery/item/new">Додати Галерею</a>
         </div>
@@ -14,9 +13,9 @@
                    onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a></div>
         <?php
         endforeach; endif; ?>
-    </div>
+</div>
 
-    <div class="admin_content" >
+<div class="admin_content" >
 
         <?php
         switch ($this->item) {
@@ -31,6 +30,6 @@
         echo $this->render('admin/editgallery.phtml');
         ?>
 
-    </div>
+</div>
 
 

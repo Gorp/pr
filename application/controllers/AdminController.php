@@ -19,8 +19,10 @@ class AdminController extends Local_Controller {
         $this->view->menu_menu = '';
         $this->view->menu_page = '';
         $this->view->menu_gallery = '';
-        $this->view->menu_blog = '';
+        $this->view->menu_blogentry = '';
+        $this->view->menu_config = '';
         $this->view->action = $this->_getParam('action');
+
         if ($this->view->action != 'login') {
             $this->checkLogin();
         }
@@ -246,6 +248,7 @@ class AdminController extends Local_Controller {
     }
 
     public function pageAction() {
+        $this->view->menu_page = 'selected';
         $this->view->item = $this->_getParam('item', 'new');
         $this->view->lang = $this->_getParam('lang', 'ua');
         $this->view->pages = Model_Page::getAll();
@@ -350,6 +353,7 @@ class AdminController extends Local_Controller {
     }
 
     public function blogentryAction() {
+        $this->view->menu_blogentry = 'selected';
         $this->view->item = $this->_getParam('item', 'new');
         $this->view->lang = $this->_getParam('lang', 'ua');
         $this->view->entrys = Model_Blogentry::getAll();
@@ -429,6 +433,7 @@ class AdminController extends Local_Controller {
     }
 
     public function translateAction() {
+        $this->view->menu_translate = 'selected';
         $this->view->item = $this->_getParam('item');
         $this->view->actionname = '/admin/savetranslate';
         $this->view->idname = 'idtranslate';
@@ -453,5 +458,33 @@ class AdminController extends Local_Controller {
         }
     }
 
+     public function configAction() {
+        $this->view->menu_config = 'selected';
+
+
+        if ( $this->_request->isPost()) {
+            $input = $this->configvalidate($_POST);
+
+            foreach ($input->config as $key => $value) {
+                Model_Config::setConfig($key, $value);
+            }
+            $this->_redirect('/admin/config');
+        }
+     }
+
+     private function configvalidate($input) {
+        $filters = array(
+            '*' => array(array('StringTrim'))
+        );
+        $options = array(
+            'escapeFilter' => new Zend_Filter_HtmlEntities(null, 'UTF-8')
+        );
+        $validators = array(
+            'config' => array(
+                'allowEmpty' => false
+            )
+        );
+        return new Zend_Filter_Input($filters, $validators, $input, $options);
+     }
 }
 
