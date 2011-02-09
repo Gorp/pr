@@ -9,6 +9,7 @@
     margin-left:5px;
     width:960px;
     white-space:nowrap;
+    z-index: 1000;
 }
 #main_menu li {
     display:inline-block;

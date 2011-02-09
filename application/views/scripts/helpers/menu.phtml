@@ -1,5 +1,5 @@
 
-<ul id="main_menu">
+<ul id="main_menu" clas="sub_menu_<?php echo $menu->idmenu."_".$this->lang;?>">
  <li>
      <a href="/<?php echo $this->lang; ?>/" class="menuitem"><?php echo $this->tr(NULL,$this->lang,'Головна'); ?></a>
  </li>
@@ -30,7 +30,7 @@ if (is_object($this->menu)) :
             // Якщо нащадки знайдені - виводимо
             if ($haschilds) :
                 echo '<span class="menu_arrow"></span>';?>
-            <ul>
+            <ul id="sub_menu" >
                 <?php foreach ($menuchilds as $child) :
                         if ( empty($child->idpage) ) {
                             $url = 'javascript:void(0)';
@@ -42,7 +42,7 @@ if (is_object($this->menu)) :
                         }
 
                  ?>
-                <li style="height: 32px;"><a href="<?php echo $url; ?>"  class="menuchilditem" style="padding: 5px 10px;"><?php echo $child->name; ?></a></li>
+                <li style="height: 32px;" id="sub_menu_<?php echo $menu->idmenu."_".$this->lang;?>" ><a href="<?php echo $url; ?>"  class="menuchilditem" style="padding: 5px 10px;"><?php echo $child->name; ?></a></li>
                 <?php endforeach; ?>
             </ul>
             <?php endif; ?>
