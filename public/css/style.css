@@ -83,8 +83,15 @@ input {
 #content {
     padding: 0 270px 0 10px;
     color: white;
+    line-height: 25px;
+    font-family: comic sans ms,cursive;
+    font-size: 20px;
 }
 
+#content h1{
+    line-height: 35px;
+    font-family: verdana;
+}
 
 /* Sidebar Right
 -----------------------------------------------------------------------------*/
@@ -205,6 +212,8 @@ input {
     margin: 10px;
     display: inline-block;
     text-decoration: none;
+    font-family: verdana;
+    font-size: 12px;
 }
 
 .blog a{
