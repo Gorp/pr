@@ -53,5 +53,14 @@
                 endforeach; endif; ?>
         </select>
     </div>
+
+    <div class="field">
+        <div class="field_name">Редагування :</div>
+            <select class="field_input" name="blockedit" >
+                <option value="unblock" <?php echo ($this->menudata->blockedit == 'unblock')?'select="selected"':''; ?> >Не Блокувати</option>>
+                <option value="block" <?php echo ($this->menudata->blockedit == 'block')?'selected="selected"':''; ?>>Блокувати</option>>
+            </select>
+    </div>
+    
     <input type="submit" name="login_button" value="Додати" id="admin_button" />
 </form>

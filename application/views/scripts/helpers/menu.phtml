@@ -1,28 +1,7 @@
-<script type="text/javascript" src="/public/js/jquery-1.4.3.min.js" />
-<script type="text/javascript">
-    //no conflict jquery
-    jQuery.noConflict();
-</script>
-<script type="text/javascript">
-    jQuery('head').append('<link rel="stylesheet" href="/public/css/menu.css" type="text/css" media="screen" />' +
-'<!--[if lte IE 7]><link rel="stylesheet" href="/public/css/menuie.css" type="text/css" media="screen" /><![endif]-->');
-jQuery(document).ready(function(){
-   jQuery('#main_menu li[id]').hover(
-        function() {
-            jQuery(this).children('a:not(.menuchilditem)').addClass('menuitem_active').removeClass('menuitem');
-            jQuery(this).find('ul').stop(true,true);
-            jQuery(this).find('ul').slideDown();
-        },
-        function() {
-            jQuery(this).find('a:not(.menuchilditem)').addClass('menuitem').removeClass('menuitem_active');
-            jQuery(this).find('ul').slideUp('fast');
-        }
-   );
-});
-</script>
-<ul id="main_menu">
+
+<ul id="main_menu" clas="sub_menu_<?php echo $menu->idmenu."_".$this->lang;?>">
  <li>
-     <a href="/" class="menuitem"><?php echo $this->tr(NULL,$this->lang,'Головна'); ?></a>
+     <a href="/<?php echo $this->lang; ?>/" class="menuitem"><?php echo $this->tr(NULL,$this->lang,'Головна'); ?></a>
  </li>
 <?php
 if (is_object($this->menu)) :
@@ -32,10 +11,13 @@ if (is_object($this->menu)) :
         if ($menu->parent == 0) :
         // Шукаємо нащадків поточного пункта меню
         $menuchilds = Model_Menu::getAll($menu->idmenu, $this->lang);
-        $haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; ?>
+        $haschilds = (is_object($menuchilds) && count($menuchilds) > 0) ? true : false; 
+//        var_dump($menuchilds,$haschilds );
+//        exit;
+?>
         <li id="main_menu_<?php echo $menu->idmenu."_".$this->lang;?>">
             <?php
-             if (empty($child->idpage)) {
+             if (count($menuchilds) > 0 ) {
                 $url = 'javascript:void(0)';
              } else {
                 $url =  $this->url(array('lang' => $this->lang,
@@ -48,9 +30,9 @@ if (is_object($this->menu)) :
             // Якщо нащадки знайдені - виводимо
             if ($haschilds) :
                 echo '<span class="menu_arrow"></span>';?>
-            <ul>
+            <ul id="sub_menu" >
                 <?php foreach ($menuchilds as $child) :
-                        if (empty($child->idpage)) {
+                        if ( empty($child->idpage) ) {
                             $url = 'javascript:void(0)';
                         } else {
                             $url =  $this->url(array('lang' => $this->lang,
@@ -60,7 +42,7 @@ if (is_object($this->menu)) :
                         }
 
                  ?>
-                        <li><a href="<?php echo $url; ?>"  class="menuchilditem"><?php echo $child->name; ?></a></li>
+                <li style="height: 32px;" id="sub_menu_<?php echo $menu->idmenu."_".$this->lang;?>" ><a href="<?php echo $url; ?>"  class="menuchilditem" style="padding: 5px 10px;"><?php echo $child->name; ?></a></li>
                 <?php endforeach; ?>
             </ul>
             <?php endif; ?>

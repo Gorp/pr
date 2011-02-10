@@ -9,11 +9,37 @@
         <?php echo $this->headScript() ?>
         <?php echo $this->headLink() ?>
         <?php echo $this->headLink()->appendStylesheet($this->baseURL . '/public/css/style.css'); ?>
+        <?php echo $this->headLink()->appendStylesheet($this->baseURL . '/public/css/menu.css'); ?>
+        <!--[if lte IE 7]><link rel="stylesheet" href="/public/css/menuie.css" type="text/css" media="screen" /><![endif]-->
+        <script type="text/javascript" src="/public/js/jquery-1.4.3.min.js" />
+        <script type="text/javascript">
+            //no conflict jquery
+            jQuery.noConflict();
+        </script>
+        <script type="text/javascript">
+            jQuery('head').append('<link rel="stylesheet" href="/public/css/menu.css" type="text/css" media="screen" />' +
+                '<!--[if lte IE 7]><link rel="stylesheet" href="/public/css/menuie.css" type="text/css" media="screen" /><![endif]-->');
+            jQuery(document).ready(function(){
+                jQuery('#main_menu li[id]').hover(
+                function() {
+                    jQuery(this).children('a:not(.menuchilditem)').addClass('menuitem_active').removeClass('menuitem');
+                    jQuery(this).find('ul').stop(true,true);
+                    jQuery(this).find('ul').slideDown();
+                },
+                function() {
+                    jQuery(this).find('a:not(.menuchilditem)').addClass('menuitem').removeClass('menuitem_active');
+                    jQuery(this).find('ul').slideUp('fast');
+                }
+            );
+            });
+        </script>
+
 
     </head>
 
 
-    <body >
+    <body style="background: url('<?php echo Model_Config::getConfig('imagebackground');?>') repeat scroll center top #000; ">
+
         <div id="wrapper">
 
             <div id="header">
@@ -26,19 +52,19 @@
                 <div id="container">
 
                     <div id="content">
-                       <?php echo $this->layout()->content; ?>
+                        <?php echo $this->layout()->content; ?>
                     </div><!-- #content-->
                 </div><!-- #container-->
 
                 <div class="sidebar" id="sideRight">
                     <?php echo $this->render('helpers/sidebar.phtml') ?>
-                </div><!-- .sidebar#sideRight -->
+                    </div><!-- .sidebar#sideRight -->
 
-            </div><!-- #middle-->
+                </div><!-- #middle-->
 
-        </div><!-- #wrapper -->
+            </div><!-- #wrapper -->
 
-        <div id="footer">
+            <div id="footer">
             <?php echo $this->render('helpers/footer.phtml') ?>
         </div><!-- #footer -->
 

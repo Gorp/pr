@@ -13,7 +13,7 @@ class Model_Page extends Model_Base_Table {
 
     public static function getAll() {
         $table = self::getInstance();
-        $select = $table->select()->order('idpage')->group('idpage');
+        $select = $table->select()->order('title')->group('idpage');
         return $table->fetchAll($select);
     }
 
