@@ -35,7 +35,51 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         array(
                             1 => 'lang',
                         ), '%s');
+
          $router->addRoute('mainpage', $route2);
+
+        $blog = new Zend_Controller_Router_Route_Regex(
+                        '([a-z]{2})/blog',
+                        array(
+                            'action' => 'blog',
+                            'controller' => 'index',
+                            'module' => 'default'
+                        ),
+                        array(
+                            1 => 'lang'
+                        ), '%s/blog');
+        $router->addRoute('blog', $blog);
+
+        $blogpagination = new Zend_Controller_Router_Route_Regex(
+                        '([a-z]{2})/blog/page/(\d+)',
+                        array(
+                            'action' => 'blog',
+                            'controller' => 'index',
+                            'module' => 'default'
+                        ),
+                        array(
+                            1 => 'lang',
+                            2 => 'page'
+                        ), '%s/blog/page/%d');
+        $router->addRoute('blogpagination', $blogpagination);
+
+        $blogpage = new Zend_Controller_Router_Route_Regex(
+                        '([a-z]{2})/blog/(.*)-(\d+)\.html',
+                        array(
+                            'action' => 'blog',
+                            'controller' => 'index',
+                            'module' => 'default'
+                        ),
+                        array(
+                            1 => 'lang',
+                            2 => 'title',
+                            3 => 'idpost'
+                        ), '%s/blog/%s-%d.html');
+
+
+         $router->addRoute('blogpage', $blogpage);
+
+
          return $router;
     }
 }

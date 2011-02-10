@@ -16,16 +16,20 @@ if (is_object($this->menu)) :
 //        exit;
 ?>
         <li id="main_menu_<?php echo $menu->idmenu."_".$this->lang;?>">
+
             <?php
-             if (count($menuchilds) > 0 ) {
-                $url = 'javascript:void(0)';
-             } else {
-                $url =  $this->url(array('lang' => $this->lang,
+             
+             if (count($menuchilds) < 1 ) {
+                if ( $menu->idmenu == 16)  {
+                    $url = $this->url(array('lang' => $this->lang), 'blog');
+                } else {
+                    $url =  $this->url(array('lang' => $this->lang,
                               'title' => $menu->getPageByMenu($this->lang),
                               'idpage' => $menu->idpage), 'page');
+                }
              }
             ?>
-            <a href="<?php echo $url; ?>" class="menuitem"><?php echo $menu->name; ?></a>
+            <a href="<?php echo $url; ?>" class="menuitem"><?php echo $menu->name;?></a>
             <?php
             // Якщо нащадки знайдені - виводимо
             if ($haschilds) :

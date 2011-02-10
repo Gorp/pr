@@ -77,5 +77,14 @@ class IndexController extends Local_Controller
         //@TODO додати на сторінку title keywords description
     }
 
+    public function blogAction() {
+        $ispost = $this->_getParam('idpost', false);
+        if ($ispost) {
+            $this->view->post = Model_Blogentry::getById($ispost, $this->view->lang);
+            return $this->renderScript('/index/blogentry.phtml');
+        } 
+        $this->view->blogs = $this->setPaginator(Model_Blogentry::getBlogs($this->view->lang));
+        
+    }
 }
 

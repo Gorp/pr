@@ -1,0 +1,36 @@
+<?php
+
+
+foreach ($this->blogs as $blog) :?>
+<div class="blog" >
+  
+    <div class="blog_title">
+          <?php
+            $url = array(
+                'lang' => $this->lang,
+                'title' => Local_String::translit($blog->title),
+                'idpost' => $blog->identry
+            );
+          ?>
+          <a href="<?php echo $this->url($url, 'blogpage',true);?>" >
+               <h2><?php echo $blog->title;?></h2> 
+          </a> <?php echo $this->localDate($blog->date, $this->lang);?></div>
+          <a href="<?php echo $this->url($url, 'blogpage');?>" >
+            <img src="/public/img/blog/thumb/<?php echo $blog->identry;?>.jpg" align="left"/>
+          </a>
+    <div class="blog_stext">
+        <?php echo mb_substr(strip_tags($blog->richtext),0,450, 'UTF-8');?>
+    </div>
+</div>
+
+<hr />
+<?php
+endforeach;
+
+$option = array('lang' => $this->lang);
+
+echo $this->paginationControl($this->blogs,
+                             'Sliding',
+                             'helpers/pagination.phtml',
+                             $option);
+

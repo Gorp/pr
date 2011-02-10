@@ -15,9 +15,12 @@ class Model_Blogentry extends Model_Base_Table {
         return self::$_instance;
     }
 
-    public static function getAll() {
+    public static function getAll($lang) {
         $table = self::getInstance();
-        $select = $table->select()->order('identry')->group('identry');
+        $select = $table->select()
+                ->where('lang = ?', $lang)
+                ->order('identry')
+                ->group('identry');
         return $table->fetchAll($select);
     }
 
@@ -79,4 +82,14 @@ class Model_Blogentry extends Model_Base_Table {
         $table = self::getInstance();
         return $table->delete("identry = ".$identry);
     }
+
+    public static function getBlogs($lang) {
+        $select = self::getInstance()
+                        ->select()
+                        ->where('lang = ?', $lang)
+                        ->order('identry desc');
+                      //  echo $select;exit;
+        return self::getInstance()->returnData($select);
+    }
+
 }

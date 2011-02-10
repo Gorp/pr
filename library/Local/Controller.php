@@ -11,6 +11,9 @@ class Local_Controller extends Zend_Controller_Action {
         // вибранна мова
         $this->view->lang = $this->_getParam('lang', 'ua');
 
+        // потрібно для перегляду по сторінкам
+        $this->view->page = $this->_getParam('page',1);
+
         // отримуємо головне меню
         $this->view->menu = Model_Menu::getAll(NULL,$this->view->lang);
 
@@ -54,4 +57,11 @@ class Local_Controller extends Zend_Controller_Action {
                             $this->view->config->resources->mail->transport->host,
                             $this->view->config->resources->mail->transport->toArray()));
     }
+
+    public function setPaginator($paginator ) {
+        $paginator->setItemCountPerPage($this->view->config->pagination->itemperpage);
+        $paginator->setCurrentPageNumber($this->view->page);
+        return $paginator;
+    }
+
 }

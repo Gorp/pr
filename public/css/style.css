@@ -250,6 +250,12 @@ input {
     margin-left: 230px;
 
 }
+
+.paginationControl a{
+    color: yellow;
+}
+
+
 #simplemodal-overlay {
   background-color: #fff;  /* Тут выбираем цвет затемнения */
   cursor:wait;  /* Курсор при наведении на затемненную область */

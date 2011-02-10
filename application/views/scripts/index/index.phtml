@@ -59,10 +59,17 @@ foreach ($this->last as $blog) :?>
 <div class="blog" >
   
     <div class="blog_title">
-          <a href="<?php echo $blog->url;?>" >
-               <h2><?php echo $blog->title;?></h2> 
+          <?php
+            $url = array(
+                'lang' => $this->lang,
+                'title' => Local_String::translit($blog->title),
+                'idpost' => $blog->identry
+            );
+          ?>
+          <a href="<?php echo $this->url($url, 'blogpage');?>" >
+               <h2><?php echo $blog->title;?></h2>
           </a> <?php echo $this->localDate($blog->date, $this->lang);?></div>
-          <a href="<?php echo $blog->url;?>" >
+          <a href="<?php echo $this->url($url, 'blogpage');?>" >
             <img src="/public/img/blog/thumb/<?php echo $blog->identry;?>.jpg" align="left"/>
           </a>
     <div class="blog_stext">

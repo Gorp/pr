@@ -356,7 +356,7 @@ class AdminController extends Local_Controller {
         $this->view->menu_blogentry = 'selected';
         $this->view->item = $this->_getParam('item', 'new');
         $this->view->lang = $this->_getParam('lang', 'ua');
-        $this->view->entrys = Model_Blogentry::getAll();
+        $this->view->entrys = Model_Blogentry::getAll('ua');
         $this->view->actionname = '/admin/saveblogentry';
         $this->view->idname = 'identry';
         //перевіряємо на видалення

@@ -1,19 +1,15 @@
-<?php if ($this->pageCount):
-$titleurl = Local_String::translit($this->title_item);
-$url_ar = array(
-        'title' => $titleurl,
-        'lang' => $this->lang,
-        'menu_id' => $this->menu_id);
+<?php
+if ($this->pageCount):
+$url_ar = array('lang' => $this->lang);
 ?>
 
-
 <table><tr><td>
-<div class="paginationControl" style="display: inline;">
+<div class="paginationControl afl" style="display: inline;">
 <!-- Previous page link -->
 <?php if (isset($this->previous)):
     $url_ar['page'] = $this->previous;
  ?>
-  <a href="<?php echo $this->url($url_ar,'menupage'); ?>">&lt; </a> |
+  <a href="<?php echo $this->url($url_ar,'blogpagination'); ?>">&lt; </a> |
 <?php else:
     unset($url_ar['page']);
 ?>
@@ -25,7 +21,7 @@ $url_ar = array(
     if ($page != $this->current):
             $url_ar['page'] = $page;
 ?>
-            <a href="<?php echo $this->url($url_ar,'menupage'); ?>"><?php echo $page; ?></a> |
+            <a href="<?php echo $this->url($url_ar,'blogpagination'); ?>"><?php echo $page; ?></a> |
 <?php
     else:
         unset($url_ar['page']);
@@ -38,7 +34,7 @@ $url_ar = array(
     if (isset($this->next)):
     $url_ar['page'] = $this->next;
 ?>
-    <a href="<?php echo $this->url($url_ar,'menupage'); ?>"> &gt;</a>
+    <a href="<?php echo $this->url($url_ar,'blogpagination'); ?>"> &gt;</a>
 <?php else: ?>
   <span class="disabled2"> &raquo;</span>
 <?php endif; ?>
