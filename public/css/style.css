@@ -90,7 +90,12 @@ input {
 
 #content h1{
     line-height: 35px;
+    font-size: 28px;
     font-family: verdana;
+}
+
+#content hr {
+    margin-bottom: 10px;
 }
 
 /* Sidebar Right

@@ -5,7 +5,7 @@ if ($this->showvideo) : ?>
 endif;
 
 $page = array(
-    35
+    35, 45, 46, 47, 48, 49
 );
 
 if (in_array($this->idpage, $page)) : ?>
@@ -13,15 +13,20 @@ if (in_array($this->idpage, $page)) : ?>
     <br />
     <?php echo $this->tr(11, $this->lang, '<h2>Наші роботи</h2>'); ?>
     <br />
-    <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(13, $this->lang, 'Весілля'); ?>"/>
+    <a href="/<?php echo $this->lang;?>/vesillya-45.html">
+        <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(13, $this->lang, 'Весілля'); ?>"/></a>
     <br />
-    <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(14, $this->lang, 'Корпоративи'); ?>"/>
+    <a href="/<?php echo $this->lang;?>/korporatyvy-46.html">
+    <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(14, $this->lang, 'Корпоративи'); ?>"/></a>
     <br />
-    <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(15, $this->lang, 'Дні нарождення'); ?>"/>
+    <a href="/<?php echo $this->lang;?>/dni-narodzhennya-47.html">
+    <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(15, $this->lang, 'Дні нарождення'); ?>"/></a>
     <br />
-    <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(16, $this->lang, 'Випускні вечори'); ?>"/>
+    <a href="/<?php echo $this->lang;?>/vypuskni-vechory-48.html">
+    <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(16, $this->lang, 'Випускні вечори'); ?>"/></a>
     <br />
-    <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(17, $this->lang, 'Концерти'); ?>"/>
+    <a href="/<?php echo $this->lang;?>/koncerty-49.html">
+        <input type="button" class="lbut"  name="send"  value="<?php echo $this->tr(17, $this->lang, 'Концерти'); ?>"/></a>
 
 </div>
 <?php
