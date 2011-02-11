@@ -74,6 +74,7 @@ class IndexController extends Local_Controller
         // action body
         $idpage = $this->_getParam('idpage',0);
         $this->view->content = Model_Page::getById($idpage,$this->view->lang);
+        $this->view->gallery = Model_Image::getAll(5);
         //@TODO додати на сторінку title keywords description
     }
 
