@@ -1,4 +1,3 @@
-EEEE
 <link rel="stylesheet" type="text/css" href="/public/css/sl.css" media="screen" />
 <link rel="stylesheet" href="/public/css/mediaboxAdvBlack.css" type="text/css" media="screen" />
 
@@ -19,7 +18,7 @@ EEEE
              $imagename = $image->idgallery."_".$image->idimage.".jpg";
              ?>
 
-            'mid/<?php echo $imagename;?>': {
+            'big/<?php echo $imagename;?>': {
                 caption: 'Нажмите для просмотра',
                 href: "javascript:this.onclick(Mediabox.open('/public/gallery/full/<?php echo $imagename;?>','',''))",
                 thumbnail: 'small/<?php echo $imagename;?>'
@@ -35,14 +34,14 @@ EEEE
             $i++;
             endforeach; ?>
         };
-        var myShow = new Slideshow('show', data, {controller: false,  hu: '/public/gallery/', paused: true, linked: false, thumbnails: true, delay: 4000, height: 339, width: 509, duration: 750});
+        var myShow = new Slideshow('show', data, {controller: false,  hu: '/public/gallery/', paused: false, linked: false, thumbnails: true, delay: 4000, height: 400, width: 700, duration: 750});
     });
     //]]>
 </script>
 <div id="show" class="slideshow">
     <a href="<?= $firsturl; ?>" id="url"  class="spacing"  title="cation">
 
-        <img  src="<?= $firstimage;?>" width="506" height="339" alt="" />
+        <img  src="<?= $firstimage;?>" width="700" height="500" alt="" />
     </a>
 </div>
 

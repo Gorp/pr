@@ -24,9 +24,11 @@ class Model_Gallery extends Model_Base_Table {
      *
      */
 
-    public static function getAll($parent=NULL) {
+    public static function getAll($type='image') {
         $table = self::getInstance();
-        $select = $table->select()->order('idgallery');
+        $select = $table->select()
+                ->where('type = ?', $type)
+                ->order('idgallery');
         return $table->fetchAll($select);
     }
 
@@ -81,6 +83,12 @@ class Model_Gallery extends Model_Base_Table {
     public static function deletegallery($idgallery) {
         $table = self::getInstance();
         
+        // видалити файли
+        array_map('unlink',glob("public/gallery/full/{$idgallery}_*.jpg"));
+        array_map('unlink',glob("public/gallery/big/{$idgallery}_*.jpg"));
+        array_map('unlink',glob("public/gallery/mid/{$idgallery}_*.jpg"));
+        array_map('unlink',glob("public/gallery/small/{$idgallery}_*.jpg"));
+
         return $table->delete("idgallery = ".$idgallery);
     }
 

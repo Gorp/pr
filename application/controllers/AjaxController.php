@@ -39,11 +39,13 @@ class AjaxController extends Zend_Controller_Action {
 
                 $image_mid = new Asido_Image('public/gallery/full/' . $idgallery. '_' . $filename, 'public/gallery/mid/' . $idgallery . '_' . $filename);
                 $image_small = new Asido_Image('public/gallery/full/' . $idgallery . '_' . $filename, 'public/gallery/small/' . $idgallery. '_' . $filename);
+                $image_big = new Asido_Image('public/gallery/full/' . $idgallery . '_' . $filename, 'public/gallery/big/' . $idgallery. '_' . $filename);
 
                 $asido = new Asido_Api();
                 //$asido_drive =
                 $asido->_driver(new Asido_Driver_GD());
 
+                //mid
                 if ($res2width && (($ar[0] / $ar[1]) > 1.5 )) {
                     $asido->height($image_mid, 144);
                 } else {
@@ -51,6 +53,15 @@ class AjaxController extends Zend_Controller_Action {
                 }
                 $asido->crop($image_mid, 0, 0, 216, 144);
                 $image_mid->save(ASIDO_OVERWRITE_ENABLED);
+
+                //big
+                if ($res2width && (($ar[0] / $ar[1]) > 1.75 )) {
+                    $asido->height($image_big, 400);
+                } else {
+                    $asido->width($image_big, 700);
+                }
+                $asido->crop($image_big, 0, 0, 700, 400);
+                $image_big->save(ASIDO_OVERWRITE_ENABLED);
 
                 if ($res2width) {
                     $asido->height($image_small, 70);
@@ -62,6 +73,7 @@ class AjaxController extends Zend_Controller_Action {
 
                 // update permition
                 @chmod('public/gallery/full/' . $idgallery. '_' . $filename, 0777);
+                @chmod('public/gallery/big/' . $idgallery . '_' . $filename, 0777);
                 @chmod('public/gallery/mid/' . $idgallery . '_' . $filename, 0777);
                 @chmod('public/gallery/small/' . $idgallery . '_' . $filename, 0777);
                 echo json_encode(array('status' => 'success', 'idgallery' => $idgallery));
@@ -164,21 +176,9 @@ class AjaxController extends Zend_Controller_Action {
 
         $idgallery = $this->_request->getParam('item', null);
 
-        $data = Model_Image::getAll($idgallery);
-        if (is_object($data)) {
-            $res = '';
-            foreach ($data as $value) :
-                $res .= "
-<div style=\"float: left; text-align: center; margin-bottom: 4px;\">
-    <img  src=\"/public/gallery/small/" . $value["idgallery"] . "_" . $value["idimage"] . ".jpg\" style=\"float: left; border: 1px solid; margin-left: 2px;\"><br>
-    <input type=\"button\" onclick=\"$.get('/ajax/delimg/item/" . $value["idimage"] . "', function(data){ $('.photolist').html(data)});\" class=\"admin_buttonfield\"
-    value=\"Видалити\">
-</div>";
+        // показати картинки
+        $this->imagesList($idgallery);
 
-            endforeach;
-            // echo json_encode(array('status' => 'success', 'data' => $res));
-            echo $res;
-        }
         exit;
     }
 
@@ -190,29 +190,36 @@ class AjaxController extends Zend_Controller_Action {
         
         $image = Model_Image::getById($idimage);
         // видалити файли
-        @unlink('public/property/full/' . $image->idgallery . '_' . $image->idimage.".jpg");
-        @unlink('public/property/mid/' . $image->idgallery . '_' . $image->idimage.".jpg");
-        @unlink('public/property/small/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/gallery/full/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/gallery/big/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/gallery/mid/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/gallery/small/' . $image->idgallery . '_' . $image->idimage.".jpg");
         //видалити запис про картинку
         Model_Image::deleteImage($idimage);
 
-        //
-        $data = Model_Image::getAll($image->idgallery);
+        // показати картинки
+        $this->imagesList($image->idgallery);
+
+        exit;
+    }
+
+    private function imagesList($idgallery) {
+
+        $data = Model_Image::getAll($idgallery);
         if (is_object($data)) {
             $res = '';
             foreach ($data as $value) :
                 $res .= "
 <div style=\"float: left; text-align: center; margin-bottom: 4px;\">
     <img  src=\"/public/gallery/small/" . $value["idgallery"] . "_" . $value["idimage"] . ".jpg\" style=\"float: left; border: 1px solid; margin-left: 2px;\"><br>
+    <input type=\"test\" onchange=\"alert($(this).val())\"
+    value=\"\"><br />
     <input type=\"button\" onclick=\"$.get('/ajax/delimg/item/" . $value["idimage"] . "', function(data){ $('.photolist').html(data)});\" class=\"admin_buttonfield\"
     value=\"Видалити\">
 </div>";
-
             endforeach;
-            // echo json_encode(array('status' => 'success', 'data' => $res));
             echo $res;
         }
-        exit;
     }
 
 }

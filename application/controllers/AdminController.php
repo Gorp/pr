@@ -246,6 +246,74 @@ class AdminController extends Local_Controller {
 
         return new Zend_Filter_Input($filters, $validators, $input, $options);
     }
+    /*
+     * Тут працюэмо з галерею для відео
+     *
+     *
+     */
+
+    public function videoAction() {
+        $this->view->menu_video = 'selected';
+        $this->view->item = $this->_getParam('item', 'new');
+        $this->view->video = Model_Gallery::getAll('video');
+
+        //перевіряємо на видалення
+        $delete = $this->_getParam('delete', false);
+        if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
+            Model_Gallery::deletegallery($this->view->item);
+            $this->_redirect('/admin/video');
+        }
+        // якщо треба отримати дані за id меню
+        if (Zend_Validate::is($this->view->item, 'Digits')) {
+            $this->view->data = Model_Gallery::getById($this->view->item);
+        } else {
+            $this->view->data = Model_Gallery::getById(NULL);
+        }
+    }
+
+    /*
+     * Menu updater
+     *
+     */
+
+    public function savevideoAction() {
+        if ($this->_request->isPost()) {
+
+            $input = $this->videovalid($_POST);
+
+            if ($input->isValid()) {
+                $res = Model_Gallery::updategallery($input);
+                if ($res[0] > 0) {
+                    $this->_redirect('/admin/video/item/' . $res[1]);
+                } else {
+                    var_dump($res[1]);
+                    exit;
+                }
+            }
+            var_dump($input->getMessages());
+            exit;
+        }
+    }
+
+    private function videovalid($input) {
+
+        $filters = array(
+            '*' => array(array('PregReplace', "/[\\\\']/", ''), /* array('StripTags'), */ array('StringTrim'))
+        );
+        $options = array(
+            'escapeFilter' => new Zend_Filter_HtmlEntities(null, 'UTF-8')
+        );
+        $validators = array(
+            'name' => array(
+                'allowEmpty' => false,
+                'messages' => array('dddd', '222')
+            ),
+            'idgallery' => array(),
+            'type' => array()
+        );
+
+        return new Zend_Filter_Input($filters, $validators, $input, $options);
+    }
 
     public function pageAction() {
         $this->view->menu_page = 'selected';

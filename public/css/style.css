@@ -284,3 +284,13 @@ input {
   right:0px;
   cursor:pointer;
 }
+
+/* Slideshow on Page */
+.slideshow-thumbnails {
+    margin-top: 3px;
+}
+
+.slideshow-thumbnails li{
+    display: inline-block;
+    margin-right: 3px;
+}
