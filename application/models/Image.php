@@ -81,5 +81,10 @@ class Model_Image extends Model_Base_Table {
         return $table->delete("idimage = ".$idimage);
     }
 
+
+    public static function savePath($idimage, $path) {
+        $table = self::getInstance();
+        
+    }
 }
 

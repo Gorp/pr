@@ -203,6 +203,25 @@ class AjaxController extends Zend_Controller_Action {
         exit;
     }
 
+    public function pathAction() {
+        if ($this->_request->isPost()) {
+            $idimage = $this->_getParam('item','');
+            $path = $this->_getParam('path','');
+            $data = array(
+                'path' => $path
+            );
+            if ( is_object($image = Model_Image::getById($idimage)) ) {
+                $image->path = $path;
+                $image->save();
+            }
+            var_dump($image);
+            exit;
+        }
+        exit;
+    }
+
+
+
     private function imagesList($idgallery) {
 
         $data = Model_Image::getAll($idgallery);
@@ -212,8 +231,8 @@ class AjaxController extends Zend_Controller_Action {
                 $res .= "
 <div style=\"float: left; text-align: center; margin-bottom: 4px;\">
     <img  src=\"/public/gallery/small/" . $value["idgallery"] . "_" . $value["idimage"] . ".jpg\" style=\"float: left; border: 1px solid; margin-left: 2px;\"><br>
-    <input type=\"test\" onchange=\"alert($(this).val())\"
-    value=\"\"><br />
+    <input type=\"text\" onchange=\"$.post('/ajax/path', {item: " . $value["idimage"] . ", path: $(this).val()})\"
+    value=\"". $value["path"] . "\"><br />
     <input type=\"button\" onclick=\"$.get('/ajax/delimg/item/" . $value["idimage"] . "', function(data){ $('.photolist').html(data)});\" class=\"admin_buttonfield\"
     value=\"Видалити\">
 </div>";

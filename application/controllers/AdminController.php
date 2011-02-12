@@ -320,6 +320,9 @@ class AdminController extends Local_Controller {
         $this->view->item = $this->_getParam('item', 'new');
         $this->view->lang = $this->_getParam('lang', 'ua');
         $this->view->pages = Model_Page::getAll();
+        $this->view->galleries = Model_Gallery::getAll('image');
+        $this->view->videos = Model_Gallery::getAll('video');
+
         $this->view->actionname = '/admin/savepage';
         $this->view->idname = 'idpage';
         //перевіряємо на видалення
@@ -390,7 +393,13 @@ class AdminController extends Local_Controller {
             'richtext' => array(
                 'allowEmpty' => false
             ),
-            'idpage' => array()
+            'idpage' => array(),
+            'idgallery' => array(
+                'default' => 0
+            ),
+            'idvideo' => array(
+                'default' => 0
+            )
         );
         return new Zend_Filter_Input($filters, $validators, $input, $options);
     }

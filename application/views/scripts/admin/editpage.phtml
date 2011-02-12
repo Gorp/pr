@@ -33,6 +33,34 @@
     </div></div>
 
     <div class="field">
+    <div class="field_name">Галерея: </div>
+    <div><select id="lang" class="field_input" name="idgallery" >
+            <option value="0">Не вибрано</option>
+            <?php
+            foreach ($this->galleries as $gallery) : ?>
+            <option value="<?php echo $gallery->idgallery; ?>" <?php echo ( $this->data->idgallery == $gallery->idgallery)?'selected="selected"':''; ?>>
+                <?php echo $gallery->name; ?>
+            </option>
+            <?php
+            endforeach;   ?>
+        </select>
+    </div></div>
+
+    <div class="field">
+    <div class="field_name">Відео: </div>
+    <div><select id="lang" class="field_input" name="idvideo" >
+            <option value="0">Не вибрано</option>
+            <?php
+            foreach ($this->videos as $video) : ?>
+            <option value="<?php echo $video->idgallery; ?>" <?php echo ( $this->data->idvideo == $video->idgallery)?'selected="selected"':''; ?>>
+                <?php echo $video->name; ?>
+            </option>
+            <?php
+            endforeach;   ?>
+        </select>
+    </div></div>
+
+    <div class="field">
     <div class="field_name">Контент: </div><br /><br />
     <div><textarea class="field_input" id="richtext" cols="30" rows="5" name="richtext">
             <?php echo $this->data->richtext; ?>
