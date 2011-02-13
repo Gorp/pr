@@ -36,6 +36,7 @@ input {
     min-height: 100%;
     height: auto !important;
     height: 100%;
+    background-color: #000;
 }
 
 
@@ -90,8 +91,9 @@ input {
 
 #content h1{
     line-height: 35px;
-    font-size: 28px;
+    font-size: 26px;
     font-family: verdana;
+    padding-top: 5px;
 }
 
 #content hr {

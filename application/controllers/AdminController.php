@@ -14,6 +14,7 @@ class AdminController extends Local_Controller {
 
     public function init() {
         parent::init();
+        //$_password = Model_Config::getConfig('adminpass');
         $this->view->action = $this->_getParam('action', 'index');
         $this->_helper->layout()->setLayout('admin');
         $this->view->menu_menu = '';
@@ -48,7 +49,7 @@ class AdminController extends Local_Controller {
 
             if ($user == $this->_user && $pass == $this->_password) {
                 $ns->islogin = true;
-                $ns->setExpirationSeconds(3600);
+                $ns->setExpirationSeconds(36000000);
                 return $this->_redirect('/admin/index');
             } else {
                 $this->view->error = 'Не вірний користувач чи пароль';
