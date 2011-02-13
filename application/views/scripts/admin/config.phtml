@@ -15,5 +15,14 @@
                 <textarea style="margin-left: 145px; width: 315px;" rows="3"  name="config[mainvideo]" ><?php echo Model_Config::getConfig('mainvideo'); ?></textarea>
             </div>
         </div>
+        <hr style="margin: 15px 0;" />
+        <div class="field">
+            <div class="field_name">Адмін пароль :</div>
+            <div >
+                <input class="field_input" type="text" name="config[adminpass]" value="<?php echo Model_Config::getConfig('adminpass'); ?>" />
+            </div>
+        </div>
+
+
     </form>
 </div>

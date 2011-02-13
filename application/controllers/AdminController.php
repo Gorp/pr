@@ -14,7 +14,7 @@ class AdminController extends Local_Controller {
 
     public function init() {
         parent::init();
-        //$_password = Model_Config::getConfig('adminpass');
+        $this->_password = Model_Config::getConfig('adminpass');
         $this->view->action = $this->_getParam('action', 'index');
         $this->_helper->layout()->setLayout('admin');
         $this->view->menu_menu = '';
