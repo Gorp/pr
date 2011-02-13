@@ -1,6 +1,6 @@
 <?php
 if ($this->showvideo) : ?>
-<iframe title="YouTube video player" class="youtube-player" type="text/html" width="237" height="240" src="http://www.youtube.com/embed/LFbcgZpOoCE" frameborder="0" allowFullScreen></iframe>
+<?php echo html_entity_decode(Model_Config::getConfig('mainvideo')); ?>
 <?php
 endif;
 
