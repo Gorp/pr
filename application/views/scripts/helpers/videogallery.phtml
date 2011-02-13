@@ -1,0 +1,41 @@
+<?php
+
+if (is_object($this->video)) : ?>
+<script type="text/javascript">
+    //<![CDATA[
+    window.addEvent('domready', function(){
+    var datavideo = {
+            <?php
+            $i=0;
+            foreach ($this->video as $image) :
+
+             $imagename = $image->idgallery."_".$image->idimage.".jpg";
+             ?>
+
+            'big/<?php echo $imagename;?>': {
+                caption: 'Нажмите для просмотра',
+                href: "javascript:this.onclick(Mediabox.open('<?php echo (empty($image->path))?'/public/gallery/full/'.$imagename:$image->path; ?>','',''))",
+                thumbnail: 'small/<?php echo $imagename;?>'
+            }<?php
+            if( ($i+1)!=count($this->video) ) {
+                          echo  ','; }
+            if( ($i == 0) ) {
+                $firstimage = '/public/img/ajax-loader.gif';
+                //$firstimage = '/gallery/data/gallery_video/'.$image['parent'].'/full/'.$image['file'];
+                $firsturl = '/public/gallery/full/'.$imagename;
+            }
+            $i++;
+            endforeach; ?>
+        };
+        var myShowVideo = new Slideshow('showvideo', datavideo, {controller: false,  hu: '/public/gallery/', paused: false, linked: false, thumbnails: true, delay: 4000, height: 400, width: 700, duration: 750});
+    });
+    //]]>
+</script>
+<div id="showvideo" class="slideshow">
+    <a href="<?= $firsturl; ?>" id="url"  class="spacing"  title="cation">
+
+        <img  src="<?= $firstimage;?>" width="700" height="500" alt="" />
+    </a>
+</div>
+<?php
+endif; ?>
