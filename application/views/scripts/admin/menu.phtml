@@ -9,21 +9,28 @@
         foreach ($this->mainmenu as $menu)  : ?>
             <div class="menulist" ><a href="/admin/menu/item/<?php echo $menu->idmenu; ?>">
                 <?php echo $menu->name; ?></a>&nbsp;&nbsp;
+                <?php if ($menu->blockedit == 'unblock') :?>
                 <a href="/admin/menu/item/<?php echo $menu->idmenu; ?>/move/up">&uArr;</a>&nbsp;&nbsp;
                 <a href="/admin/menu/item/<?php echo $menu->idmenu; ?>/move/down">&dArr;</a>&nbsp;&nbsp;
                 <a href="/admin/menu/item/<?php echo $menu->idmenu; ?>/delete/1" 
-                   onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a></div>
+                   onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a>
+                <?php
+                endif;?>
+                </div>
                 <ul>
                 <?php
                 if ( ($menu->idmenu == $this->curmenu) && is_object($this->submenu) ) :
                 foreach ($this->submenu as $submenu)  : ?>
                    <li class="menulist"><a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>">
                 <?php echo $submenu->name; ?></a>&nbsp;&nbsp;
-                <a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>/move/up">&uArr;</a>&nbsp;&nbsp;
-                <a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>/move/down">&dArr;</a>&nbsp;&nbsp;
-                   <a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>/delete/1"
+                <?php if ($submenu->blockedit == 'unblock') :?>
+                    <a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>/move/up">&uArr;</a>&nbsp;&nbsp;
+                    <a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>/move/down">&dArr;</a>&nbsp;&nbsp;
+                    <a href="/admin/menu/item/<?php echo $submenu->idmenu; ?>/delete/1"
                       onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a>
-                   </li>
+                <?php
+                endif; ?>
+                </li>
                 <?php
                 endforeach; endif; ?>
                 </ul>

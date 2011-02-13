@@ -72,7 +72,7 @@ class AdminController extends Local_Controller {
         if (($move = $this->_getParam('move', false))) {
             Model_Menu::movemenu($this->view->item, $move);
         }
-        echo "false";
+        //echo "false";
 
 
         $this->view->lang = $this->_getParam('lang', 'ua');
@@ -145,7 +145,7 @@ class AdminController extends Local_Controller {
                 echo "Ошибка! " . var_dump($t);;
                 exit;
             } else {
-                echo "Редагування цього запису заблоковано.";
+                echo "Редагування цього запису заблоковано2.";
                 exit;
             }
 
