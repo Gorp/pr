@@ -52,10 +52,10 @@ class Local_Controller extends Zend_Controller_Action {
         }
 
         //налаштування транспорту пошти
-        Zend_Mail::setDefaultTransport(
-                new Zend_Mail_Transport_Smtp(
-                            $this->view->config->resources->mail->transport->host,
-                            $this->view->config->resources->mail->transport->toArray()));
+//        Zend_Mail::setDefaultTransport(
+//                new Zend_Mail_Transport_Smtp(
+//                            $this->view->config->resources->mail->transport->host,
+//                            $this->view->config->resources->mail->transport->toArray()));
     }
 
     public function setPaginator($paginator ) {

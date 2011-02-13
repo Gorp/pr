@@ -32,10 +32,10 @@ if (in_array($this->idpage, $page)) : ?>
 <?php
 endif; ?>
 
-<img style="" src="/public/img/boxtop.png" />
+<img  src="/public/img/boxtop.png" />
 <div class="sidebarcontact">
     <div class="sidebarbox" >
-        <div id="msgcont" style="display:none;width:400px;height:150px;padding:5px;"></div>
+        <div id="msgcont" style="display:none;width:300px;height:110px;padding:5px;"></div>
         <br />
         <?php echo $this->tr(1, $this->lang, '<h2>Контакты</h2>'); ?>
         <br />
@@ -76,7 +76,7 @@ endif; ?>
         var msglist = "";
         jQuery('input[name=send]').attr('disabled','disabled');
         jQuery.post(
-        'index/sendmessage',
+        '/index/sendmessage',
         dataArray,
         function(data) {
             if (typeof data !== "error") {
