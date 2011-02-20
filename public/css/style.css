@@ -296,3 +296,9 @@ input {
     display: inline-block;
     margin-right: 3px;
 }
+
+
+
+.show_blog_entry {
+    padding-left: 2px;
+}
