@@ -206,6 +206,8 @@ input {
 -----------------------------------------------------------------------------*/
 #footer {
     width: 980px;
+    background: black;
+    color: yellow;
 /*    margin: -100px auto 0;*/
     height: 100px;
 /*    background: #BFF08E;*/
