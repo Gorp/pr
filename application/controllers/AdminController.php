@@ -111,7 +111,7 @@ class AdminController extends Local_Controller {
         if ($this->_request->isPost()) {
             //var_dump($_POST);exit;
             $input = $this->menuvalid($_POST);
-            if (($input->isValid()) && ($input->blockedit == 'unblock')) {
+            if (($input->isValid()) /*&& ($input->blockedit == 'unblock')*/) {
                 $res = Model_Menu::updatemenu($input);
                 if ($res[0] > 0) {
                     // Якщо це створення нового обєкта та збережено з мовою по запиту,
