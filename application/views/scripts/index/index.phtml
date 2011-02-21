@@ -73,7 +73,10 @@ foreach ($this->last as $blog) :?>
             <img src="/public/img/blog/thumb/<?php echo $blog->identry;?>.jpg" align="left"/>
           </a>
     <div class="blog_stext">
-        <?php echo mb_substr(strip_tags($blog->richtext),0,450, 'UTF-8');?>
+        <?php echo mb_substr(strip_tags($blog->richtext),0,280, 'UTF-8');?>
+        <a href="<?php echo $this->url($url, 'blogpage',true);?>" style="color: yellow;">
+            <?php echo $this->tr(NULL,$this->lang,'Деталі...'); ?>
+        </a>
     </div>
 </div>
 

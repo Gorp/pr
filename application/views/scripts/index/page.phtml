@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/public/css/sl.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/public/css/slideshow.css" media="screen" />
 <link rel="stylesheet" href="/public/css/mediaboxAdvBlack.css" type="text/css" media="screen" />
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script>
@@ -11,6 +11,6 @@ $videogallery = $this->render('/helpers/videogallery.phtml');
 $imagegallery = $this->render('/helpers/imagegallery.phtml');
 ?>
 
-<h1><?php echo $this->content->title;?></h1>
+<h1><?php echo $this->escape($this->content->title);?></h1>
 <hr />
 <?php echo str_replace( array('<!--videogallery-->','<!--imagegallery-->'), array($videogallery, $imagegallery), $this->content->richtext);?>
