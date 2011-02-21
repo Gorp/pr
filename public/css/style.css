@@ -206,10 +206,16 @@ input {
 -----------------------------------------------------------------------------*/
 #footer {
     width: 980px;
-    background: black;
-    color: yellow;
-/*    margin: -100px auto 0;*/
+    margin: 0 auto;
+    min-height: 100%;
+    height: auto !important;
     height: 100px;
+    background-color: #000;    
+    color: yellow;
+    border-top: 4px white solid;
+/*    border: solid red 1px;*/
+/*    margin: -100px auto 0;*/
+
 /*    background: #BFF08E;*/
 }
 
