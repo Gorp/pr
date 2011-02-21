@@ -50,6 +50,15 @@ class Model_Menu extends Model_Base_Table {
             $select->where('idmenu = ?', $idmenu)->where('lang = ?', $lang);
              $res = $table->fetchRow($select);
             if ( is_object($res)) { return $res; }
+             
+             // якщо в нас нема запису для вибраної мови, то дадаємо запис
+//             $select->where('idmenu = ?', $idmenu)->where('lang = ?', 'ua');
+//             $res = $table->fetchRow($select);
+//             
+//             if ( is_object($res)) {
+//                 foreach ()
+//             }
+
             return $table->fetchNew();
         } else {
             return $table->fetchNew();
@@ -73,7 +82,10 @@ class Model_Menu extends Model_Base_Table {
                 $select = $table->select()
                     ->where("idmenu = ?", $data['idmenu'])
                     ->where("lang = ?", $data['lang']);
+                //echo $select;
                 $cur = $table->fetchRow($select);
+//                var_dump($cur);
+//                exit;
                 if (is_object($cur)) {
                     $table->update($data, 'idmenu =  ' . $id. " and lang = '".$cur->lang."'");
                 } else {

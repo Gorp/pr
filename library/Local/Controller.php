@@ -19,6 +19,10 @@ class Local_Controller extends Zend_Controller_Action {
 
         //скільки мов підтримуємо
         $this->view->langs = explode(',', $this->view->config->langs);
+        if ($this->getRequest()->getControllerName() == 'admin') {
+            $this->view->langs = explode(',', $this->view->config->adminlangs);
+        }
+        
 
         // показувати відео тільки на першій сторінці
         $this->view->showvideo = false;
