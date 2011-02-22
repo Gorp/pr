@@ -107,7 +107,7 @@ if ( $this->item != 'new') : ?>
             upload_progress_handler : uploadProgress,
             upload_error_handler : uploadError,
             upload_success_handler : uploadSuccess,
-            upload_complete_handler : uploadComplete,
+            upload_complete_handler : afterUpload,
             queue_complete_handler : queueComplete	// Queue plugin event
         };
 
@@ -116,7 +116,7 @@ if ( $this->item != 'new') : ?>
 
     function afterUpload() {
         d = new Date();
-        $("#curThumb").attr("src", "/public/img/blog/thumb/<?php echo $this->item; ?>.jpg?"+d.getTime());
+        $("#curThumb").attr("src", "/public/img/blog/thumb/<?php echo $this->item; ?>.jpg?"+Math.random () );
     }
 
     $(document).ready(function() {

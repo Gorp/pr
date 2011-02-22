@@ -101,7 +101,7 @@ function uploadProgress(file, bytesLoaded, bytesTotal) {
 }
 
 function uploadSuccess(file, serverData) {
-    alert(serverData);
+    //alert(serverData);
 	try {
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
 		progress.setComplete();
