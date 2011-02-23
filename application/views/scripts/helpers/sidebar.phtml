@@ -66,10 +66,12 @@ endif; ?>
             <br />
             <input type="submit"  class="slbut" name="send"  value="<?php echo $this->tr(10, $this->lang, 'Відправити'); ?>"/>
         </form>
-        <br /><br />
+
     </div>
 </div>
+<div style="margin-top: -5px;">
 <img  src="/public/img/boxbottom.png" />
+</div>
 <script type="text/javascript">
     function sendMessage() {
         var dataArray = jQuery('input[name=sender],input[name=phone],textarea[name=message]').serialize();
