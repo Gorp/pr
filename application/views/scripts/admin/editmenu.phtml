@@ -2,7 +2,7 @@
     <div class="field">
         <div class="field_name">Назва :</div>
         <div >
-            <input class="field_input" type="text" name="name" <?= ($this->menudata->blockedit=='block')?"disabled":"";?> value="<?php echo $this->menudata->name; ?>" />
+            <input class="field_input" type="text" name="name"   value="<?php echo $this->menudata->name; ?>" />
             <input  type="hidden" name="idmenu" value="<?php echo $this->item; ?>" />
         </div>
     </div>
@@ -25,7 +25,7 @@
 
     <div class="field">
         <div class="field_name">Меню :</div>
-        <select class="field_input" name="parent" <?= ($this->menudata->blockedit=='block')?"disabled":"";?> >
+        <select class="field_input" name="parent"   >
             <option value="0">Головне Меню</option>
             <?php
             if (is_object($this->mainmenu)) :
@@ -41,7 +41,7 @@
     </div>
     <div class="field">
         <div class="field_name">Сторінка :</div>
-        <select class="field_input" name="idpage" <?= ($this->menudata->blockedit=='block')?"disabled":"";?> >
+        <select class="field_input" name="idpage"   >
             <option value="0">Вибрати сторінку</option>
             <?php
             if (is_object($this->pages)) :

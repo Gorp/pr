@@ -1,10 +1,11 @@
 <div  style="height: 241px; background: url('<?php echo $this->headerurl;?>') #0b0b0b   no-repeat center center;"></div>
 <div class="langs fr" style="z-index: 10;position: absolute;">
-    <a href="/">
-    <img src="/public/img/ua-flag.gif" title="Українська" alt="Українська"></a>&nbsp;&nbsp;&nbsp;
-    <a href="/ru/">
-    <img src="/public/img/ru-flag.gif" title="Русский" alt="Русский">
-    </a>
+    <?php 
+    foreach ($this->langs as $lang) : ?>
+    <a href="/<?php echo $lang;?>">
+    <img src="/public/img/<?php echo $lang;?>-flag.gif" title="<?php $lang = str_replace('ua','uk',$lang);echo Zend_Locale::getTranslation($lang, 'language', $lang);?>" alt="<?php echo Zend_Locale::getTranslation($lang, 'language', $lang);?>" /></a>&nbsp;&nbsp;&nbsp;
+    <?php
+    endforeach;?>
 </div>
 
 <!--<div style="z-index: 10; "><div  style="height: 241px; background: #0b0b0b url('<?php echo $this->headerurl;?>') no-repeat bottom right;"></div>

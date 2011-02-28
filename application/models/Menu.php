@@ -49,6 +49,7 @@ class Model_Menu extends Model_Base_Table {
         if ($idmenu !== NULL) {
             $select->where('idmenu = ?', $idmenu)->where('lang = ?', $lang);
              $res = $table->fetchRow($select);
+            //echo $select;            var_dump($res);exit; 
             if ( is_object($res)) { return $res; }
              
              // якщо в нас нема запису для вибраної мови, то дадаємо запис

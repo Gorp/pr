@@ -109,6 +109,10 @@ class AdminController extends Local_Controller {
 
     public function savemenuAction() {
         if ($this->_request->isPost()) {
+            $t = Model_Menu::getById($this->_getParam('idmenu'));
+            if ($t->blockedit == $this->_getParam('blockedit')) {
+                $this->_redirect('/admin/menu/item/'.$this->_getParam('idmenu'));
+            }
             //var_dump($_POST);exit;
             $input = $this->menuvalid($_POST);
             if (($input->isValid()) /*&& ($input->blockedit == 'unblock')*/) {
