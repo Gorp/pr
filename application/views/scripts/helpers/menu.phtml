@@ -27,6 +27,8 @@ if (is_object($this->menu)) :
                               'title' => $menu->getPageByMenu($this->lang),
                               'idpage' => $menu->idpage), 'page');
                 }
+             } else {
+                 $url = 'javascript:viod(0)';
              }
             ?>
             <a href="<?php echo $url; ?>" class="menuitem"><?php echo $menu->name;?></a>

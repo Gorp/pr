@@ -46,29 +46,33 @@ class AjaxController extends Zend_Controller_Action {
                 $asido->_driver(new Asido_Driver_GD());
 
                 //mid
-                if ($res2width && (($ar[0] / $ar[1]) > 1.5 )) {
-                    $asido->height($image_mid, 144);
-                } else {
-                    $asido->width($image_mid, 216);
-                }
-                $asido->crop($image_mid, 0, 0, 216, 144);
+//                if ($res2width && (($ar[0] / $ar[1]) > 1.5 )) {
+//                    $asido->height($image_mid, 144);
+//                } else {
+//                    $asido->width($image_mid, 216);
+//                }
+                
+                //$asido->crop($image_mid, 0, 0, 216, 144);
+                $asido->frame($image_mid, 216, 144,  Asido_Api::color(0, 0, 0));
                 $image_mid->save(ASIDO_OVERWRITE_ENABLED);
 
                 //big
-                if ($res2width && (($ar[0] / $ar[1]) > 1.75 )) {
-                    $asido->height($image_big, 400);
-                } else {
-                    $asido->width($image_big, 700);
-                }
-                $asido->crop($image_big, 0, 0, 700, 400);
+//                if ($res2width && (($ar[0] / $ar[1]) > 1.75 )) {
+//                    $asido->height($image_big, 400);
+//                } else {
+//                    $asido->width($image_big, 700);
+//                }
+//                $asido->crop($image_big, 0, 0, 700, 400);
+                $asido->frame($image_big, 700, 400, Asido_Api::color(0, 0, 0));
                 $image_big->save(ASIDO_OVERWRITE_ENABLED);
 
-                if ($res2width) {
-                    $asido->height($image_small, 70);
-                } else {
-                    $asido->width($image_small, 70);
-                }
-                $asido->crop($image_small, 0, 0, 70, 70);
+//                if ($res2width) {
+//                    $asido->height($image_small, 70);
+//                } else {
+//                    $asido->width($image_small, 70);
+//                }
+                //$asido->crop($image_small, 0, 0, 70, 70);
+                $asido->frame($image_small, 70, 70, Asido_Api::color(0, 0, 0));
                 $image_small->save(ASIDO_OVERWRITE_ENABLED);
 
                 // update permition
@@ -144,12 +148,13 @@ class AjaxController extends Zend_Controller_Action {
                     $res2width = false;
                 }
 
-                if ($res2width && (($ar[0] / $ar[1]) > 1.5 )) {
-                    $asido->height($thumb, 153);
-                } else {
-                    $asido->width($thumb, 224);
-                }
-                $asido->crop($thumb, 0, 0, 224, 153);
+//                if ($res2width && (($ar[0] / $ar[1]) > 1.5 )) {
+//                    $asido->height($thumb, 153);
+//                } else {
+//                    $asido->width($thumb, 224);
+//                }
+//                $asido->crop($thumb, 0, 0, 224, 153);
+                $asido->frame($thumb, 224, 153, Asido_Api::color(0, 0, 0));
                 $thumb->save(ASIDO_OVERWRITE_ENABLED);
 
                 // update permition
