@@ -32,7 +32,7 @@ class IndexController extends Local_Controller
                     $text = str_replace("{sender}", $input->sender, $text);
                     $text = str_replace("{phone}", $input->phone, $text);
                     $text = str_replace("{message}", $input->message, $text);
-                    $mail->setSubject('З сайту patyzone!');
+                    $mail->setSubject('Повідомлення із сайту Party Zone');
                     $mail->setBodyText($text);
                     $mail->send();
                 } catch (Zend_Mail_Exception $e) {
