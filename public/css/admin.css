@@ -179,7 +179,7 @@ li.adminmenuselected, li.adminmenu:hover {
     height: 40px;
     margin: 0px 0px 0px 0px;
     position: relative;
-    background-image: url('../img/menu_hide.png');
+    background-image: url('/public/css/colorbox/images/menu_hide.png');
     cursor: pointer;
     width:20px;
     z-index:10000;

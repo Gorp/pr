@@ -1,3 +1,6 @@
+<link href="/public/css/colorbox/colorbox.css" rel="stylesheet" />
+<script src="/public/js/colorbox/jquery.colorbox-min.js"></script>
+<div style="overflow-y: scroll;overflow-x: hidden; height: 700px;">
 <center> <h2>Тут медія смітник</h2> </center>
 <table>
     <tr>
@@ -10,6 +13,7 @@
         </td>
     </tr>
 </table>
+</div>
 <script  type="text/javascript">
  jQuery(document).ready(function(){
      
@@ -19,7 +23,9 @@
      jQuery.get("/ajax/getallgalimages",
             function(data){
              jQuery("#imggallery").html(data);
+             $("a.gallery").colorbox();     
             });
+           
  }
 
  function delImage(id, type){
@@ -27,6 +33,9 @@
     { item :id,
       type : type
     });
-   getImages();
+   getImages();   
+   
+
+   
  }
 </script>

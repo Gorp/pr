@@ -256,16 +256,18 @@ class AjaxController extends Zend_Controller_Action {
     public function getallgalimagesAction() {
         $imaget = Model_Image::getInstance();
         $select = $imaget->select()->order("idimage desc");
-        $listgal = $imaget->fetchAll($select);
+        /*$listgal = $imaget->fetchAll($select);
         foreach ($listgal as $key => $image) { ?>
             <div style="float: left; text-align: center; margin-bottom: 4px;">
                 <?php //echo $image->idimage;?>
-                <img style="float: left; border: 1px solid; margin-left: 2px;" src="/public/gallery/small/<?php echo $image->idgallery . '_' . $image->idimage;?>.jpg" /><br>
+                <a class="gallery" href="/public/gallery/full/<?php echo $image->idgallery . '_' . $image->idimage;?>.jpg" >
+                <img style="float: left; border: 1px solid; margin-left: 2px;" src="/public/gallery/small/<?php echo $image->idgallery . '_' . $image->idimage;?>.jpg" />
+                </a><br>
                 <input type="button" value="Видалити" class="admin_buttonfield" onclick="delImage('<?php echo $image->idimage;?>','g')" />
             </div>
         <?php
-        }
-        
+        }*/
+        echo '<div style="clear:both;"><hr /></div>';
         $listpage = scandir('public/img/page');
         $x = '.png|.jpg|.gif';
         foreach( array_diff($listpage,array('.','..')) as $f) :
@@ -274,8 +276,10 @@ class AjaxController extends Zend_Controller_Action {
                         && (($x)?preg_match('/'.$x.'$/i',$f):1) ) :?>
                     <div style="float: left; text-align: center; margin-bottom: 4px;">
                         <?php //echo $image->idimage;?>
+                        <a class="gallery" href="/public/img/page/<?php echo $f;?>">
                         <img style="float: left; border: 1px solid; margin-left: 2px; width: 70px; height: 70px;" src="/public/img/page/<?php echo $f;?>" /><br>
                         <input type="button" value="Видалити" class="admin_buttonfield" onclick="delImage('public/img/page/<?php echo $f;?>','p')" />
+                        </a>
                     </div>                    
                 <?php endif; endforeach;
         exit;
