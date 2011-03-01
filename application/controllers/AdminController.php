@@ -21,6 +21,7 @@ class AdminController extends Local_Controller {
         $this->view->menu_page = '';
         $this->view->menu_gallery = '';
         $this->view->menu_blogentry = '';
+        $this->view->menu_medialib = '';
         $this->view->menu_config = '';
         $this->view->action = $this->_getParam('action');
 
@@ -570,6 +571,14 @@ class AdminController extends Local_Controller {
             )
         );
         return new Zend_Filter_Input($filters, $validators, $input, $options);
+     }
+     
+     // для медія сміття
+     public function medialibAction() {
+        $this->view->menu_medialib = 'selected';
+        
+        //для видалення картинок
+        
      }
 }
 

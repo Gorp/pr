@@ -244,6 +244,7 @@ li.adminmenuselected, li.adminmenu:hover {
     background:#000;
     border:solid 1px #ffffff;
     color:#ffffff;
+    cursor: pointer;
 }	
 
 .admin_data_row {

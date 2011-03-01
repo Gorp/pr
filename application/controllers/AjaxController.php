@@ -191,17 +191,10 @@ class AjaxController extends Zend_Controller_Action {
     public function delimgAction() {
         $idimage = $this->_request->getParam('item', null);
 
-        // отримуемо інформацію про файл
-        
+        // Видаляємо картинки    
         $image = Model_Image::getById($idimage);
-        // видалити файли
-        @unlink('public/gallery/full/' . $image->idgallery . '_' . $image->idimage.".jpg");
-        @unlink('public/gallery/big/' . $image->idgallery . '_' . $image->idimage.".jpg");
-        @unlink('public/gallery/mid/' . $image->idgallery . '_' . $image->idimage.".jpg");
-        @unlink('public/gallery/small/' . $image->idgallery . '_' . $image->idimage.".jpg");
-        //видалити запис про картинку
-        Model_Image::deleteImage($idimage);
-
+        $this->deleteImage($idimage);
+        
         // показати картинки
         $this->imagesList($image->idgallery);
 
@@ -245,5 +238,63 @@ class AjaxController extends Zend_Controller_Action {
             echo $res;
         }
     }
+    
+    private function deleteImage($idimage) {
+        // отримуемо інформацію про файл
+        $image = Model_Image::getById($idimage);
+        // видалити файли
+        @unlink('public/gallery/full/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/gallery/big/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/gallery/mid/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        @unlink('public/gallery/small/' . $image->idgallery . '_' . $image->idimage.".jpg");
+        //видалити запис про картинку
+        Model_Image::deleteImage($idimage);
+        
+    }
+    
+    // отримати всі картинки в галереях
+    public function getallgalimagesAction() {
+        $imaget = Model_Image::getInstance();
+        $select = $imaget->select()->order("idimage desc");
+        $listgal = $imaget->fetchAll($select);
+        foreach ($listgal as $key => $image) { ?>
+            <div style="float: left; text-align: center; margin-bottom: 4px;">
+                <?php //echo $image->idimage;?>
+                <img style="float: left; border: 1px solid; margin-left: 2px;" src="/public/gallery/small/<?php echo $image->idgallery . '_' . $image->idimage;?>.jpg" /><br>
+                <input type="button" value="Видалити" class="admin_buttonfield" onclick="delImage('<?php echo $image->idimage;?>','g')" />
+            </div>
+        <?php
+        }
+        
+        $listpage = scandir('public/img/page');
+        $x = '.png|.jpg|.gif';
+        foreach( array_diff($listpage,array('.','..')) as $f) :
+                //echo preg_match('/'.$x.'$/i',$f)."<br />";
+                if(is_file('public/img/page/'.$f)
+                        && (($x)?preg_match('/'.$x.'$/i',$f):1) ) :?>
+                    <div style="float: left; text-align: center; margin-bottom: 4px;">
+                        <?php //echo $image->idimage;?>
+                        <img style="float: left; border: 1px solid; margin-left: 2px; width: 70px; height: 70px;" src="/public/img/page/<?php echo $f;?>" /><br>
+                        <input type="button" value="Видалити" class="admin_buttonfield" onclick="delImage('public/img/page/<?php echo $f;?>','p')" />
+                    </div>                    
+                <?php endif; endforeach;
+        exit;
+    }
+    
+    // Видалити картинку
+    public function delgalimgAction() {
+        $idimage = $this->_request->getParam('item', null);
+        $type = $this->_request->getParam('type', null);
+
+        
+        // Видаляємо картинки    
+        if ($type == 'p') {
+            @unlink($idimage);
+        } else {
+            $this->deleteImage($idimage);
+        }
+        exit;
+    }
+    
 
 }

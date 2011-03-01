@@ -1,0 +1,32 @@
+<center> <h2>Тут медія смітник</h2> </center>
+<table>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <div id="imggallery">Завантажую картинки...</div>
+        </td>
+    </tr>
+</table>
+<script  type="text/javascript">
+ jQuery(document).ready(function(){
+     
+     getImages();
+ });
+  function getImages() {
+     jQuery.get("/ajax/getallgalimages",
+            function(data){
+             jQuery("#imggallery").html(data);
+            });
+ }
+
+ function delImage(id, type){
+   jQuery.post("/ajax/delgalimg",
+    { item :id,
+      type : type
+    });
+   getImages();
+ }
+</script>
