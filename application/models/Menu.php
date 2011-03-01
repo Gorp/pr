@@ -89,6 +89,11 @@ class Model_Menu extends Model_Base_Table {
 //                exit;
                 if (is_object($cur)) {
                     $table->update($data, 'idmenu =  ' . $id. " and lang = '".$cur->lang."'");
+                    // якщо вибрано (роз)блокування то (роз)блокувати для всіх пенктів меню
+                    if (isset($data['blockedit'])) {
+                        $newdata = array('blockedit' => $data['blockedit']);
+                        $table->update($newdata, 'idmenu =  ' . $id);
+                    }
                 } else {
 //                    $max = $table->select()
 //                                 ->from(array($table->_name),array('idlang','text'));

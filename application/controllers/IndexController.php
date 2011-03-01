@@ -27,7 +27,7 @@ class IndexController extends Local_Controller
                 try {
                     $mail = new Zend_Mail($charset = 'utf-8');
                     $mail->addTo($this->view->config->resources->mail->admin);
-                    $mail->setFrom(null, $input->sender);
+                    $mail->setFrom($this->view->config->resources->mail->sender, $input->sender);
                     $text = $this->view->config->resources->mail->template;
                     $text = str_replace("{sender}", $input->sender, $text);
                     $text = str_replace("{phone}", $input->phone, $text);

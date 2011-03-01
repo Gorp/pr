@@ -66,6 +66,7 @@ class AdminController extends Local_Controller {
     }
 
     public function menuAction() {
+
         $this->view->menu_menu = 'selected';
         $this->view->item = $this->_getParam('item', 'new');
         // 0 якщо рухаємо  меню
@@ -110,7 +111,7 @@ class AdminController extends Local_Controller {
     public function savemenuAction() {
         if ($this->_request->isPost()) {
             $t = Model_Menu::getById($this->_getParam('idmenu'));
-            if ($t->blockedit == $this->_getParam('blockedit')) {
+            if ( ($t->blockedit == $this->_getParam('blockedit')) && ($t->blockedit == 'block') ) {
                 $this->_redirect('/admin/menu/item/'.$this->_getParam('idmenu'));
             }
             //var_dump($_POST);exit;
@@ -120,9 +121,11 @@ class AdminController extends Local_Controller {
                 if ($res[0] > 0) {
                     // Якщо це створення нового обєкта та збережено з мовою по запиту,
                     // зберігаємо варіант для інших мов
-                    if ($_POST['idmenu'] == 'new') {
+                    //if ($_POST['idmenu'] == 'new') {
                         $ll = $input->lang;
                         foreach ($this->view->langs as $key) {
+                            $t = Model_Menu::getById($this->_getParam('idmenu'),$key);
+                            if (!is_null($t->idmenu)) { continue;}
                             if ($key !== $ll) {
                                 $data = $_POST;
                                 $data['idmenu'] = $res[1];
@@ -131,7 +134,7 @@ class AdminController extends Local_Controller {
                                 Model_Menu::updatemenu($input);
                             }
                         }
-                    }
+                    //}
                     // Якщо ні просто переходимо до редактування обєкту
                     $this->_redirect('/admin/menu/item/' . $res[1] . '/lang/' . $_POST['lang']);
                 } else {
@@ -412,7 +415,7 @@ class AdminController extends Local_Controller {
     public function getpageimgAction() {
         $this->_helper->layout->disableLayout();
         if ($this->_request->isPost()) {
-            $url = 'public/img/' . uniqid() . "." . pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
+            $url = 'public/img/page/' . uniqid() . "." . pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
             $funcNum = $_GET['CKEditorFuncNum'];
             if (($_FILES['upload'] == "none") || (empty($_FILES['upload']['name']))) {
                 $message = "Файл не завантажений.";

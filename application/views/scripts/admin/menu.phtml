@@ -45,9 +45,11 @@
         switch ($this->item) {
             case 'new' :
                   echo   '<h2 class="admin_title">Новий пункт меню</h2>';
+                  $this->buttonname  = 'Додати';
                   break;
 
            default : echo '<h2 class="admin_title">Редагувати пункт меню</h2>';
+                  $this->buttonname  = 'Редагувати';
                   break;
 
         }
