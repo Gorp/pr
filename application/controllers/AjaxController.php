@@ -278,8 +278,9 @@ class AjaxController extends Zend_Controller_Action {
                         <?php //echo $image->idimage;?>
                         <a class="gallery" href="/public/img/page/<?php echo $f;?>">
                         <img style="float: left; border: 1px solid; margin-left: 2px; width: 70px; height: 70px;" src="/public/img/page/<?php echo $f;?>" /><br>
-                        <input type="button" value="Видалити" class="admin_buttonfield" onclick="delImage('public/img/page/<?php echo $f;?>','p')" />
                         </a>
+                        <input type="button" value="Видалити" class="admin_buttonfield" onclick="delImage('public/img/page/<?php echo $f;?>','p')" />
+                        
                     </div>                    
                 <?php endif; endforeach;
         exit;
