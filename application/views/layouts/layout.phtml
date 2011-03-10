@@ -6,6 +6,7 @@
         <link rel="icon" href="/public/img/favicon.ico" type="image/x-icon" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <?php echo '<title>' . $this->pageTitle . '</title>'; ?>
+        <?php echo $this->headMeta() ?>
         <?php echo $this->headScript() ?>
         <?php echo $this->headLink() ?>
         <?php echo $this->headLink()->appendStylesheet($this->baseURL . '/public/css/style.css'); ?>

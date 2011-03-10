@@ -13,6 +13,7 @@ class IndexController extends Local_Controller
 // action body
         $this->view->last = Model_Blogentry::getLast3Blog($this->view->lang);
         $this->view->showvideo = true;
+        $this->view->pageTitle = $this->view->tr(NULL,$this->view->lang,'Музика для свята'); 
     }
 
 
@@ -77,11 +78,16 @@ class IndexController extends Local_Controller
         $this->view->content = Model_Page::getById($idpage,$this->view->lang);
         $this->view->gallery = Model_Image::getAll($this->view->content->idgallery);
         $this->view->video = Model_Image::getAll($this->view->content->idvideo);
+        if (is_object($this->view->content) ) {
+        $this->view->pageTitle = $this->view->content->title;
+        $this->view->headMeta()->appendName('keywords', $this->view->content->keyword);
+        $this->view->headMeta()->appendName('description', $this->view->content->description);}
         //@TODO додати на сторінку title keywords description
     }
 
     public function blogAction() {
         $ispost = $this->_getParam('idpost', false);
+        $this->view->pageTitle = $this->view->tr(NULL,$this->view->lang,'Наш Блог'); 
         if ($ispost) {
             $this->view->token = sha1(date('YY-mm-dd', time())."PassWS!!!");
             if ($this->_request->isPost() ) {
@@ -100,6 +106,10 @@ class IndexController extends Local_Controller
             }
             $this->view->comments = Model_Comment::getAll($ispost);
             $this->view->post = Model_Blogentry::getById($ispost, $this->view->lang);
+            if (is_object($this->view->post) ) {
+            $this->view->pageTitle = $this->view->post->title;
+            $this->view->headMeta()->appendName('keywords', $this->view->post->keyword);
+            $this->view->headMeta()->appendName('description', $this->view->post->description);}
             return $this->renderScript('/index/blogentry.phtml');
         } 
         $this->view->blogs = $this->setPaginator(Model_Blogentry::getBlogs($this->view->lang));

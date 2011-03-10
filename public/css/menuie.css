@@ -29,6 +29,30 @@
 }
 /* UA menu items width end */
 
+/* UA menu items width begin */
+#sub_menu_6_ua {
+    margin-left:-160px;
+}
+#sub_menu_7_ua {
+    margin-left:-233px;
+}
+#sub_menu_15_ua {
+    margin-left: -108px;
+}
+/* UA menu items width end */
+
+/* UA menu items width begin */
+#sub_menu_6_ua {
+    margin-left:-160px;
+}
+#sub_menu_7_ua {
+    margin-left:-233px;
+}
+#sub_menu_15_ua {
+    margin-left: -108px;
+}
+/* UA menu items width end */
+
 /* ru menu items width begin */
 #main_menu_6_ru {
     width:150px;
@@ -47,29 +71,82 @@
 }
 /* ru menu items width end */
 
+/* en menu items width begin */
+#main_menu_6_en {
+    width:143px;
+}
+#main_menu_7_en {
+    width:233px;
+}
+#main_menu_15_en {
+    width:113px;
+}
+#main_menu_16_en {
+    width:246px;
+}
+#main_menu_17_en {
+    width:114px;
+}
+/* en menu items width end */
 
 
 
-/* UA menu items width begin */
-#sub_menu_6_ua {
+/* en menu items width begin */
+#main_menu_6_hu {
+    width:182px;
+}
+#main_menu_7_hu {
+    width:135px;
+}
+#main_menu_15_hu {
+    width:101px;
+}
+#main_menu_16_hu {
+    width:246px;
+}
+#main_menu_17_hu {
+    width:145px;
+}
+/* en menu items width end */
+
+/* en menu items width begin */
+#sub_menu_6_hu {
     margin-left:-160px;
 }
-#sub_menu_7_ua {
+#sub_menu_7_hu {
     margin-left:-233px;
 }
-#sub_menu_15_ua {
-    margin-left: -108px;
+#sub_menu_15_hu {
+    margin-left: -118px;
 }
-/* UA menu items width end */
+/* en menu items width end */
 
-/* ru menu items width begin */
-#sub_menu_6_ru {
+/* en menu items width begin */
+#main_menu_6_sk {
+    width:145px;
+}
+#main_menu_7_sk {
+    width:239px;
+}
+#main_menu_15_sk {
+    width:91px;
+}
+#main_menu_16_sk {
+    width:196px;
+}
+#main_menu_17_sk {
+    width:118px;
+}
+/* en menu items width end */
+
+/* en menu items width begin */
+#sub_menu_6_sk {
     margin-left:-160px;
 }
-#sub_menu_7_ru {
+#sub_menu_7_sk {
     margin-left:-233px;
 }
-#sub_menu_15_ru {
-    margin-left: -88px;
+#sub_menu_15_sk {
+    margin-left: -118px;
 }
-/* ru menu items width end */
+/* en menu items width end */
