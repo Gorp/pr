@@ -576,9 +576,27 @@ class AdminController extends Local_Controller {
      // для медія сміття
      public function medialibAction() {
         $this->view->menu_medialib = 'selected';
+     }
+
+     // для коментів
+     public function commentAction() {
+        // delete  
+        $delete = $this->_getParam('delete', false);
+        if (($delete) && Zend_Validate::is($delete, 'Digits')) {
+            Model_Comment::deletepage($delete);
+            $this->_redirect('/admin/comment');
+        } 
         
-        //для видалення картинок
-        
+        if ($this->_request->isPost()) {
+            $data = array(
+                "idcomment" => $_POST["idcomment"],
+                "message" => $_POST["message"]
+            );
+            Model_Comment::updatepage($data);
+            $this->_redirect('/admin/comment');
+        }
+        $this->view->menu_comment = 'selected';
+        $this->view->comments = Model_Comment::getAll();
      }
 }
 

@@ -83,6 +83,22 @@ class IndexController extends Local_Controller
     public function blogAction() {
         $ispost = $this->_getParam('idpost', false);
         if ($ispost) {
+            $this->view->token = sha1(date('YY-mm-dd', time())."PassWS!!!");
+            if ($this->_request->isPost() ) {
+                $filter = new Zend_Filter();
+                $filter = $filter->addFilter(new Zend_Filter_StripTags)
+                               ->addFilter(new Zend_Filter_HtmlEntities); 
+                $name = $filter->filter($this->_getParam('message',''));
+                $email = $filter->filter($this->_getParam('email',''));
+                $message = $filter->filter($this->_getParam('message',''));
+                $token = $this->_getParam('token','');
+                $data = array('name' => $name, 'email' => $email, 'message' => $message, 'idpage' => $ispost);
+                if ( $this->view->token == $token) {
+                    Model_Comment::updatepage($data);
+                    $this->_redirect($this->getRequest()->getRequestUri());
+                }
+            }
+            $this->view->comments = Model_Comment::getAll($ispost);
             $this->view->post = Model_Blogentry::getById($ispost, $this->view->lang);
             return $this->renderScript('/index/blogentry.phtml');
         } 

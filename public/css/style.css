@@ -348,7 +348,36 @@ input {
 .slideshow-images img{float:left;left:0;top:0;}*/
 
 
-
+/* Blog comment*/
 .show_blog_entry {
     padding-left: 2px;
 }
+
+
+.comment {
+/*    margin-left: 100px;*/
+/*    border: 1px solid blue;*/
+}
+
+.comment input, .comment textarea{
+    width: 350px;
+}
+
+.comment td{
+    width: 150px;
+}
+
+div.textcomment{
+    margin-left: 100px;
+    color: red;
+    float: left;
+}
+
+
+div.textinput{
+   
+    color: red;
+    position: relative;
+    float: left;
+}
+

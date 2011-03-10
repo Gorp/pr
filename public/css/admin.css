@@ -341,3 +341,14 @@ h2.admin_title {
     margin-left: 500px;
     position: absolute;
 }
+
+thead {
+    background-color: white;
+    color: blue;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#editor {
+/*    display: none;*/
+}

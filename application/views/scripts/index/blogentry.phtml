@@ -1,41 +1,53 @@
 <h1><?php echo $this->post->title; ?></h1>
 <hr />
 
-<img src="/public/img/blog/thumb/<?php echo $this->post->identry;?>.jpg" align="left" style="padding-right: 7px; "/>
+<img src="/public/img/blog/thumb/<?php echo $this->post->identry; ?>.jpg" align="left" style="padding-right: 7px; "/>
 <div class="show_blog_entry">
 
-<?php echo $this->post->richtext; //var_dump($_SERVER); ?>
+    <?php echo $this->post->richtext; ?>
 
 </div>
 <div style="clear: both;"></div>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'przone'; // required: replace example with your forum shortname
 
-    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-    var disqus_identifier = 'post_<?php echo $this->post->identry;?>';
-    var disqus_url = '<?php echo $_SERVER["SCRIPT_URI"];?>';
+<?php foreach ($this->comments as $comment) : ?>
+    <div class="blog" >
+        <div class="blog_title">
+        <h2><?php echo $this->escape($comment->name); ?></h2>
+        <?php echo $this->localDate($comment->postdate, $this->lang); ?></div>
+        <div class="blog_stext2">
+            <?php echo $this->escape($comment->message); ?>
+        </div>
+    </div>
+<?php endforeach; ?>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+<div style="clear: both;"></div>
+<div class="comment">
+    <form action="" method="post">    
+        <table border="0">
+            <tr>
+                <td >Від кого:</td>
+                <td ><input name="sender" /></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input name="email" /></td>
+            </tr>
+            <tr>
+                <td>Повідомлення:</td>
+                <td><textarea name="message" ></textarea></td>
+            </tr>
+            <tr>
+                <td><input type="hidden" name="token" value="<?php echo $this->token; ?>" /></td>
+                <td><input type="submit" class="slbut" value="Відіслати повідомлення" /></td>
+            </tr>
+        </table>    
+    </form>    
+    <div class="textcomment"></div>
+    <div class="textinput"></div>
 
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'przone'; // required: replace example with your forum shortname
+<!--<div class="textcomment">Email:</div><div> <input name="sender" />
+</div>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+<div class="textcomment">Сообщение:</div> <div><textarea name="message" ></textarea>
+</div>-->
+</div>    

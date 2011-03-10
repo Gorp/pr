@@ -1,0 +1,57 @@
+<link href="/public/css/colorbox/colorbox.css" rel="stylesheet" />
+<script src="/public/js/colorbox/jquery.colorbox-min.js"></script>
+<div style="overflow-y: scroll;overflow-x: hidden; height: 700px;">
+<center> <h2>Коментарі</h2> 
+ 
+</center>    
+
+
+
+<table width="100%">
+    <thead>
+        <td width="5%">Дата</td>
+        <td width="10%">Імя</td>
+        <td width="10%">Email</td>
+        <td width="60%">Повідомлення</td>
+        <td>Дії</td>
+    </thead>
+    <?php
+    foreach ($this->comments as $comment) :?>
+    <tr>
+        <td><?= $comment->postdate;?></td>
+        <td><?= $comment->name;?></td>
+        <td><?= $comment->email;?></td>
+        <td><?= $comment->message;?></td>
+        <td><a href="javascript:editor('<?= $comment->idcomment;?>', '<?= $comment->message;?>' )">Редактировать</a> <a href="javascript:delcomment('<?= $comment->idcomment;?>')">Удалить</a></td>
+    </tr>
+    <?php
+    endforeach;?>
+</table>
+</div>
+<script  type="text/javascript">
+ jQuery(document).ready(function(){
+     
+    //$.colorbox({html:'<p>Hello</p>'});
+ });
+  
+ function editor(id, msg){
+     //$("#editor").show();
+     html = '<div id="editor">' +    
+    '<form action="" method="post">' +
+    '<h2>Редактор коментаріїв</h2>' +
+    '<textarea cols="30" rows="10" id="message" name="message"></textarea>' +
+    '<input type="hidden" id="idcomment" name="idcomment" value="" /><br />' +
+    '<input type="submit" value="Змінити" id="admin_button"/>' +
+    '</form></div>';
+     $.colorbox({
+         title: 'Редактор коментаріїв',
+         html: html});
+     $("#idcomment").val(id);
+     $("#message").val(msg);
+   
+ }
+
+ function delcomment(id){
+     document.location.href = "/admin/comment/delete/" + id;
+ }
+</script>
