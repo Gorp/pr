@@ -94,7 +94,7 @@ class IndexController extends Local_Controller
                 $filter = new Zend_Filter();
                 $filter = $filter->addFilter(new Zend_Filter_StripTags)
                                ->addFilter(new Zend_Filter_HtmlEntities); 
-                $name = $filter->filter($this->_getParam('message',''));
+                $name = $filter->filter($this->_getParam('name',''));
                 $email = $filter->filter($this->_getParam('email',''));
                 $message = $filter->filter($this->_getParam('message',''));
                 $token = $this->_getParam('token','');

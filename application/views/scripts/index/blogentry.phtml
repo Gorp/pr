@@ -8,32 +8,33 @@
 
 </div>
 <div style="clear: both;"></div>
-
+<hr />
 <?php foreach ($this->comments as $comment) : ?>
     <div class="blog" >
         <div class="blog_title">
         <h2><?php echo $this->escape($comment->name); ?></h2>
         <?php echo $this->localDate($comment->postdate, $this->lang); ?></div>
-        <div class="blog_stext2">
+        <div class="blog_stext2" style=" font-size: 16px;">
             <?php echo $this->escape($comment->message); ?>
         </div>
     </div>
 <?php endforeach; ?>
-
+<hr />
 <div style="clear: both;"></div>
-<div class="comment">
+<?php echo $this->tr(NULL,$this->lang,'<u>Залишити свій відгук</u>'); ?> 
+<div class="comment" style="margin-top: 12px;">
     <form action="" method="post">    
         <table border="0">
             <tr>
-                <td >Від кого:</td>
-                <td ><input name="sender" /></td>
+                <td ><?php echo $this->tr(NULL,$this->lang,'Від кого:');?></td>
+                <td ><input name="name" /></td>
             </tr>
             <tr>
-                <td>Email:</td>
+                <td>EMail :<p style="color: rgb(127, 127, 127); font-size: 0.55em; margin: 0pt; padding: 0pt;"><i><?php echo $this->tr(NULL,$this->lang,'не буде показано на сайті');?></i></p></td>
                 <td><input name="email" /></td>
             </tr>
             <tr>
-                <td>Повідомлення:</td>
+                <td><?php echo $this->tr(NULL,$this->lang,'Повідомлення:');?></td>
                 <td><textarea name="message" ></textarea></td>
             </tr>
             <tr>
