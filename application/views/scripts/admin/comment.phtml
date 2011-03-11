@@ -10,15 +10,17 @@
 <table width="100%">
     <thead>
         <td width="5%">Дата</td>
+        <td width="10%">Название</td>
         <td width="10%">Імя</td>
         <td width="10%">Email</td>
-        <td width="60%">Повідомлення</td>
+        <td width="50%">Повідомлення</td>
         <td>Дії</td>
     </thead>
     <?php
     foreach ($this->comments as $comment) :?>
     <tr>
         <td><?= $comment->postdate;?></td>
+        <td><?= Model_Blogentry::getById($comment->idpage, $this->lang)->title;?></td>
         <td><?= $comment->name;?></td>
         <td><?= $comment->email;?></td>
         <td><?= $comment->message;?></td>

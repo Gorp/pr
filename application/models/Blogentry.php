@@ -28,7 +28,7 @@ class Model_Blogentry extends Model_Base_Table {
         $table = self::getInstance();
         $select = $table->select()
                     ->where('lang = ?', $lang)
-                    ->order('identry desc')
+                    ->order('date desc')
                     ->limit(3);
         return $table->fetchAll($select);
     }
@@ -62,6 +62,9 @@ class Model_Blogentry extends Model_Base_Table {
                 $cur = $table->fetchRow($select);
                 if (is_object($cur)) {
                     $table->update($data, 'identry =  ' . $id. " and lang = '".$cur->lang."'");
+                    if (!empty($data['date'])) {
+                        $table->update(array('date' => $data['date']), 'identry =  ' . $id);
+                    }
                 } else {
                     $data['date'] = new Zend_Db_Expr('CURRENT_TIMESTAMP') ;
                     $table->insert($data);
@@ -87,7 +90,7 @@ class Model_Blogentry extends Model_Base_Table {
         $select = self::getInstance()
                         ->select()
                         ->where('lang = ?', $lang)
-                        ->order('identry desc');
+                        ->order('date desc');
                       //  echo $select;exit;
         return self::getInstance()->returnData($select);
     }

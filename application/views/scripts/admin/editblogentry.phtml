@@ -38,6 +38,12 @@ if ( $this->item != 'new') : ?>
     </div>
 
     <div class="field">
+    <div class="field_name">Дата публікації: </div>
+    <div><input id="description" class="field_input" type="text" name="date" 
+                value="<?php echo $this->escape($this->data->date); ?>" /></div>
+    </div>
+
+    <div class="field">
     <div class="field_name">Мови: </div>
     <div><select id="lang" class="field_input" name="lang" onchange="window.location='/admin/blogentry/item/' + <?php echo $this->item;?> +  '/lang/' + $('#lang').val() ">
             <?php
