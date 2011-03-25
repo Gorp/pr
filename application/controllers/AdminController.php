@@ -479,7 +479,7 @@ class AdminController extends Local_Controller {
                         }
                     }
                     // Якщо ні просто переходимо до редактування обєкту
-                    $this->_redirect('/admin/blogentry/item/' . $res[1]);
+                    $this->_redirect('/admin/blogentry/item/' . $res[1].'/lang/' . $_POST['lang']);
                 } else {
                     var_dump($res[1]);
                     exit;
