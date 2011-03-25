@@ -514,7 +514,9 @@ class AdminController extends Local_Controller {
                 'allowEmpty' => true
             ),
             'identry' => array(),
-            'date' => array()
+            'date' => array(
+                'allowEmpty' => true
+	     )
         );
         return new Zend_Filter_Input($filters, $validators, $input, $options);
     }
