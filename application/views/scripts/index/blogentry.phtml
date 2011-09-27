@@ -9,7 +9,9 @@
 </div>
 <div style="clear: both;"></div>
 <hr />
-<?php foreach ($this->comments as $comment) : ?>
+<?php 
+if ($this->comments) :
+foreach ($this->comments as $comment) : ?>
     <div class="blog" >
         <div class="blog_title">
         <h2><?php echo $this->escape($comment->name); ?></h2>
@@ -18,13 +20,16 @@
             <?php echo $this->escape($comment->message); ?>
         </div>
     </div>
-<?php endforeach; ?>
-<hr />
+<?php endforeach; 
+echo "<hr />";
+endif;
+?>
+
 <div style="clear: both;"></div>
 <?php echo $this->tr(NULL,$this->lang,'<u>Залишити свій відгук</u>'); ?> 
-<div class="comment" style="margin-top: 12px;">
+<div  style="margin-top: 12px;">
     <form action="" method="post">    
-        <table border="0">
+        <table border="0" class="comment">
             <tr>
                 <td ><?php echo $this->tr(NULL,$this->lang,'Від кого:');?></td>
                 <td ><input name="name" /></td>
@@ -37,8 +42,18 @@
                 <td><?php echo $this->tr(NULL,$this->lang,'Повідомлення:');?></td>
                 <td><textarea name="message" ></textarea></td>
             </tr>
+        </table>
+        <div style="clear: both;"></div>
+        <table>
             <tr>
-                <td><input type="hidden" name="token" value="<?php echo $this->token; ?>" /></td>
+                <td colspan="2">
+                    <?php echo $this->tr(NULL,$this->lang,'Ми маємо перевірити чи Ви реальна людина. <br />Будь-ласка введіть текст, що Ви бачете далі на картинці'); ?> 
+                    <?= $this->token->getHTML();?>
+                </td>
+            </tr>
+            <tr>
+<!--                <td><input type="hidden" name="token" value="<?php echo $this->token; ?>" /></td>-->
+                
                 <td><input type="submit" class="slbut" value="<?php echo $this->tr(NULL,$this->lang,'Відіслати повідомлення');?>" /></td>
             </tr>
         </table>    

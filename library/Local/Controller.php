@@ -6,7 +6,7 @@ class Local_Controller extends Zend_Controller_Action {
         $frontController = Zend_Controller_Front::getInstance();
         $bootstrap = $frontController->getParam('bootstrap');
 
-        $this->view->config = new Zend_Config($bootstrap->getOptions());
+        $this->config = $this->view->config = new Zend_Config($bootstrap->getOptions());
         
         // вибранна мова
         $this->view->lang = $this->_getParam('lang', 'ua');
