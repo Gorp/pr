@@ -63,7 +63,7 @@
     <div class="field">
     <div class="field_name">Контент: </div><br /><br />
     <div><textarea class="field_input" id="richtext" cols="30" rows="5" name="richtext">
-            <?php echo $this->data->richtext; ?>
+            <?php echo $this->escape($this->data->richtext); ?>
         </textarea></div>
     </div>
     <input id="admin_button" type="submit" name="submit" value="Зберегти" />
