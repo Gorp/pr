@@ -59,14 +59,14 @@ Class Asido_Driver {
 	/**
 	* Resize an image
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param integer $width
 	* @param integer $height
 	* @param mixed $mode
 	* @return boolean
 	* @access public
 	*/
-	function resize(&$tmp, $width, $height, $mode) {
+	function resize($tmp, $width, $height, $mode) {
 		
 		// no params ?
 		//
@@ -160,12 +160,12 @@ Class Asido_Driver {
 	/**
 	* Convert an image from one file-type to another
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param string $mime_type
 	* @return boolean
 	* @access public
 	*/
-	function convert(&$tmp, $mime_type) {
+	function convert($tmp, $mime_type) {
 		
 		$mime_type = strToLower($mime_type);
 		
@@ -189,7 +189,7 @@ Class Asido_Driver {
 	/**
 	* Watermark an image 
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param string $watermark_image
 	* @param mixed $position
 	* @param mixed $scalable
@@ -197,7 +197,7 @@ Class Asido_Driver {
 	* @return boolean
 	* @access public
 	*/
-	function watermark(&$tmp, $watermark_image, $position, $scalable, $scalable_factor) {
+	function watermark($tmp, $watermark_image, $position, $scalable, $scalable_factor) {
 		
 		// open
 		//
@@ -236,7 +236,7 @@ Class Asido_Driver {
 			//
 			$t2 = $this->__tmpimage($wt->source);
 			
-			if ($this->resize(&$t2,
+			if ($this->resize($t2,
 					intval($target_width * $scalable_factor),
 					intval($target_height * $scalable_factor),
 					ASIDO_RESIZE_PROPORTIONAL)
@@ -376,24 +376,24 @@ Class Asido_Driver {
 	/**
 	* Make the image greyscale
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access public
 	*/
-	function grayscale(&$tmp) {
+	function grayscale($tmp) {
 		return $this->__grayscale($tmp);
 		}
 
 	/**
 	* Rotate the image clockwise
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param float $angle
 	* @param Asido_Color $color
 	* @return boolean
 	* @access public
 	*/
-	function rotate(&$tmp, $angle, $color=null) {
+	function rotate($tmp, $angle, $color=null) {
 		
 		// color ?
 		//
@@ -408,14 +408,14 @@ Class Asido_Driver {
 	/**
 	* Resize an image by "framing" it with the provided width and height
 	*
-	* @param Asido_Tmp &$tmp
+	* @param Asido_Tmp $tmp
 	* @param integer $width
 	* @param integer $height
 	* @param Asido_Color $color
 	* @return boolean
 	* @access public
 	*/
-	function frame(&$tmp, $width, $height, $color=null) {
+	function frame($tmp, $width, $height, $color=null) {
 		
 		// color ?
 		//
@@ -480,14 +480,14 @@ Class Asido_Driver {
 	/**
 	* Resize an image by "framing" it with the provided width and height
 	*
-	* @param Asido_Tmp &$tmp
+	* @param Asido_Tmp $tmp
 	* @param string $applied_image	filepath to the image that is going to be copied
 	* @param integer $x
 	* @param integer $y
 	* @return boolean
 	* @access public
 	*/
-	function copy(&$tmp, $applied_image, $x, $y) {
+	function copy($tmp, $applied_image, $x, $y) {
 
 		// open
 		//
@@ -525,7 +525,7 @@ Class Asido_Driver {
 	/**
 	* Crop the image 
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param integer $x
 	* @param integer $y
 	* @param integer $width
@@ -533,30 +533,30 @@ Class Asido_Driver {
 	* @return boolean
 	* @access public
 	*/
-	function crop(&$tmp, $x, $y, $width, $height) {
+	function crop($tmp, $x, $y, $width, $height) {
 		return $this->__crop($tmp, $x, $y, $width, $height);
 		}
 
 	/**
 	* Vertically mirror (flip) the image
 	* 
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access public
 	*/
-	function flip(&$tmp) {
-		return $this->__flip(&$tmp);
+	function flip($tmp) {
+		return $this->__flip($tmp);
 		}
 
 	/**
 	* Horizontally mirror (flop) the image
 	* 
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access public
 	*/
-	function flop(&$tmp) {
-		return $this->__flop(&$tmp);
+	function flop($tmp) {
+		return $this->__flop($tmp);
 		}
 
 	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
@@ -564,11 +564,11 @@ Class Asido_Driver {
 	/**
 	* Prepare an image for processing it
 	*
-	* @param Asido_Image &$image
+	* @param Asido_Image $image
 	* @return boolean
 	* @access public
 	*/
-	function prepare(&$image) {
+	function prepare($image) {
 
 		// create new temporary object
 		//
@@ -592,11 +592,11 @@ Class Asido_Driver {
 	/**
 	* Save an image after being processed
 	*
-	* @param Asido_Image &$image
+	* @param Asido_Image $image
 	* @return boolean
 	* @access public
 	*/
-	function save(&$image) {
+	function save($image) {
 		return $this->__write($image);
 		}
 
@@ -605,15 +605,15 @@ Class Asido_Driver {
 	/**
 	* Copy one image to another
 	*
-	* @param Asido_TMP &$tmp_target
-	* @param Asido_TMP &$tmp_source
+	* @param Asido_TMP $tmp_target
+	* @param Asido_TMP $tmp_source
 	* @param integer $destination_x
 	* @param integer $destination_y
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/
-	function __copy(&$tmp_target, &$tmp_source, $destination_x, $destination_y) {
+	function __copy($tmp_target, $tmp_source, $destination_x, $destination_y) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -623,14 +623,14 @@ Class Asido_Driver {
 	/**
 	* Do the actual resize of an image
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param integer $width
 	* @param integer $height
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/
-	function __resize(&$tmp, $width, $height) {
+	function __resize($tmp, $width, $height) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -640,12 +640,12 @@ Class Asido_Driver {
 	/**
 	* Make the image greyscale
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/
-	function __grayscale(&$tmp) {
+	function __grayscale($tmp) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -655,14 +655,14 @@ Class Asido_Driver {
 	/**
 	* Rotate the image clockwise
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param float $angle
 	* @param Asido_Color $color
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/
-	function __rotate(&$tmp, $angle, $color) {
+	function __rotate($tmp, $angle, $color) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -689,7 +689,7 @@ Class Asido_Driver {
 	/**
 	* Crop the image 
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param integer $x
 	* @param integer $y
 	* @param integer $width
@@ -698,7 +698,7 @@ Class Asido_Driver {
 	* @access protected
 	* @abstract
 	*/
-	function __crop(&$tmp, $x, $y, $width, $height) {
+	function __crop($tmp, $x, $y, $width, $height) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -708,12 +708,12 @@ Class Asido_Driver {
 	/**
 	* Vertically mirror (flip) the image
 	* 
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/
-	function __flip(&$tmp) {
+	function __flip($tmp) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -723,12 +723,12 @@ Class Asido_Driver {
 	/**
 	* Horizontally mirror (flop) the image
 	* 
-	* @param Asido_Image &$image
+	* @param Asido_Image $image
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/
-	function __flop(&$tmp) {
+	function __flop($tmp) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -792,12 +792,12 @@ Class Asido_Driver {
 	/**
 	* Open the source and target image for processing it
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/
-	function __open(&$tmp) {
+	function __open($tmp) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -807,12 +807,12 @@ Class Asido_Driver {
 	/**
 	* Write the image after being processed
 	*
-	* @param Asido_Image &$image
+	* @param Asido_Image $image
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/
-	function __write(&$image) {
+	function __write($image) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -833,7 +833,7 @@ Class Asido_Driver {
 	/**
 	* Generate a temporary object for the provided argument
 	*
-	* @param mixed &$handler
+	* @param mixed $handler
 	* @param string $filename the filename will be automatically generated 
 	*	on the fly, but if you want you can use the filename provided by 
 	*	this argument
@@ -841,7 +841,7 @@ Class Asido_Driver {
 	* @access protected
 	* @abstract
 	*/
-	function __tmpimage(&$handler, $filename=null) {
+	function __tmpimage($handler, $filename=null) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -853,12 +853,12 @@ Class Asido_Driver {
 	/**
 	* Destroy the source for the provided temporary object
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/	
-	function __destroy_source(&$tmp) {
+	function __destroy_source($tmp) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__
@@ -868,12 +868,12 @@ Class Asido_Driver {
 	/**
 	* Destroy the target for the provided temporary object
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/	
-	function __destroy_target(&$tmp) {
+	function __destroy_target($tmp) {
 		Asido_Core::trigger_abstract_error(
 			__CLASS__,
 			__FUNCTION__

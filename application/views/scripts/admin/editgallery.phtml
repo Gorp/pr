@@ -25,7 +25,7 @@ if ( $this->item != 'new' ) : ?>
 
     </form>
 </div>
-<div class="photolist"></div>
+<div class="photolist" style="overflow-y:400px;overflow-x:hidden;width: 95%;height: 330px; padding: 10px; margin-bottom: 50px;"></div>
 
 
 
@@ -89,7 +89,9 @@ if ( $this->item != 'new' ) : ?>
         $.get('/ajax/getimg/item/' + '<?php echo $this->item; ?>', function(data){
             // var imgs = eval('(' + data + ')');
             $('.photolist').html(data);
+            $('.photolist').click();
         });
+        
     });
 </script>
 

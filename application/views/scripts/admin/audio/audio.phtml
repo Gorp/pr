@@ -1,0 +1,35 @@
+<div class="admin_submenu" style="height: 430px; overflow-y: scroll; overflow-x: hidden;">
+        <div class="menulist" >
+            <a href="/admin/audio/item/new">Додати Трекліст</a>
+        </div>
+
+        <div> ----- </div>
+        <?php
+        if (is_object($this->audio)) :
+        foreach ($this->audio as $item)  : ?>
+            <div class="menulist" ><a href="/admin/audio/item/<?php echo $item->idgallery; ?>">
+                <?php echo $item->name; ?></a>&nbsp;&nbsp;
+                <a href="/admin/audio/item/<?php echo $item->idgallery; ?>/delete/1"
+                   onclick="if(confirm('Впевнені, що хочете видалити?')) {return true;} else {return false;}">X</a></div>
+        <?php
+        endforeach; endif; ?>
+</div>
+
+<div class="admin_content" >
+
+        <?php
+        switch ($this->item) {
+            case 'new' :
+                  echo   '<h2 class="admin_title">Створити трекліст</h2>';
+                  break;
+
+           default : echo '<h2 class="admin_title">Редагувати трекліст</h2>';
+                     break;
+
+        }
+        echo $this->render('admin/audio/editaudio.phtml');
+        ?>
+
+</div>
+
+

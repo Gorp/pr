@@ -69,6 +69,24 @@ class Model_Image extends Model_Base_Table {
 
         return array('-2', 'Помилка даних.');
     }
+    
+    
+    public static function addTrack($idgallery, $trackname) {
+        $table = self::getInstance();
+        //var_dump($data);        exit;
+        try {
+            $data = array(
+                'idgallery' => $idgallery,
+                'path' => $trackname
+            );
+            $id = $table->insert($data);
+            return array(true, $id);
+        } catch (Exception $e) {
+            return array('-1', $e->getMessage());
+        }
+
+        return array('-2', 'Помилка даних.');
+    }
 
     /**
      * Видалення пункта картинку за id

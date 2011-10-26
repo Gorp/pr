@@ -19,7 +19,7 @@ class Model_Blogentry extends Model_Base_Table {
         $table = self::getInstance();
         $select = $table->select()
                 ->where('lang = ?', $lang)
-                ->order('identry')
+                ->order('date desc')
                 ->group('identry');
         return $table->fetchAll($select);
     }

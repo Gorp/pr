@@ -167,13 +167,13 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Do the actual resize of an image
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param integer $width
 	* @param integer $height
 	* @return boolean
 	* @access protected
 	*/
-	function __resize(&$tmp, $width, $height) {
+	function __resize($tmp, $width, $height) {
 
 		// create new target
 		//
@@ -200,14 +200,14 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Copy one image to another
 	*
-	* @param Asido_TMP &$tmp_target
-	* @param Asido_TMP &$tmp_source
+	* @param Asido_TMP $tmp_target
+	* @param Asido_TMP $tmp_source
 	* @param integer $destination_x
 	* @param integer $destination_y
 	* @return boolean
 	* @access protected
 	*/
-	function __copy(&$tmp_target, &$tmp_source, $destination_x, $destination_y) {
+	function __copy($tmp_target, $tmp_source, $destination_x, $destination_y) {
 
 		imageAlphaBlending($tmp_target->target, true);
 		$r = imageCopy($tmp_target->target, $tmp_source->source,
@@ -223,11 +223,11 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Make the image greyscale: supported only for PHP => 5.* and PHP => 4.0.1 except for PHP 4.3.11
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	*/
-	function __grayscale(&$tmp) {
+	function __grayscale($tmp) {
 
 		// the shorter path: function already exists
 		//
@@ -250,13 +250,13 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Rotate the image clockwise
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param float $angle
-	* @param Asido_Color &$color
+	* @param Asido_Color $color
 	* @return boolean
 	* @access protected
 	*/
-	function __rotate(&$tmp, $angle, &$color) {
+	function __rotate($tmp, $angle, $color) {
 
 		// skip full loops
 		//
@@ -283,7 +283,7 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Crop the image 
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @param integer $x
 	* @param integer $y
 	* @param integer $width
@@ -291,7 +291,7 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	* @return boolean
 	* @access protected
 	*/
-	function __crop(&$tmp, $x, $y, $width, $height) {
+	function __crop($tmp, $x, $y, $width, $height) {
 		
 		$t = imageCreateTrueColor($width, $height);
 		imageAlphaBlending($t, true);
@@ -313,22 +313,22 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Vertically mirror (flip) the image: not supported
 	* 
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	*/
-	function __flip(&$tmp) {
+	function __flip($tmp) {
 		return false;
 		}
 
 	/**
 	* Horizontally mirror (flop) the image: not supported
 	* 
-	* @param Asido_Image &$image
+	* @param Asido_Image $image
 	* @return boolean
 	* @access protected
 	*/
-	function __flop(&$tmp) {
+	function __flop($tmp) {
 		return false;
 		}
 
@@ -339,11 +339,11 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	*
 	* @param integer $width
 	* @param integer $height
-	* @param Asido_Color &$color
+	* @param Asido_Color $color
 	* @return Asido_TMP
 	* @access protected
 	*/
-	function __canvas($width, $height, &$color) {
+	function __canvas($width, $height, $color) {
 		
 		$t = new Asido_TMP;
 		$t->target = imageCreateTrueColor($width, $height);
@@ -361,14 +361,14 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Generate a temporary object for the provided argument
 	*
-	* @param mixed &$handler
+	* @param mixed $handler
 	* @param string $filename the filename will be automatically generated 
 	*	on the fly, but if you want you can use the filename provided by 
 	*	this argument
 	* @return Asido_TMP
 	* @access protected
 	*/
-	function __tmpimage(&$handler, $filename=null) {
+	function __tmpimage($handler, $filename=null) {
 
 		if (!isset($filename)) {
 			$filename = $this->__tmpfile();
@@ -390,11 +390,11 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Open the source and target image for processing it
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	*/
-	function __open(&$tmp) {
+	function __open($tmp) {
 
 		$error_source = false;
 		$error_target = false;
@@ -535,11 +535,11 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Write the image after being processed
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	*/
-	function __write(&$tmp) {
+	function __write($tmp) {
 
 		// try to guess format from extension
 		//
@@ -587,24 +587,24 @@ Class Asido_Driver_GD Extends Asido_Driver {
 	/**
 	* Destroy the source for the provided temporary object
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/	
-	function __destroy_source(&$tmp) {
+	function __destroy_source($tmp) {
 		return imageDestroy($tmp->source);
 		}
 
 	/**
 	* Destroy the target for the provided temporary object
 	*
-	* @param Asido_TMP &$tmp
+	* @param Asido_TMP $tmp
 	* @return boolean
 	* @access protected
 	* @abstract
 	*/	
-	function __destroy_target(&$tmp) {
+	function __destroy_target($tmp) {
 		return imageDestroy($tmp->target);
 		}
 

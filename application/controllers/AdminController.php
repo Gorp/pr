@@ -212,6 +212,44 @@ class AdminController extends Local_Controller {
             $this->view->data = Model_Gallery::getById(NULL);
         }
     }
+    
+    /*
+     * Тут працюэмо з галерея
+     *
+     *
+     */
+
+    public function audioAction() {
+        $this->view->menu_audio = 'selected';
+        $this->view->item = $this->_getParam('item', 'new');
+        $this->view->audio = Model_Gallery::getAll('audio');
+
+        //перевіряємо на видалення
+        $delete = $this->_getParam('delete', false);
+        if (($delete) && Zend_Validate::is($this->view->item, 'Digits')) {
+            Model_Gallery::deletegallery($this->view->item);
+            $this->_redirect('/admin/audio');
+        }
+        // якщо треба отримати дані за id меню
+        if (Zend_Validate::is($this->view->item, 'Digits')) {
+            if ($this->_request->isPost()) {
+                $selectedtracks = $this->_getParam('mp3folder');
+                if (count($selectedtracks) > 0) {
+                    foreach ($selectedtracks as $track) {
+                        Model_Image::addTrack($this->view->item, $track);
+                    }  
+                    return $this->_redirect('/admin/audio/item/'.$this->view->item);
+                } 
+            }
+            
+            $this->view->data = Model_Gallery::getById($this->view->item);
+            $this->view->listmp3 = @scandir($this->view->config->mp3folder);
+            $this->view->tracklist = Model_Image::getAll($this->view->item);
+        } else {
+            $this->view->data = Model_Gallery::getById(NULL);
+        }
+        $this->renderScript('admin/audio/audio.phtml');
+    }
 
     /*
      * Menu updater
@@ -254,6 +292,29 @@ class AdminController extends Local_Controller {
         );
 
         return new Zend_Filter_Input($filters, $validators, $input, $options);
+    }
+    /*
+     * Menu updater
+     *
+     */
+
+    public function saveaudioAction() {
+        if ($this->_request->isPost()) {
+
+            $input = $this->videovalid($_POST);
+
+            if ($input->isValid()) {
+                $res = Model_Gallery::updategallery($input);
+                if ($res[0] > 0) {
+                    $this->_redirect('/admin/audio/item/' . $res[1]);
+                } else {
+                    var_dump($res[1]);
+                    exit;
+                }
+            }
+            var_dump($input->getMessages());
+            exit;
+        }
     }
     /*
      * Тут працюэмо з галерею для відео
@@ -442,7 +503,7 @@ class AdminController extends Local_Controller {
         $this->view->menu_blogentry = 'selected';
         $this->view->item = $this->_getParam('item', 'new');
         $this->view->lang = $this->_getParam('lang', 'ua');
-        $this->view->entrys = Model_Blogentry::getAll('ua');
+        $this->view->entrys = Model_Blogentry::getAll($this->view->lang);
         $this->view->actionname = '/admin/saveblogentry';
         $this->view->idname = 'identry';
         //перевіряємо на видалення

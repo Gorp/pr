@@ -352,3 +352,56 @@ thead {
 #editor {
 /*    display: none;*/
 }
+
+.bb2 {
+    border: black 1px solid;
+}
+
+#audiotrack {
+    width: 500px;
+    float: left;
+}
+
+#audiotrack .tracklist{
+    width: 500px;
+}
+
+#mp3folder {
+    float: right;
+    width: 300px;
+    margin-right: 165px;
+    height: 150px;
+}
+
+#mp3folder select {
+    margin-top: -160px;
+    width: 260px;
+}
+
+.tracklist li {
+    list-style: none;
+    
+}
+.tracklist span {
+/*    float: left;*/
+    font-size: 10px;
+    padding-left: 3px;
+    position: relative;
+    width: 56px;
+}
+
+#mp3folder .addmp3{
+    margin-top: 65px;
+}
+
+#mp3folder input{
+    height: 83px;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}

@@ -201,6 +201,23 @@ class AjaxController extends Zend_Controller_Action {
         exit;
     }
 
+    public function descAction() {
+        if ($this->_request->isPost()) {
+            $idimage = $this->_getParam('item','');
+            $desc = $this->_getParam('desc','');
+            $data = array(
+                'desc' => $desc
+            );
+            if ( is_object($image = Model_Image::getById($idimage)) ) {
+                $image->desc = $desc;
+                $image->save();
+            }
+        }
+        exit;
+    }    
+    
+    
+    
     public function pathAction() {
         if ($this->_request->isPost()) {
             $idimage = $this->_getParam('item','');

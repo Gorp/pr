@@ -1,0 +1,55 @@
+<form action="/admin/saveaudio" method="post" >
+    <div class="field">
+        <div class="field_name">Назва :</div>
+        <div >
+            <input class="field_input" type="text" name="name" value="<?php echo $this->data->name; ?>" />
+            <input  type="hidden" name="idgallery" value="<?php echo $this->item; ?>" />
+            <input  type="hidden" name="type" value="audio" />
+        </div>
+    </div>
+
+    <input type="submit"  value="<?php echo ($this->item == 'new')?'Додати':'Поновити';?>" id="admin_button" />
+</form>
+
+<?php
+if ( $this->item != 'new' ) : 
+    $listmp3 = array('123123123','123123123123','1231231 123123123','1231231313');
+    
+    ?>
+<div id="audiotrack" class="bb2">
+    <div class="tracklist bb2">
+    <ul>
+    <?php
+    foreach ($this->tracklist as $track) :?>
+        <li class="bb2" id="li<?php echo $track->idimage;?>">
+            <input type="button" value="Видалити" class="admin_buttonfield bb2" onclick="$.get('/ajax/delimg/item/<?php echo $track->idimage;?>', function(data){ $('#li<?php echo $track->idimage;?>').hide() });" />
+            <label>Назва трека: 
+                <input name="trackname[<?php echo $track->idimage;?>]" 
+                       onchange="$.post('/ajax/desc', {item: <?php echo $track->idimage;?>, desc: $(this).val()})" 
+                       value="<?php echo $track->desc;?>" />
+                  <span><?php echo $track->path;?></span>
+            </label>
+          
+            
+        </li>
+    <?php endforeach;?>
+    </ul> </div> 
+        
+</div>
+
+<form method="post">    
+    <div id="mp3folder" >
+        <div class="addmp3"><input type="button" class="admin_buttonfield" value="<<" onclick="form.submit()"/></div>
+        <select size="13" class="fr" multiple  name="mp3folder[]">
+           <?php
+           foreach ($this->listmp3 as $mp3) :
+            if  ( ($mp3 == '.') || ($mp3 == '..')  ) continue;?>
+            <option value="<?php echo $mp3;?> "> <?php echo $mp3;?></option>
+           <?php endforeach;?>  
+        </select>
+    </div>
+</form>    
+
+
+<?php
+endif; ?>

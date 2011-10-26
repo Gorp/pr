@@ -13,10 +13,9 @@ class Model_Comment extends Model_Base_Table {
 
     public static function getAll($idpage=NULL) {
         $table = self::getInstance();
-        $select = $table->select()->order('postdate');
+        $select = $table->select()->order('postdate desc');
         if ($idpage) {
             $select->where("idpage = ?", $idpage);
-            
         }
         return $table->fetchAll($select);
     }

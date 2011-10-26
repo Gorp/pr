@@ -14,6 +14,7 @@ class Model_Page extends Model_Base_Table {
     public static function getAll() {
         $table = self::getInstance();
         $select = $table->select()->order('title')->group('idpage');
+        $select->where('lang = ?','ua');
         return $table->fetchAll($select);
     }
 

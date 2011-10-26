@@ -126,14 +126,14 @@ input {
     padding-left: 22px;
 }
 
-.sidebarservice input.lbut,.sidebarservice input.lbut:hover{
+.sidebarservice input.lbut, input.frm_button_lbut {
     background: url('/public/img/lbut.png') no-repeat;
     height: 40px;
     width: 229px;
     color: white;
     padding-bottom: 3px;
     border: 0px #404040 solid;
-    margin: 0px 2px 2px 2px;
+    margin: 10px 2px 2px 2px;
     font: 16px/18px Arial, Tahoma, Verdana, sans-serif;
     text-align: left;
     padding-left: 20px;
@@ -141,7 +141,7 @@ input {
     outline: none;
 }
 
-.sidebarservice input.lbut:hover{
+.sidebarservice input.lbut:hover,  input.frm_button_lbut:hover{
     background: url('/public/img/lbuth.png') no-repeat;
 }
 
@@ -173,7 +173,7 @@ input {
     margin-bottom: 6px;
 }
 
-.sidebarbox input.slbut,.sidebarbox input.slbut:hover{
+.sidebarbox input.slbut,.sidebarbox input.slbut:hover, input.frm_button_slbut{
     background: url('/public/img/slbut.png') no-repeat;
     height: 40px;
     width: 104px;
@@ -183,7 +183,23 @@ input {
 
 }
 
-.sidebarbox input.slbut:hover{
+.sidebarbox input.slbut:hover {
+    background: url('/public/img/slbuth.png') no-repeat;
+    cursor: pointer;
+}
+
+input.frm_button_slbut{
+    background: url('/public/img/slbut.png') no-repeat;
+    height: 40px;
+    width: 104px;
+    margin-top: 10px;
+    margin-left: 10px;
+    color: white;
+    cursor: pointer;
+    border-style: hidden;
+}
+
+input.frm_button_slbut:hover{
     background: url('/public/img/slbuth.png') no-repeat;
     cursor: pointer;
 }
@@ -381,3 +397,35 @@ div.textinput{
     float: left;
 }
 
+.field_name {
+    font-size: 16px;
+    font-weight: bold;
+    height: 26px;
+    position: absolute;
+    width: 140px;
+    font: 18px/21px Arial,Tahoma,Verdana,sans-serif;
+    color: white;
+}
+
+.field {
+    color: #999999;
+    margin-top: 10px;
+}
+
+.field_input {
+    border: 1px solid #CACACA;
+    color: #565656;
+    font-size: 16px;
+    height: 26px;
+    margin-left: 145px;
+    padding: 1px;
+    width: 315px;
+}
+
+.errors {
+    color: red;
+    font-style: italic;
+    font-size:0.6em;
+    margin:0;
+    padding:0;
+}

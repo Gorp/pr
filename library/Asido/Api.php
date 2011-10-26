@@ -574,7 +574,7 @@ class Asido_Api
 	* @access public
 	* @static
 	*/
-	function color($red, $green, $blue) {
+	static function  color($red, $green, $blue) {
 		$color = new Asido_Color;
 		$color->set($red, $green, $blue);
 		return $color;

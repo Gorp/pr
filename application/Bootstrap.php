@@ -63,6 +63,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         ), '%s/blog/page/%d');
         $router->addRoute('blogpagination', $blogpagination);
 
+        $newblog = new Zend_Controller_Router_Route_Regex(
+                        '([a-z]{2})/blog/new.html',
+                        array(
+                            'action' => 'blognew',
+                            'controller' => 'index',
+                            'module' => 'default'
+                        ),
+                        array(
+                            1 => 'lang'
+                        ), '%s/blog/new.html');
+        $router->addRoute('newblog', $newblog);
+
         $blogpage = new Zend_Controller_Router_Route_Regex(
                         '([a-z]{2})/blog/(.*)-(\d+)\.html',
                         array(
