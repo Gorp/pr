@@ -1,0 +1,28 @@
+<?php
+
+if (is_object($this->audio)) : 
+$this->headScript()->appendFile('/public/js/jwplayer.js');    
+    ?>
+<div class="audiolist">
+    <ul >
+    <?php
+    $playlist = '';
+    foreach ($this->audio as $audio) : ?>
+        <li id="track<?php echo $audio->idimage; ?>"><?php echo $audio->desc;?></li>
+<?php
+        $playlist .= "{ 'file' : '/".$this->config->mp3folder."/".trim($audio->path)."',\n".
+                       "'title' : '/".$audio->desc."'},\n";
+    endforeach; ?>
+    </ul>     
+</div>
+<div id="container"></div>
+
+<script type="text/javascript">
+    jwplayer("container").setup({
+        'flashplayer': '/public/js/player.swf',
+        'playlist': [<?php echo $playlist;?>],
+        repeat: 'list'
+    });
+</script>
+<?php
+        endif; ?>

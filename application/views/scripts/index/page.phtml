@@ -9,8 +9,9 @@
 <?php
 $videogallery = $this->render('/helpers/videogallery.phtml');
 $imagegallery = $this->render('/helpers/imagegallery.phtml');
+$audiogallery = $this->render('/helpers/audiogallery.phtml');
 ?>
 
 <h1><?php echo $this->escape($this->content->title);?></h1>
 <hr />
-<?php echo str_replace( array('<!--videogallery-->','<!--imagegallery-->'), array($videogallery, $imagegallery), $this->content->richtext);?>
+<?php echo str_replace( array('<!--videogallery-->','<!--imagegallery-->','<!--audiogallery-->'), array($videogallery, $imagegallery,$audiogallery), $this->content->richtext);?>

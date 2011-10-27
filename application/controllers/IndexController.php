@@ -75,6 +75,7 @@ class IndexController extends Local_Controller {
         $this->view->content = Model_Page::getById($idpage, $this->view->lang);
         $this->view->gallery = Model_Image::getAll($this->view->content->idgallery);
         $this->view->video = Model_Image::getAll($this->view->content->idvideo);
+        $this->view->audio = Model_Image::getAll($this->view->content->idaudio);
         if (is_object($this->view->content)) {
             $this->view->pageTitle = $this->view->content->title;
             $this->view->headMeta()->appendName('keywords', $this->view->content->keyword);

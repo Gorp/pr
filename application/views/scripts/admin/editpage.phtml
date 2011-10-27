@@ -59,6 +59,20 @@
             endforeach;   ?>
         </select>
     </div></div>
+
+    <div class="field">
+    <div class="field_name">Аудіо: </div>
+    <div><select id="lang" class="field_input" name="idaudio" >
+            <option value="0">Не вибрано</option>
+            <?php
+            foreach ($this->audios as $audio) : ?>
+            <option value="<?php echo $audio->idgallery; ?>" <?php echo ( $this->data->idaudio == $audio->idgallery)?'selected="selected"':''; ?>>
+                <?php echo $audio->name; ?>
+            </option>
+            <?php
+            endforeach;   ?>
+        </select>
+    </div></div>
     
     <div class="field">
     <div class="field_name">Контент: </div><br /><br />

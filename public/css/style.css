@@ -429,3 +429,9 @@ div.textinput{
     margin:0;
     padding:0;
 }
+
+.audiolist {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 100px; 
+}

@@ -392,6 +392,7 @@ class AdminController extends Local_Controller {
         $this->view->pages = Model_Page::getAll();
         $this->view->galleries = Model_Gallery::getAll('image');
         $this->view->videos = Model_Gallery::getAll('video');
+        $this->view->audios = Model_Gallery::getAll('audio');
 
         $this->view->actionname = '/admin/savepage';
         $this->view->idname = 'idpage';
@@ -468,6 +469,9 @@ class AdminController extends Local_Controller {
                 'default' => 0
             ),
             'idvideo' => array(
+                'default' => 0
+            ),
+            'idaudio' => array(
                 'default' => 0
             )
         );
