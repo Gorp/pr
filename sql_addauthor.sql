@@ -6,4 +6,14 @@ ALTER TABLE `pr_uz_ua`.`gallery` ADD COLUMN `data` VARCHAR(45) NULL  AFTER `type
 ALTER TABLE `pr_uz_ua`.`gallery` CHANGE COLUMN `data` `data` TEXT NULL DEFAULT NULL  ;
 ALTER TABLE `pr_uz_ua`.`page` ADD COLUMN `idaudio` INT NULL DEFAULT 0  AFTER `lang` ;
 
+delimiter $$
+
+CREATE TABLE `counter` (
+  `idcounter` varchar(45) NOT NULL,
+  `ip` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcounter`,`ip`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1$$
+
+
+
 
