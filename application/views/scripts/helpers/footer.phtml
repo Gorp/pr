@@ -4,6 +4,16 @@
 </div>    
 <script type="text/javascript">
 
+    jQuery('.mancounter').click(function(){
+       id = jQuery(this).attr('id');
+       //jQuery(id + 'mandata').toggle();
+       jQuery('#' + id + ' .mandata').toggle('slow'); 
+       jQuery.get('/ajax/counter',{id:id},function(data){
+            jQuery('#' + id + ' .mancnt').html('(' + data + ')').toggle();
+       });
+    });
+
+
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-11548501-7']);
   _gaq.push(['_trackPageview']);

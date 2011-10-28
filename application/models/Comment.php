@@ -48,4 +48,16 @@ class Model_Comment extends Model_Base_Table {
         $table = self::getInstance();
         return $table->delete("idcomment = ".$idcomment);
     }
+    
+    public static function countComment($idblog) {
+        $table = self::getInstance();
+        $select = $table->select()
+             ->from('comment', array('totalcomment' => new Zend_Db_Expr('COUNT(*)')))
+             ->where('idpage = ?',$idblog)   ;
+        
+        return $table->fetchRow($select);
+
+    }
+    
+    
 }

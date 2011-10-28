@@ -8,9 +8,9 @@
 
 <div style="max-height: 400px;">
 <div id="CustomSlideshow">
-<!--        <img src="/public/img/main/vesillya.jpg" alt="Весілля"/>
+        <img src="/public/img/main/vesillya.jpg" alt="Весілля"/>
 
-        <img src="/public/img/main/korporativ.jpg" alt="Корпаратив"/>-->
+        <img src="/public/img/main/korporativ.jpg" alt="Корпаратив"/>
 
 
     <a id="vypuskni" href="/<?php echo $this->lang;?>/vypuskni-vechory-48.html" title="<?php echo $this->tr(NULL,$this->lang,'<h2>Випуснкі вечори</h2>'); ?> ">
@@ -59,6 +59,7 @@ foreach ($this->last as $blog) :?>
 <div class="blog" >
   
     <div class="blog_title">
+        
           <?php
             $url = array(
                 'lang' => $this->lang,
@@ -77,6 +78,8 @@ foreach ($this->last as $blog) :?>
         <a href="<?php echo $this->url($url, 'blogpage',true);?>" style="color: yellow;">
             <?php echo $this->tr(NULL,$this->lang,'Деталі...'); ?>
         </a>
+        <br />
+        <?php echo $this->tr(NULL,$this->lang,'Коментарів'); ?>: (<?php echo Model_Comment::countComment($blog->identry)->totalcomment;?>)
     </div>
 </div>
 

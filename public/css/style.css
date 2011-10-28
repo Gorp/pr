@@ -433,5 +433,14 @@ div.textinput{
 .audiolist {
     margin-left: auto;
     margin-right: auto;
-    padding-left: 100px; 
+    padding-left: 150px; 
 }
+
+.mandata, .mancnt {
+    display: none;
+}
+
+.mancounter {
+    cursor: pointer;
+}
+
