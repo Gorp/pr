@@ -321,7 +321,7 @@ class AjaxController extends Zend_Controller_Action {
     public function counterAction() {
         $idcounter = $this->_getParam('id');
         $ip = $_SERVER['REMOTE_ADDR'];
-        $ip = rand(0, 1000);
+        //$ip = rand(0, 1000);
         echo Model_Counter::update_counter($idcounter, $ip);
         exit;
         //$ip = $_SERVER['IP_ADDRESS']

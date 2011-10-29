@@ -48,15 +48,25 @@ endif;
             </tr>
             <tr>
                 <td><?php echo $this->tr(NULL,$this->lang,'Повідомлення:');?></td>
-                <td><textarea name="message" ></textarea></td>
+                <td><textarea style="height: 150px;" name="message" ></textarea></td>
             </tr>
         </table>
         <div style="clear: both;"></div>
         <table>
             <tr>
                 <td colspan="2">
-                    <?php echo $this->tr(NULL,$this->lang,'Ми маємо перевірити чи Ви реальна людина. <br />Будь-ласка введіть текст, що Ви бачете далі на картинці'); ?> 
+                 <br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <?php echo $this->tr(NULL,$this->lang,'Ми маємо перевірити чи Ви реальна людина. <br />Будь-ласка, введіть символи, зображені нижче'); ?> 
                     <?= $this->token->getHTML();?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                 <br />
                 </td>
             </tr>
             <tr>
