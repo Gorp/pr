@@ -109,7 +109,7 @@ class IndexController extends Local_Controller {
                     Model_Comment::updatepage($data);
                     // send mail
                     try {
-                        $mail = new Zend_Mail();
+                        $mail = new Zend_Mail($charset = 'utf-8');
                         $mail->addTo($this->view->config->resources->mail->admin);
                         $mail->setFrom($this->view->config->resources->mail->sender);
                         $text = $this->view->config->resources->mail->template;
@@ -130,7 +130,7 @@ class IndexController extends Local_Controller {
                     $this->_redirect($this->getRequest()->getRequestUri());
                 }
             }
-            $this->view->comments = Model_Comment::getAll($ispost);
+            $this->view->comments = Model_Comment::getAll($ispost, 'asc');
             $this->view->post = Model_Blogentry::getById($ispost, $this->view->lang);
             if (is_object($this->view->post)) {
                 $this->view->pageTitle = $this->view->post->title;
@@ -168,13 +168,13 @@ class IndexController extends Local_Controller {
 
             
             if ( ! $result->isValid() ) {
-                $this->view->errors['captcha'][0] = 'Введений не вірний текст';
+                $this->view->errors['captcha'][0] = $this->view->tr(NULL,$this->lang,'Введений не вірний текст');
             }
             
             // валідація введених даних
             $_POST['keyword'] = $_POST['description'] = $_POST['title'];
             $input = $this->blogvalidate($_POST);
-            if (true || $input->isValid() && empty($this->view->errors['captcha'][0])) {
+            if ( $input->isValid() && empty($this->view->errors['captcha'][0])) {
                 $res = Model_Blogentry::updateentry($input);
                 if ($res[0] > 0) {
                         foreach ($this->view->langs as $key) {
@@ -235,12 +235,12 @@ class IndexController extends Local_Controller {
                         $mail->addTo($this->view->config->resources->mail->admin);
                         $mail->setFrom($this->view->config->resources->mail->sender);
                         $text = $this->view->config->resources->mail->template;
-                        $text = "Був додане поздоровлення  " .
-                                $this->view->config->baseurl . $this->getRequest()->getRequestUri() . "\n";
+                        $text = "Був додане поздоровлення  '{$_POST['title']}'" .
+                                $this->view->config->baseurl . "/ua/blog/post-{$res[1]}.html" . "\n";
                         $text .= "Дата: " . $this->view->localDate(time(), $this->view->lang) . "\n";
                         $text .= "Имя: ".$input->author." \n";
                         $text .= "Email: ".$input->email."\n";
-                        $text .= "Текст: ".$input->richtext." \n";
+                        $text .= "Текст: ".strip_tags($input->richtext)." \n";
                         $mail->setSubject('Поздоровлення на сайті Party Zone');
                         $mail->setBodyText($text);
                         $t = $mail->send();

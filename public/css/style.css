@@ -135,10 +135,29 @@ input {
     border: 0px #404040 solid;
     margin: 10px 2px 2px 2px;
     font: 16px/18px Arial, Tahoma, Verdana, sans-serif;
-    text-align: left;
+    text-align: center;
     padding-left: 20px;
     cursor: pointer;
     outline: none;
+}
+
+input.frm_button_lbut {
+    background: url('/public/img/lbut2.png') no-repeat;
+    height: 40px;
+    width: 229px;
+    color: white;
+    padding-bottom: 3px;
+    border: 0px #404040 solid;
+    margin: 10px 2px 2px 2px;
+    font: 16px/18px Arial, Tahoma, Verdana, sans-serif;
+    text-align: center;
+    padding-left: 20px;
+    cursor: pointer;
+    outline: none;
+}
+
+input.frm_button_lbut:hover{
+    background: url('/public/img/lbuth2.png') no-repeat;
 }
 
 .sidebarservice input.lbut:hover,  input.frm_button_lbut:hover{
