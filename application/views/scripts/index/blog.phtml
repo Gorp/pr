@@ -1,3 +1,6 @@
+<form action="/<?= $this->lang;?>/blog/new.html">
+<input type="submit" class="frm_button_lbut" value="<?php echo $this->tr(NULL,$this->lang,'Створити привітання');?>" />
+</form>
 <h1><?php echo $this->blogmenu->name;?></h1>
 <hr />
 <?php
@@ -23,7 +26,7 @@ foreach ($this->blogs as $blog) :?>
         <a href="<?php echo $this->url($url, 'blogpage',true);?>" style="color: yellow;">
             <?php echo $this->tr(NULL,$this->lang,'Деталі...'); ?>
             <br />
-            <?php echo $this->tr(NULL,$this->lang,'Коментарів'); ?>: (<?php echo Model_Comment::countComment($blog->identry)->totalcomment;?>)
+            <i><?php echo $this->tr(NULL,$this->lang,'Коментарів'); ?>: (<?php echo Model_Comment::countComment($blog->identry)->totalcomment;?>)</i>
         </a>
     </div>
 </div>

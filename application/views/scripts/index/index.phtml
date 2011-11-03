@@ -77,9 +77,10 @@ foreach ($this->last as $blog) :?>
         <?php echo mb_substr(strip_tags($blog->richtext),0,280, 'UTF-8');?>
         <a href="<?php echo $this->url($url, 'blogpage',true);?>" style="color: yellow;">
             <?php echo $this->tr(NULL,$this->lang,'Деталі...'); ?>
-        </a>
+        
         <br />
-        <?php echo $this->tr(NULL,$this->lang,'Коментарів'); ?>: (<?php echo Model_Comment::countComment($blog->identry)->totalcomment;?>)
+        <i><?php echo $this->tr(NULL,$this->lang,'Коментарів'); ?>: (<?php echo Model_Comment::countComment($blog->identry)->totalcomment;?>)</i>
+        </a>
     </div>
 </div>
 

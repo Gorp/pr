@@ -109,7 +109,7 @@ class IndexController extends Local_Controller {
                     Model_Comment::updatepage($data);
                     // send mail
                     try {
-                        $mail = new Zend_Mail($charset = 'utf-8');
+                        $mail = new Zend_Mail();
                         $mail->addTo($this->view->config->resources->mail->admin);
                         $mail->setFrom($this->view->config->resources->mail->sender);
                         $text = $this->view->config->resources->mail->template;
@@ -124,7 +124,7 @@ class IndexController extends Local_Controller {
                         $t = $mail->send();
                     } catch (Zend_Mail_Exception $e) {
                         echo json_encode(array('status' => 'error', 'msg' => $e->getMessages()));
-                        exit;
+                       // exit;
                     }
 
                     $this->_redirect($this->getRequest()->getRequestUri());
