@@ -166,9 +166,8 @@ class IndexController extends Local_Controller {
                     $recaptcha_challenge_field, $recaptcha_response_field
             );       
 
-            
             if ( ! $result->isValid() ) {
-                $this->view->errors['captcha'][0] = $this->view->tr(NULL,$this->lang,'Введений не вірний текст');
+                $this->view->errors['captcha'][0] = $this->view->tr(NULL,$this->view->lang,'Введений не вірний текст');
             }
             
             // валідація введених даних
@@ -245,8 +244,8 @@ class IndexController extends Local_Controller {
                         $mail->setBodyText($text);
                         $t = $mail->send();
                     } catch (Zend_Mail_Exception $e) {
-                        echo json_encode(array('status' => 'error', 'msg' => $e->getMessages()));
-                        exit;
+                       // echo json_encode(array('status' => 'error', 'msg' => $e->getMessages()));
+                       // exit;
                     }   
                         
                         

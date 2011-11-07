@@ -8,6 +8,8 @@
 
 </div>
 <div style="clear: both;"></div>
+<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+<div class="yashare-auto-init" data-yashareL10n="<?php echo $this->lang;?>" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki"></div>
 <hr />
 <?php 
 if ($this->comments) :
@@ -64,7 +66,7 @@ endif;
             <tr>
 <!--                <td><input type="hidden" name="token" value="<?php echo $this->token; ?>" /></td>-->
                 
-                <td><input align="center" type="button" class="frm_button_lbut" value="<?php echo $this->tr(NULL,$this->lang,'Відіслати повідомлення');?>" /></td>
+                <td><input   class="frm_button_lbut" type="submit" value="<?php echo $this->tr(NULL,$this->lang,'Відіслати повідомлення');?>" /></td>
             </tr>
         </table>    
     </form>    

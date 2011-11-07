@@ -5,6 +5,7 @@ ALTER TABLE `gallery` CHANGE COLUMN `type` `type` ENUM('image','video','audio') 
 ALTER TABLE `gallery` ADD COLUMN `data` VARCHAR(45) NULL  AFTER `type` ;
 ALTER TABLE `gallery` CHANGE COLUMN `data` `data` TEXT NULL DEFAULT NULL  ;
 ALTER TABLE `page` ADD COLUMN `idaudio` INT NULL DEFAULT 0  AFTER `lang` ;
+ALTER TABLE `image` ADD `desc` VARCHAR( 255 ) NOT NULL ;
 
 delimiter $$
 
