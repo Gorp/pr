@@ -8,8 +8,7 @@
 
 </div>
 <div style="clear: both;"></div>
-<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-<div class="yashare-auto-init" data-yashareL10n="<?php echo $this->lang;?>" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki"></div>
+<?php echo $this->render('/helpers/share.phtml'); ?>
 <hr />
 <?php 
 if ($this->comments) :

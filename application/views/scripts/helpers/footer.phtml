@@ -9,7 +9,7 @@
        //jQuery(id + 'mandata').toggle();
        jQuery('#' + id + ' .mandata').toggle('slow'); 
        jQuery.get('/ajax/counter',{id:id},function(data){
-            jQuery('#' + id + ' .mancnt').html('(' + data + ')').toggle();
+            jQuery('#' + id + ' .mancnt').html('(' + '<?php echo $this->tr(NULL,$this->lang,'переглядів');?> - '  + data +  ')').toggle();
        });
     });
 

@@ -1,0 +1,6 @@
+/*
+ * http://share42.com
+ * Date: 16.10.2011
+ * (c) 2011, Dimox
+ */
+function share42(f,u,t){if(!u)u=location.href;if(!t)t=document.title;u=encodeURIComponent(u);t=encodeURIComponent(t);document.write('<span id="share42">');var s=new Array('"#" onclick="window.open(\'http://vkontakte.ru/share.php?url='+u+'\', \'_blank\', \'scrollbars=0, resizable=1, menubar=0, left=200, top=200, width=554, height=421, toolbar=0, status=0\');return false" title="Поделиться В Контакте"','"http://www.facebook.com/sharer.php?u='+u+'&t='+t+'" title="Поделиться в Facebook"','"http://twitter.com/share?text='+t+'&url='+u+'" title="Добавить в Twitter"','"http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl='+u+'&title='+t+'" title="Добавить в Одноклассники"');for(i=0;i<s.length;i++)document.write('<a rel="nofollow" style="display:inline-block;vertical-align:bottom;width:32px;height:32px;margin:0 6px 6px 0;outline:none;background:url('+f+'icons.png) -'+32*i+'px 0" href='+s[i]+' target="_blank"></a>');document.write('</span>');};

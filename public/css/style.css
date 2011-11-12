@@ -463,3 +463,46 @@ div.textinput{
     cursor: pointer;
 }
 
+.playlist {
+    height: 147px; 
+    overflow-y:100px;
+    overflow-x:hidden; 
+    color: black; 
+    font-style: italic; 
+    background-color: #E8E8E8;
+    width: 400px; 
+    border-bottom-style: dotted; 
+    border-bottom-width: 1px;
+}
+
+.song {
+    padding: 5px 5px;
+    border-bottom-style: solid; 
+    border-bottom-width: 1px; 
+    border-bottom-color: gray;
+    cursor: pointer;
+}
+
+.nowplaying {
+    font-size: 14px;
+    text-decoration: blink;
+    display: none;
+}
+
+#share42 {
+  display: inline-block;
+  padding: 6px 0 0 6px;
+  background: #00;
+  border: 1px  #E9E9E9;
+  border-radius: 4px;
+}
+
+#share42:hover {
+  background: #F6F6F6;
+  border: 1px solid #D4D4D4;
+  box-shadow: 0 0 5px #DDD;
+}
+
+#share42 a {opacity: 0.5;}
+#share42:hover a {opacity: 0.7}
+#share42 a:hover {opacity: 1}

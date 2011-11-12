@@ -2,32 +2,62 @@
 
 if (is_object($this->audio)) : 
 $this->headScript()->appendFile('/public/js/jwplayer.js');    
+//$this->headScript()->appendFile('/public/js/swfobject.js');    
     ?>
+
+
 <div class="audiolist">
-    <div class="audiolist" id="containermp3"></div>
-<!--    <ul >
+    <div class="playlist">    
+<ul >
     <?php
     $playlist = '';
+    $id=0;
     foreach ($this->audio as $audio) : ?>
-        <li id="track<?php echo $audio->idimage; ?>"><?php echo $audio->desc;?></li>
+        <li class="song" onclick="changesong(<?php echo $id;?>);"> 
+            <?php echo $audio->desc;?><span  id="now<?php echo $id;?>" class="nowplaying"><?php echo $this->tr(NULL,$this->lang,' - зараз грає '); ?></span>
+        </li>
 <?php
         $playlist .= "{ 'file' : '/".$this->config->mp3folder."/".trim($audio->path)."',\n".
                        "'title' : '".$audio->desc."'},\n";
+        $id++;
     endforeach; ?>
-    </ul>     -->
+    </ul> </div>
+    
+    <div class="audiolist" id="containermp3"></div>
 </div>
 
-
 <script type="text/javascript">
-    jwplayer("containermp3").setup({
-        'flashplayer': '/public/js/player.swf',
-        'playlist': [<?php echo $playlist;?>],
-         'playlist.position':'top',
-         'playlist.size':'180',
-         'dock' : 'false',
-         'allowfullscreen': 'false',
+    var so = jwplayer("containermp3");
+    so.setup({
+        flashplayer: '/public/js/player.swf',
+        playlist: [<?php echo $playlist;?>],
+        //'playlist.position' :'top',
+        //'playlist.size' :'180',
+        height: 23,
+        dock : 'false',
+        'controlbar.position' : 'bottom',
+        allowfullscreen: 'false',
+        allowscriptaccess: 'never',
         repeat: 'list'
+//        plugins : {
+//            sharing : { link : false}
+//        },
+//        modes : [
+//          { type : "html5"},
+//          { type: "flash", src: "/public/js/player.swf"}
+//        ]
     });
+    //jwplayer("containermp3").setVolume(50).onComplete(function(){ alert('done!'); }).play();
+    
+    function changesong(id) {
+        jQuery('.nowplaying').hide();
+        jwplayer().playlistItem(id);
+        jQuery('#now'+id).show();
+        jwplayer().play();        
+    }
 </script>
+
+
+
 <?php
         endif; ?>

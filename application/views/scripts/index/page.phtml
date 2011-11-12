@@ -15,5 +15,4 @@ $audiogallery = $this->render('/helpers/audiogallery.phtml');
 <h1><?php echo $this->escape($this->content->title);?></h1>
 <hr />
 <?php echo str_replace( array('<!--videogallery-->','<!--imagegallery-->','<!--audiogallery-->'), array($videogallery, $imagegallery,$audiogallery), $this->content->richtext);?>
-<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-<div class="yashare-auto-init" data-yashareL10n="<?php echo $this->lang;?>" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki"></div>
+<?php echo $this->render('/helpers/share.phtml'); ?>
