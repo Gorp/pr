@@ -1,0 +1,75 @@
+<?php $this->ckeditor = 'ckeditor'; ?>
+
+<div style="margin-left:20px;">
+<h1><?php echo $this->tr(NULL,$this->lang,'Створення привітання або відгук');?></h1>
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="field">
+        <div class="field_name"><?php echo $this->tr(NULL,$this->lang,'Назва');?>: 
+        <p class="errors"><?php echo $this->tr(NULL,$this->lang,$this->errors['title'][0]) ;?> </p></div>
+        <div><input id="title" class="field_input" type="text" name="title"
+                value="<?php echo $this->input['title']; ?>" /></div>
+    </div>
+        
+<!--    <div class="field">
+    <div class="field_name">Ключові слова: </div>
+    <div><input id="keyword" class="field_input" type="text" name="keyword"
+                value="<?php //echo $this->escape($this->data->keyword); ?>" /></div>
+    </div>
+    
+    <div class="field">
+    <div class="field_name">Опис: </div>
+    <div><input id="description" class="field_input" type="text" name="description" 
+                value="<?php //echo $this->escape($this->data->description); ?>" /></div>
+    </div>-->
+
+    <div class="field">
+    <div class="field_name"><?php echo $this->tr(NULL,$this->lang,'Автор');?>:
+        <p class="errors"><?php echo $this->tr(NULL,$this->lang,$this->errors['author'][0]) ;?> </p>
+        </div>
+    <div><input id="description" class="field_input" type="text" name="author" 
+                value="<?php echo $this->escape($this->input['author']); ?>" /></div>
+    </div>
+
+    <div class="field">
+    <div class="field_name"><?php echo $this->tr(NULL,$this->lang,'Email');?>:
+        <?php if(empty($this->errors['email'])) : ?>
+        <p style="color:#7F7F7F;font-size:0.6em;margin:0;padding:0;"><?php echo $this->tr(NULL,$this->lang,'Не буде показуватися');?></p>
+        <?php else : ?>
+        <p class="errors"><?php echo $this->tr(NULL,$this->lang,$this->errors['email'][0]) ;?> </p>
+        <?php endif;?>
+    </div>
+        
+    <div><input id="description" class="field_input" type="text" name="email" 
+                value="<?php echo $this->escape($this->input['email']); ?>" /></div>
+    </div>
+
+    <div class="field">
+    <div class="field_name"><?php echo $this->tr(NULL,$this->lang,'Фото');?>: 
+        
+    </div>
+    
+    <div><input id="photo" class="field_input" type="file" name="photo" 
+                value="<?php //echo $this->escape($this->data->description); ?>" /></div>
+    </div>
+
+    <div class="field">
+    <div class="field_name"><?php echo $this->tr(NULL,$this->lang,'Контент');?>: 
+        <p class="errors"><?php echo $this->tr(NULL,$this->lang,$this->errors['richtext'][0]) ;?> </p>
+    </div><br /><br />
+    <div><textarea class="field_input" id="richtext" cols="30" rows="5" name="richtext">
+            <?php echo $this->input['richtext']; ?>
+        </textarea></div>
+    </div>
+    <div class="clear"></div>
+    
+    <?= $this->token->getHTML();?>
+    <p class="errors"><?php echo $this->tr(NULL,$this->lang,$this->errors['captcha'][0]) ;?> </p>
+    <input   class="frm_button_lbut" type="submit" name="submit" value="<?php echo $this->tr(NULL,$this->lang,'Відправити');?>" />
+    <input type="hidden" name="lang" value="ua" />
+</form>
+</div>
+
+
+<?php 
+$this->headScript()->appendFile("/public/js/ckeditor/ckeditor.js");
+echo $this->setupEditor('richtext', '/public/js/ckeditor/pruzua_config_frontend.js'); ?>
