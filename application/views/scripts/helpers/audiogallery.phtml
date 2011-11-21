@@ -52,8 +52,8 @@ $this->headScript()->appendFile('/public/js/jwplayer.js');
     function changesong(id) {
         jQuery('.nowplaying').hide();
         jwplayer().playlistItem(id);
-        jQuery('#now'+id).show();
-        jwplayer().play();        
+        //jQuery('#now'+id).show();
+        jwplayer("containermp3").play();        
     }
 </script>
 
